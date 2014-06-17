@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>ngToast by tameraydin</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>ngToast</h1>
+        <p>Angular provider for toast notifications</p>
+
+        <p class="view"><a href="https://github.com/tameraydin/ngToast">View the Project on GitHub <small>tameraydin/ngToast</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/tameraydin/ngToast/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/tameraydin/ngToast/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/tameraydin/ngToast">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="ngtoast" class="anchor" href="#ngtoast"><span class="octicon octicon-link"></span></a>ngToast</h2>
+
+<p>ngToast is a simple Angular provider for toast notifications. </p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Download ngToast manually or install with bower:</p>
+
+<p><code>bower install ngtoast</code></p>
+
+<p>Include resource files in your app:</p>
+
+<pre><code>&lt;script src="lib/ngToast/ngToast.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="lib/ngToast/ngToast.css"&gt;
+</code></pre>
+
+<p>Include ngToast as a dependency in your app module:</p>
+
+<pre><code>var app = angular.module('myApp', ['ngToast']);
+</code></pre>
+
+<p>Place <code>ng-toast</code> element into your HTML:</p>
+
+<pre><code>&lt;body&gt;
+  &lt;ng-toast&gt;&lt;/ng-toast&gt;
+  ...
+&lt;/body&gt;
+</code></pre>
+
+<p>Inject ngToast provider in your controller:</p>
+
+<pre><code>var MyCtrl = function($scope, ngToast) {};
+</code></pre>
+
+<h2>
+<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
+
+<pre><code>// to create a toast:
+ngToast.create({
+  message: 'A toast message...'
+});
+
+// to clear specific toast:
+var msg = ngToast.create({
+  message: 'Another message as &lt;a href="#" class=""&gt;HTML&lt;/a&gt;',
+  horizontalPosition: 'left'
+});
+
+ngToast.dismiss(msg);
+
+// to clear all toasts:
+ngToast.dismiss();
+</code></pre>
+
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
+
+<ul>
+<li>Add unit &amp; e2e tests</li>
+<li>Improve API documentation</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/tameraydin">tameraydin</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
