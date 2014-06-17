@@ -10,8 +10,8 @@ Download ngToast manually or install with bower:
 
 Include resource files in your app:
 ```
-<script src="lib/ngToast/ngToast.min.js"></script>
-<link rel="stylesheet" href="lib/ngToast/ngToast.css">
+<script src="lib/ngtoast/dist/ngToast.min.js"></script>
+<link rel="stylesheet" href="lib/ngtoast/dist/ngToast.css">
 ```
 
 Include ngToast as a dependency in your app module:

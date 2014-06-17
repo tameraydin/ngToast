@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       dist: {
-        src: ['src/scripts/provider.js', 'src/scripts/directive.js', 'scripts/src/module.js'],
+        src: ['src/scripts/provider.js', 'src/scripts/directive.js', 'src/scripts/module.js'],
         dest: 'dist/ngToast.js'
       }
     },
