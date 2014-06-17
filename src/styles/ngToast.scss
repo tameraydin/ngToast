@@ -1,0 +1,123 @@
+$module: 'ng-toast';
+
+.#{$module} {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  margin-top: 20px;
+  text-align: center;
+
+  &.#{$module}--top {
+    top: 0;
+    bottom: auto;
+
+    .#{$module}__list {
+      top: 0;
+      bottom: auto;
+    }
+
+    &.#{$module}--center {
+
+      .#{$module}__list {
+        position: static;
+      }
+    }
+  }
+
+  &.#{$module}--bottom {
+    top: auto;
+    bottom: 0;
+
+    .#{$module}__list {
+      top: auto;
+      bottom: 0;
+    }
+
+    &.#{$module}--center {
+
+      .#{$module}__list {
+        pointer-events: none;
+      }
+
+      .#{$module}__message {
+        .alert {
+          pointer-events: auto;
+        }
+      }
+    }
+  }
+
+  &.#{$module}--right {
+
+    .#{$module}__list {
+      left: auto;
+      right: 0;
+      margin-right: 20px
+    }
+
+    .#{$module}__message {
+      text-align: right;
+    }
+  }
+
+  &.#{$module}--left {
+
+    .#{$module}__list {
+      right: auto;
+      left: 0;
+      margin-left: 20px;
+    }
+
+    .#{$module}__message {
+      text-align: left;
+    }
+  }
+
+  .#{$module}__list {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .#{$module}__message {
+    display: block;
+    width: 100%;
+    text-align: center;
+
+    .alert {
+      display: inline-block;
+    }
+  }
+
+  .ng-enter,
+  .ng-leave,
+  .ng-move {
+    transition: 0.3s ease all;
+  }
+  .ng-enter {
+    left:-50px;
+    opacity:0;
+  }
+  .ng-enter.ng-enter-active {
+    left:0;
+    opacity:1;
+  }
+  .ng-leave {
+    left:0;
+    opacity:1;
+  }
+  .ng-leave.ng-leave-active {
+    left:-50px;
+    opacity:0;
+  }
+  .ng-move {
+    opacity:0.5;
+  }
+  .ng-move.ng-move-active {
+    opacity:1;
+  }
+}
