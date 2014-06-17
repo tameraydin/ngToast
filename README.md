@@ -39,12 +39,12 @@ var MyCtrl = function($scope, ngToast) {};
 ```
 // to create a toast:
 ngToast.create({
-  message: 'A toast message...'
+  content: 'A toast message...'
 });
 
 // to clear specific toast:
 var msg = ngToast.create({
-  message: 'Another message as <a href="#" class="">HTML</a>',
+  content: 'Another message as <a href="#" class="">HTML</a>',
   horizontalPosition: 'left'
 });
 
