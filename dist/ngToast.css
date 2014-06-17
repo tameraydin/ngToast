@@ -1,0 +1,114 @@
+/* line 3, ../src/styles/ngToast.scss */
+.ng-toast {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  margin-top: 20px;
+  text-align: center;
+}
+/* line 10, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--top {
+  top: 0;
+  bottom: auto;
+}
+/* line 14, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--top .ng-toast__list {
+  top: 0;
+  bottom: auto;
+}
+/* line 21, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--top.ng-toast--center .ng-toast__list {
+  position: static;
+}
+/* line 27, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--bottom {
+  top: auto;
+  bottom: 0;
+}
+/* line 31, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--bottom .ng-toast__list {
+  top: auto;
+  bottom: 0;
+}
+/* line 38, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--bottom.ng-toast--center .ng-toast__list {
+  pointer-events: none;
+}
+/* line 43, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--bottom.ng-toast--center .ng-toast__message .alert {
+  pointer-events: auto;
+}
+/* line 52, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--right .ng-toast__list {
+  left: auto;
+  right: 0;
+  margin-right: 20px;
+}
+/* line 58, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--right .ng-toast__message {
+  text-align: right;
+}
+/* line 65, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--left .ng-toast__list {
+  right: auto;
+  left: 0;
+  margin-left: 20px;
+}
+/* line 71, ../src/styles/ngToast.scss */
+.ng-toast.ng-toast--left .ng-toast__message {
+  text-align: left;
+}
+/* line 76, ../src/styles/ngToast.scss */
+.ng-toast .ng-toast__list {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+/* line 86, ../src/styles/ngToast.scss */
+.ng-toast .ng-toast__message {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+/* line 91, ../src/styles/ngToast.scss */
+.ng-toast .ng-toast__message .alert {
+  display: inline-block;
+}
+/* line 98, ../src/styles/ngToast.scss */
+.ng-toast .ng-enter,
+.ng-toast .ng-leave,
+.ng-toast .ng-move {
+  transition: 0.3s ease all;
+}
+/* line 101, ../src/styles/ngToast.scss */
+.ng-toast .ng-enter {
+  left: -50px;
+  opacity: 0;
+}
+/* line 105, ../src/styles/ngToast.scss */
+.ng-toast .ng-enter.ng-enter-active {
+  left: 0;
+  opacity: 1;
+}
+/* line 109, ../src/styles/ngToast.scss */
+.ng-toast .ng-leave {
+  left: 0;
+  opacity: 1;
+}
+/* line 113, ../src/styles/ngToast.scss */
+.ng-toast .ng-leave.ng-leave-active {
+  left: -50px;
+  opacity: 0;
+}
+/* line 117, ../src/styles/ngToast.scss */
+.ng-toast .ng-move {
+  opacity: 0.5;
+}
+/* line 120, ../src/styles/ngToast.scss */
+.ng-toast .ng-move.ng-move-active {
+  opacity: 1;
+}
