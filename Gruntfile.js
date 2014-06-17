@@ -38,15 +38,19 @@ module.exports = function(grunt) {
     compass: {
       dist: {
         options: {
+          noLineComments: true,
           sassDir: 'src/styles',
-          cssDir: 'dist/'
+          cssDir: 'dist/',
+          banner: '<%= banner %>',
+          specify: 'src/styles/ngToast.scss'
         }
       }
     },
     cssmin: {
       minify: {
         options: {
-          banner: '<%= banner %>'
+          banner: '<%= banner %>',
+          keepSpecialComments: 0
         },
         expand : true,
         src: 'dist/*.css',
