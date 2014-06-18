@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ngToast.directive', [])
+angular.module('ngToast.directives', ['ngToast.provider'])
   .directive('ngToast', ['ngToast',
     function(ngToast) {
       return {
@@ -32,11 +32,11 @@ angular.module('ngToast.directive', [])
         scope: {
           message: '='
         },
-        controller: function($scope) {
+        controller: ['$scope', 'ngToast', function($scope, ngToast) {
           $scope.dismiss = function() {
             ngToast.dismiss($scope.message.id);
           };
-        },
+        }],
         template:
           '<li class="ng-toast__message">' +
             '<div class="alert alert-{{message.class}}" ' +

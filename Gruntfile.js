@@ -28,10 +28,13 @@ module.exports = function(grunt) {
           'block': true,
           'line': true
         },
-        banner: '<%= banner %>'
+        banner: '<%= banner %>\n\'use strict\'\n',
+        process: function(src, filepath) {
+          return src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+        }
       },
       dist: {
-        src: ['src/scripts/provider.js', 'src/scripts/directive.js', 'src/scripts/module.js'],
+        src: ['src/scripts/provider.js', 'src/scripts/directives.js', 'src/scripts/module.js'],
         dest: 'dist/ngToast.js'
       }
     },
