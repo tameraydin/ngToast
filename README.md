@@ -46,8 +46,7 @@ ngToast.create({
 
 // to clear specific toast:
 var msg = ngToast.create({
-  content: 'Another message as <a href="#" class="">HTML</a>',
-  horizontalPosition: 'left'
+  content: 'Another message as <a href="#" class="">HTML</a>'
 });
 
 ngToast.dismiss(msg);
