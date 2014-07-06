@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>ngToast by tameraydin</title>
 
+
+     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/ngtoast/dist/ngToast.min.css" />
+    <!-- endbower -->
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -12,7 +17,9 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body ng-app="ngToastApp" ng-controller="MainController">
+    <a href="https://github.com/you"><img style="position: fixed; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+    <ng-toast></ng-toast>
     <div class="wrapper">
       <header>
         <h1>ngToast</h1>
@@ -33,6 +40,11 @@
 
 <p>ngToast is a simple Angular provider for toast notifications. </p>
 
+<h2>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+<p>
+<a href="#" ng-click="showSample()" class="btn btn-primary">Create a sample toast</a>
+</p>
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
@@ -97,6 +109,14 @@ ngToast.dismiss();
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-
+<!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/ngtoast/dist/ngToast.min.js"></script>
+    <!-- endbower -->
+        <script src="javascripts/app.js"></script>
   </body>
 </html>
