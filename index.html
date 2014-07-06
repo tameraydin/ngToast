@@ -38,7 +38,7 @@
 
 <p>Download ngToast manually or install with bower:</p>
 
-<p><code>bower install ngtoast</code></p>
+<pre><code>bower install ngtoast</code></pre>
 
 <p>Include resource files in your app:</p>
 
@@ -74,8 +74,7 @@ ngToast.create({
 
 // to clear specific toast:
 var msg = ngToast.create({
-  message: 'Another message as &lt;a href="#" class=""&gt;HTML&lt;/a&gt;',
-  horizontalPosition: 'left'
+  content: 'Another message as &lt;a href="#" class=""&gt;HTML&lt;/a&gt;'
 });
 
 ngToast.dismiss(msg);
@@ -98,6 +97,6 @@ ngToast.dismiss();
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+
   </body>
 </html>
