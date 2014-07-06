@@ -2,6 +2,8 @@
 
 ngToast is a simple Angular provider for toast notifications. 
 
+http://tameraydin.github.io/ngToast/
+
 ## Usage
 
 Download ngToast manually or install with bower:
