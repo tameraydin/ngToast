@@ -10,10 +10,12 @@ Download ngToast manually or install with bower:
 
 ```bower install ngtoast```
 
-Include resource files in your app:
+Include ngToast resource files along with the [Bootstrap CSS](http://getbootstrap.com/) (only the Alerts component is used as style base, so you don't have to include complete CSS):
 ```
-<script src="lib/ngtoast/dist/ngToast.min.js"></script>
+<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="lib/ngtoast/dist/ngToast.css">
+
+<script src="lib/ngtoast/dist/ngToast.min.js"></script>
 ```
 
 Include ngToast as a dependency in your app module:
