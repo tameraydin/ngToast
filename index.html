@@ -29,7 +29,7 @@
     </script>
   </head>
   <body ng-app="ngToastApp" ng-controller="MainController">
-    <a href="https://github.com/tameraydin/ngToast"><img style="position: fixed; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+    <a href="https://github.com/tameraydin/ngToast" class="fork-badge"><img style="position: fixed; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
     <ng-toast></ng-toast>
     <div class="wrapper">
       <header>
@@ -86,27 +86,62 @@
 
 <p>Inject ngToast provider in your controller:</p>
 
-<pre><code>var MyCtrl = function($scope, ngToast) {};
+<pre><code>var MyCtrl = function($scope, ngToast) {...};
 </code></pre>
 
 <h2>
 <a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
-
-<pre><code>// to create a toast:
+<pre><code>// create a toast:
 ngToast.create({
   message: 'A toast message...'
 });
 
-// to clear specific toast:
+// clear specific toast:
 var msg = ngToast.create({
   content: 'Another message as &lt;a href="#" class=""&gt;HTML&lt;/a&gt;'
 });
-
 ngToast.dismiss(msg);
 
-// to clear all toasts:
+// clear all toasts:
 ngToast.dismiss();
 </code></pre>
+
+<h2>
+<a name="settings" class="anchor" href="#settings"><span class="octicon octicon-link"></span></a>Settings</h2>
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Default value</th>
+    <th>Description</th>
+  </tr>
+  <tr><td><strong>class</strong></td>
+  <td>'success'</td>
+  <td></td></tr>
+  <tr><td><strong>dismissOnTimeout</strong></td>
+  <td>true</td>
+  <td></td></tr>
+  <tr><td><strong>timeout</strong></td>
+  <td>4000</td>
+  <td></td></tr>
+  <tr><td><strong>dismissButton</strong></td>
+  <td>false</td>
+  <td></td></tr>
+  <tr><td><strong>dismissButtonHtml</strong></td>
+  <td>'&amp;times;'</td>
+  <td></td></tr>
+  <tr><td><strong>dismissOnClick</strong></td>
+  <td>true</td>
+  <td></td></tr>
+  <tr><td><strong>horizontalPosition</strong></td>
+  <td>right</td>
+  <td></td></tr>
+  <tr><td><strong>verticalPosition</strong></td>
+  <td>top</td>
+  <td></td></tr>
+  <tr><td><strong>maxNumber</strong></td>
+  <td>0</td>
+  <td></td></tr>
+</table>
 
 <h2>
 <a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>

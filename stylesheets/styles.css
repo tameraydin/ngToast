@@ -89,6 +89,7 @@ dt {
 
 th {
   color:#444;
+  border-bottom: 1px solid #444;
 }
 
 img {
@@ -183,7 +184,22 @@ footer {
   bottom:50px;
 }
 
+.fork-badge img {
+  transition: opacity 0.3s ease-in;
+}
+
 @media print, screen and (max-width: 960px) {
+
+  body {
+    padding-left: 50px;
+  }
+  .ng-toast {
+    margin-left: -50px;
+  }
+
+  .fork-badge img {
+    opacity: 0;
+  }
 
   div.wrapper {
     width:auto;
