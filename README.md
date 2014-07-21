@@ -35,27 +35,65 @@ Place ```ng-toast``` element into your HTML:
 Inject ngToast provider in your controller:
 
 ```
-var MyCtrl = function($scope, ngToast) {};
+var MyCtrl = function($scope, ngToast) {...};
 ```
 
 ## API
 
 ```
-// to create a toast:
+// create a toast:
 ngToast.create({
   content: 'A toast message...'
 });
 
-// to clear specific toast:
+// clear specific toast:
 var msg = ngToast.create({
   content: 'Another message as <a href="#" class="">HTML</a>'
 });
 
 ngToast.dismiss(msg);
 
-// to clear all toasts:
+// clear all toasts:
 ngToast.dismiss();
 ```
+
+## Settings
+
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Default value</th>
+    <th>Description</th>
+  </tr>
+  <tr><td><strong>class</strong></td>
+  <td>'success'</td>
+  <td></td></tr>
+  <tr><td><strong>dismissOnTimeout</strong></td>
+  <td>true</td>
+  <td></td></tr>
+  <tr><td><strong>timeout</strong></td>
+  <td>4000</td>
+  <td></td></tr>
+  <tr><td><strong>dismissButton</strong></td>
+  <td>false</td>
+  <td></td></tr>
+  <tr><td><strong>dismissButtonHtml</strong></td>
+  <td>'&amp;times;'</td>
+  <td></td></tr>
+  <tr><td><strong>dismissOnClick</strong></td>
+  <td>true</td>
+  <td></td></tr>
+  <tr><td><strong>horizontalPosition</strong></td>
+  <td>right</td>
+  <td></td></tr>
+  <tr><td><strong>verticalPosition</strong></td>
+  <td>top</td>
+  <td></td></tr>
+  <tr><td><strong>maxNumber</strong></td>
+  <td>0</td>
+  <td></td></tr>
+</table>
+
 
 ##TODO
 - Add unit & e2e tests
