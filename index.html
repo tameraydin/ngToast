@@ -111,45 +111,39 @@ ngToast.dismiss();
 <table>
   <tr>
     <th>Property</th>
-    <th>Default value</th>
+    <th>Default</th>
     <th>Description</th>
   </tr>
   <tr><td><strong>class</strong></td>
   <td>'success'</td>
-  <td></td></tr>
+  <td>Class name to be added on toast message with 'alert-' prefix. See <a target="_blank" href="http://getbootstrap.com/components/#alerts">Bootstrap Alerts</a> for possible options.</td></tr>
   <tr><td><strong>dismissOnTimeout</strong></td>
   <td>true</td>
-  <td></td></tr>
+  <td>Allows toast messages to be removed automatically after a specified time</td></tr>
   <tr><td><strong>timeout</strong></td>
   <td>4000</td>
-  <td></td></tr>
+  <td>Wait time for removal of created toast message</td></tr>
   <tr><td><strong>dismissButton</strong></td>
   <td>false</td>
-  <td></td></tr>
+  <td>Appends specified close button on toast message </td></tr>
   <tr><td><strong>dismissButtonHtml</strong></td>
   <td>'&amp;times;'</td>
-  <td></td></tr>
+  <td>HTML of close button to append</td></tr>
   <tr><td><strong>dismissOnClick</strong></td>
   <td>true</td>
-  <td></td></tr>
-  <tr><td><strong>horizontalPosition</strong></td>
+  <td>Allows toasts messages to be removed on mouse click</td></tr>
+  <tr><td><strong>horizontalPosition*</strong></td>
   <td>right</td>
-  <td></td></tr>
-  <tr><td><strong>verticalPosition</strong></td>
+  <td>Horizontal position of toast messages: 'right', 'left' or 'center'</td></tr>
+  <tr><td><strong>verticalPosition*</strong></td>
   <td>top</td>
-  <td></td></tr>
-  <tr><td><strong>maxNumber</strong></td>
+  <td>Vertical position of toast messages: 'top' or 'bottom'</td></tr>
+  <tr><td><strong>maxNumber*</strong></td>
   <td>0</td>
-  <td></td></tr>
+  <td>Maximum number of toast messages to display. (0 = no limit)</td></tr>
 </table>
+<small class="note"><strong>*</strong> Available only at <a target="_blank" href="https://docs.angularjs.org/guide/providers">configuration level</a>. Rest of setting properties can be overwritten at individual toast message.</small>
 
-<h2>
-<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
-
-<ul>
-<li>Add unit &amp; e2e tests</li>
-<li>Improve API documentation</li>
-</ul>
       </section>
       <footer>
         <p>This project is maintained by <a href="http://tamerayd.in">Tamer Aydin</a></p>

@@ -184,6 +184,21 @@ footer {
   bottom:50px;
 }
 
+table {
+  margin-bottom: 10px;
+}
+
+small.note {
+  font-size:11px;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+small.note strong {
+  font-size:13px;
+  color: #777;
+}
+
 .fork-badge img {
   transition: opacity 0.3s ease-in;
 }
@@ -230,7 +245,7 @@ footer {
   header ul {
     position:absolute;
     right:50px;
-    top:52px;
+    top:100px;
   }
 }
 
