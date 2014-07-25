@@ -92,9 +92,7 @@
 <h2>
 <a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
 <pre><code>// create a toast:
-ngToast.create({
-  message: 'A toast message...'
-});
+ngToast.create('A toast message...');
 
 // clear specific toast:
 var msg = ngToast.create({
@@ -114,6 +112,9 @@ ngToast.dismiss();
     <th>Default</th>
     <th>Description</th>
   </tr>
+  <tr><td><strong>content</strong></td>
+  <td></td>
+  <td>Content of the toast message as string (HTML is supported).</td></tr>
   <tr><td><strong>class</strong></td>
   <td>'success'</td>
   <td>Class name to be added on toast message with 'alert-' prefix. See <a target="_blank" href="http://getbootstrap.com/components/#alerts">Bootstrap Alerts</a> for possible options.</td></tr>
