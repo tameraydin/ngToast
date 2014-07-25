@@ -1,4 +1,4 @@
-## ngToast
+## ngToast [![Build Status](http://img.shields.io/travis/tameraydin/ngToast/master.svg?style=flat)](https://travis-ci.org/tameraydin/ngToast)
 
 ngToast is a simple Angular provider for toast notifications. 
 
