@@ -18,7 +18,7 @@ Include ngToast resource files along with the [Bootstrap CSS](http://getbootstra
 <script src="lib/ngtoast/dist/ngToast.min.js"></script>
 ```
 
-Include ngToast as a dependency in your app module:
+Include ngToast as a dependency in your application module:
 
 ```
 var app = angular.module('myApp', ['ngToast']);
@@ -35,7 +35,7 @@ Place ```ng-toast``` element into your HTML:
 Inject ngToast provider in your controller:
 
 ```
-var MyCtrl = function($scope, ngToast) {...};
+app.controller($scope, ngToast) {...};
 ```
 
 ## Settings & API
