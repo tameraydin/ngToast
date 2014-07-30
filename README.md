@@ -42,6 +42,10 @@ app.controller($scope, ngToast) {...};
 
 Please find at [project website](http://tameraydin.github.io/ngToast/#api).
 
+## License
+
+MIT [http://tameraydin.mit-license.org/](http://tameraydin.mit-license.org/)
+
 
 ##TODO
 - Add unit & e2e tests
