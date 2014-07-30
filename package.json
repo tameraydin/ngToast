@@ -1,6 +1,6 @@
 {
   "name": "ngToast",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Angular provider for toast notifications",
   "main": "dist/ngToast.js",
   "repository": {
@@ -17,7 +17,7 @@
   "author": "Tamer Aydin",
   "license": {
     "type": "MIT",
-    "url": "https://github.com/tameraydin/ngToast/blob/master/LICENSE"
+    "url": "http://tameraydin.mit-license.org/"
   },
   "readmeFilename": "readme.md",
   "homepage": "http://tameraydin.github.io/ngToast",
