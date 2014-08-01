@@ -11,7 +11,7 @@ angular.module('ngToast.directives', ['ngToast.provider'])
           scope.messages = ngToast.messages;
 
           // get the template if exists
-          var tmpl = (attrs.template !== "" ? $templateCache.get(attrs.template) : null);
+          var tmpl = (attrs.template && attrs.template !== "" ? $templateCache.get(attrs.template) : null);
           if (!tmpl) {
             tmpl = '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
               '<ul class="ng-toast__list">' +
