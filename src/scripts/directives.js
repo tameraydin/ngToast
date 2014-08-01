@@ -1,24 +1,36 @@
 'use strict';
 
 angular.module('ngToast.directives', ['ngToast.provider'])
-  .directive('ngToast', ['ngToast',
-    function(ngToast) {
+  .directive('ngToast', ['ngToast', '$templateCache', '$compile',
+    function(ngToast, $templateCache, $compile) {
       return {
-        replace: true,
         restrict: 'E',
-        template:
-          '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
-            '<ul class="ng-toast__list">' +
-              '<ng-toast-message ng-repeat="message in messages" ' +
-                'message="message">' +
-                '<span ng-bind-html="message.content"></span>' +
-              '</ng-toast-message>' +
-            '</ul>' +
-          '</div>',
-        link: function(scope) {
+        link: function(scope, elem, attrs) {
           scope.hPos = ngToast.settings.horizontalPosition;
           scope.vPos = ngToast.settings.verticalPosition;
           scope.messages = ngToast.messages;
+
+          // get the template if exists
+          var tmpl = (attrs.template !== "" ? $templateCache.get(attrs.template) : null);
+          if (!tmpl) {
+            tmpl = '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
+              '<ul class="ng-toast__list">' +
+              '<ng-toast-message ng-repeat="message in messages" ' +
+              'message="message">' +
+              '<span ng-bind-html="message.content"></span>' +
+              '</ng-toast-message>' +
+              '</ul>' +
+              '</div>';
+          }
+
+          // build the dom
+          var tElem = angular.element(tmpl);
+          var link = $compile(tElem);
+          // provide scope & link/bind data to dom
+          var html = link(scope);
+
+          // append it to container
+          elem.replaceWith(html);
         }
       };
     }
