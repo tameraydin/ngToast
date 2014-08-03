@@ -1,36 +1,36 @@
 'use strict';
 
 angular.module('ngToast.directives', ['ngToast.provider'])
-  .directive('ngToast', ['ngToast', '$templateCache', '$compile',
-    function(ngToast, $templateCache, $compile) {
+  .directive('ngToast', ['ngToast', '$templateCache', '$log',
+    function(ngToast, $templateCache, $log) {
       return {
+        replace: true,
         restrict: 'E',
-        link: function(scope, elem, attrs) {
-          scope.hPos = ngToast.settings.horizontalPosition;
-          scope.vPos = ngToast.settings.verticalPosition;
-          scope.messages = ngToast.messages;
-
-          // get the template if exists
-          var tmpl = (attrs.template && attrs.template !== "" ? $templateCache.get(attrs.template) : null);
-          if (!tmpl) {
-            tmpl = '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
-              '<ul class="ng-toast__list">' +
+        template:
+          '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
+            '<ul class="ng-toast__list">' +
               '<ng-toast-message ng-repeat="message in messages" ' +
-              'message="message">' +
-              '<span ng-bind-html="message.content"></span>' +
+                'message="message">' +
+                '<span ng-bind-html="message.content"></span>' +
               '</ng-toast-message>' +
-              '</ul>' +
-              '</div>';
+            '</ul>' +
+          '</div>',
+        compile: function(tElem, tAttrs) {
+          if (tAttrs.template) {
+            var template = $templateCache.get(tAttrs.template);
+            if (template) {
+              tElem.replaceWith(template);
+            } else {
+              $log.warn('ngToast: Provided template could not be loaded. ' +
+                'Please be sure that it is populated before the <ng-toast> element is represented.');
+            }
           }
 
-          // build the dom
-          var tElem = angular.element(tmpl);
-          var link = $compile(tElem);
-          // provide scope & link/bind data to dom
-          var html = link(scope);
-
-          // append it to container
-          elem.replaceWith(html);
+          return function(scope) {
+            scope.hPos = ngToast.settings.horizontalPosition;
+            scope.vPos = ngToast.settings.verticalPosition;
+            scope.messages = ngToast.messages;
+          };
         }
       };
     }
