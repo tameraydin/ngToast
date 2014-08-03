@@ -42,6 +42,12 @@ app.controller($scope, ngToast) {...};
 
 Please find at [project website](http://tameraydin.github.io/ngToast/#api).
 
+## Development
+
+* Install dependencies: `npm install`
+* Play on **/src**
+* Run `grunt`
+
 ## License
 
 MIT [http://tameraydin.mit-license.org/](http://tameraydin.mit-license.org/)
