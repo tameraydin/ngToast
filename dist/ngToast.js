@@ -166,7 +166,10 @@ angular.module('ngToast.directives', ['ngToast.provider'])
     }
   ]);
 
-angular.module('ngToast', [
+angular
+  .module('ngToast', [
+    'ngAnimate',
+    'ngSanitize',
     'ngToast.directives',
     'ngToast.provider'
   ]);
