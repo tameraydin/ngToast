@@ -88,8 +88,8 @@ angular.module('ngToast.provider', [])
   ]);
 
 angular.module('ngToast.directives', ['ngToast.provider'])
-  .directive('ngToast', ['ngToast',
-    function(ngToast) {
+  .directive('ngToast', ['ngToast', '$templateCache', '$log',
+    function(ngToast, $templateCache, $log) {
       return {
         replace: true,
         restrict: 'E',
@@ -102,10 +102,22 @@ angular.module('ngToast.directives', ['ngToast.provider'])
               '</ng-toast-message>' +
             '</ul>' +
           '</div>',
-        link: function(scope) {
-          scope.hPos = ngToast.settings.horizontalPosition;
-          scope.vPos = ngToast.settings.verticalPosition;
-          scope.messages = ngToast.messages;
+        compile: function(tElem, tAttrs) {
+          if (tAttrs.template) {
+            var template = $templateCache.get(tAttrs.template);
+            if (template) {
+              tElem.replaceWith(template);
+            } else {
+              $log.warn('ngToast: Provided template could not be loaded. ' +
+                'Please be sure that it is populated before the <ng-toast> element is represented.');
+            }
+          }
+
+          return function(scope) {
+            scope.hPos = ngToast.settings.horizontalPosition;
+            scope.vPos = ngToast.settings.verticalPosition;
+            scope.messages = ngToast.messages;
+          };
         }
       };
     }
