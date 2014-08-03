@@ -63,12 +63,14 @@
 
 <pre><code>bower install ngtoast</code></pre>
 
-<p>Include ngToast resource files along with the <a href="http://getbootstrap.com/" target="_blank">Bootstrap CSS</a> (only the Alerts component is used as style base, so you don't have to include complete CSS):</p>
+<p>Include ngToast resource files along with the built-in <a href="http://docs.angularjs.org/api/ngAnimate">ngAnimate</a> &amp; <a href="http://docs.angularjs.org/api/ngSanitize">ngSanitize</a> modules and the <a href="http://getbootstrap.com/" target="_blank">Bootstrap CSS</a> (only the Alerts component is used as style base, so you don't have to include complete CSS):</p>
 
-<pre><code>&lt;link rel="stylesheet" href="lib/bootstrap/bootstrap.css"&gt;
-&lt;link rel="stylesheet" href="lib/ngToast/ngToast.css"&gt;
+<pre><code>&lt;link rel="stylesheet" href="bootstrap.min.css"&gt;
+&lt;link rel="stylesheet" href="ngToast.min.css"&gt;
 
-&lt;script src="lib/ngToast/ngToast.min.js"&gt;&lt;/script&gt;
+&lt;script src="angular-animate.min.js"&gt;&lt;/script&gt;
+&lt;script src="angular-sanitize.min.js"&gt;&lt;/script&gt;
+&lt;script src="ngToast.min.js"&gt;&lt;/script&gt;
 </code></pre>
 
 <p>Include ngToast as a dependency in your app module:</p>
