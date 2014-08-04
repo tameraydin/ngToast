@@ -37,7 +37,9 @@ Place ```ng-toast``` element into your HTML:
 Inject ngToast provider in your controller:
 
 ```
-app.controller($scope, ngToast) {...};
+app.controller('myCtrl', function(ngToast) {
+  ngToast.create('a toast message...');
+});
 ```
 
 ## Settings & API
