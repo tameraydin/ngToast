@@ -4,7 +4,7 @@
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
 
-'use strict'
+'use strict';
 angular.module('ngToast.provider', [])
   .provider('ngToast', [
     function() {
