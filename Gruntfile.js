@@ -28,10 +28,7 @@ module.exports = function(grunt) {
           'block': true,
           'line': true
         },
-        banner: '<%= banner %>\n\'use strict\';\n',
-        process: function(src, filepath) {
-          return src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
-        }
+        banner: '<%= banner %>'
       },
       dist: {
         src: ['src/scripts/provider.js', 'src/scripts/directives.js', 'src/scripts/module.js'],
