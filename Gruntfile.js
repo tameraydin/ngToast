@@ -1,3 +1,5 @@
+require('colors');
+var jsdiff = require('diff');
 var fs = require('fs');
 
 module.exports = function(grunt) {
@@ -44,6 +46,21 @@ module.exports = function(grunt) {
           banner: '<%= banner %>',
           specify: 'src/styles/ngToast.scss'
         }
+      },
+      test: {
+        options: {
+          noLineComments: true,
+          sassDir: 'src/styles',
+          cssDir: 'test/css-files',
+          specify: 'src/styles/ngToast.scss'
+        }
+      }
+    },
+    less: {
+      test: {
+        files: {
+          "test/css-files/ngToast.less.css": "src/styles/ngToast.less"
+        }
       }
     },
     cssmin: {
@@ -52,7 +69,7 @@ module.exports = function(grunt) {
           banner: '<%= banner %>',
           keepSpecialComments: 0
         },
-        expand : true,
+        expand: true,
         src: 'dist/*.css',
         ext: '.min.css'
       }
@@ -83,21 +100,54 @@ module.exports = function(grunt) {
 
     fs.writeFileSync('bower.json', JSON.stringify(bower, null, 4));
     fs.writeFileSync('package.json', JSON.stringify(npm_package, null, 4));
-  })
+  });
+
+  grunt.registerTask('test-generated-css', function() {
+    this.requires('less:test');
+    this.requires('compass:test');
+
+    var sassCSS = grunt.file.read('./test/css-files/ngToast.css');
+    var lessCSS = grunt.file.read('./test/css-files/ngToast.less.css');
+    grunt.file.delete('test/css-files');
+
+    if (lessCSS === sassCSS) {
+      // pass
+      grunt.log.ok('LESS/SASS generated CSS matches.');
+    } else {
+      // fail
+      var headerFooter = 'SASS differences\n'.magenta + 'LESS differences\n\n'.blue;
+      var diff = jsdiff.diffCss(lessCSS, sassCSS);
+
+      grunt.log.write(headerFooter);
+
+      diff.forEach(function(line) {
+        var color = line.added ? 'magenta' : line.removed ? 'blue' : 'gray';
+        grunt.log.write(line.value[color]);
+      });
+
+      grunt.log.write(headerFooter);
+      grunt.fail.warn('Generated LESS/SASS CSS does not match!', 6);
+    }
+  });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-karma');
   grunt.registerTask('default', [
+    'compass:test',
+    'clean:sass',
+    'less:test',
+    'test-generated-css',
     'jshint',
     'karma',
     'clean:dist',
     'concat',
-    'compass',
+    'compass:dist',
     'clean:sass',
     'cssmin',
     'uglify'
