@@ -147,7 +147,7 @@ module.exports = function(grunt) {
     'karma',
     'clean:dist',
     'concat',
-    'compass',
+    'compass:dist',
     'clean:sass',
     'cssmin',
     'uglify'
