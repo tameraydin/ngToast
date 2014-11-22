@@ -2,8 +2,8 @@
   "name": "ngToast",
   "version": "1.2.0",
   "main": [
-    "dist/ngToast.min.js",
-    "dist/ngToast.min.css"
+    "dist/ngToast.js",
+    "dist/ngToast.css"
   ],
   "dependencies": {
     "angular": "~1.2.15",
