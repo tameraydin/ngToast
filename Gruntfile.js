@@ -6,7 +6,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*!\n' +
-            ' * ngToast v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+            ' * toast v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
             ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
             ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n' +
             ' */\n',
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/scripts/provider.js', 'src/scripts/directives.js', 'src/scripts/module.js'],
-        dest: 'dist/ngToast.js'
+        dest: 'dist/toast.js'
       }
     },
     compass: {
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
           sassDir: 'src/styles',
           cssDir: 'dist/',
           banner: '<%= banner %>',
-          specify: 'src/styles/ngToast.scss'
+          specify: 'src/styles/toast.scss'
         }
       },
       test: {
@@ -52,14 +52,14 @@ module.exports = function(grunt) {
           noLineComments: true,
           sassDir: 'src/styles',
           cssDir: 'test/css-files',
-          specify: 'src/styles/ngToast.scss'
+          specify: 'src/styles/toast.scss'
         }
       }
     },
     less: {
       test: {
         files: {
-          "test/css-files/ngToast.less.css": "src/styles/ngToast.less"
+          "test/css-files/toast.less.css": "src/styles/toast.less"
         }
       }
     },
@@ -106,8 +106,8 @@ module.exports = function(grunt) {
     this.requires('less:test');
     this.requires('compass:test');
 
-    var sassCSS = grunt.file.read('./test/css-files/ngToast.css');
-    var lessCSS = grunt.file.read('./test/css-files/ngToast.less.css');
+    var sassCSS = grunt.file.read('./test/css-files/toast.css');
+    var lessCSS = grunt.file.read('./test/css-files/toast.less.css');
     grunt.file.delete('test/css-files');
 
     if (lessCSS === sassCSS) {

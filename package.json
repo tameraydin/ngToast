@@ -1,11 +1,11 @@
 {
-  "name": "ngToast",
+  "name": "toast",
   "version": "1.2.0",
   "description": "Angular provider for toast notifications",
-  "main": "dist/ngToast.js",
+  "main": "dist/toast.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/tameraydin/ngToast.git"
+    "url": "git://github.com/tameraydin/toast.git"
   },
   "keywords": [
     "angular",
@@ -20,9 +20,9 @@
     "url": "http://tameraydin.mit-license.org/"
   },
   "readmeFilename": "readme.md",
-  "homepage": "http://tameraydin.github.io/ngToast",
+  "homepage": "http://tameraydin.github.io/toast",
   "bugs": {
-    "url": "https://github.com/tameraydin/ngToast/issues"
+    "url": "https://github.com/tameraydin/toast/issues"
   },
   "devDependencies": {
     "colors": "^1.0.3",

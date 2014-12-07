@@ -1,19 +1,19 @@
 (function(window, angular, undefined) {
   'use strict';
 
-  angular.module('ngToast.directives', ['ngToast.provider'])
-    .directive('ngToast', ['ngToast', '$templateCache', '$log',
-      function(ngToast, $templateCache, $log) {
+  angular.module('toast.directives', ['toast.provider'])
+    .directive('toast', ['toast', '$templateCache', '$log',
+      function(toast, $templateCache, $log) {
         return {
           replace: true,
           restrict: 'E',
           template:
-            '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
-              '<ul class="ng-toast__list">' +
-                '<ng-toast-message ng-repeat="message in messages" ' +
+            '<div class="toast toast--{{hPos}} toast--{{vPos}}">' +
+              '<ul class="toast__list">' +
+                '<toast-message ng-repeat="message in messages" ' +
                   'message="message">' +
                   '<span ng-bind-html="message.content"></span>' +
-                '</ng-toast-message>' +
+                '</toast-message>' +
               '</ul>' +
             '</div>',
           compile: function(tElem, tAttrs) {
@@ -22,22 +22,22 @@
               if (template) {
                 tElem.replaceWith(template);
               } else {
-                $log.warn('ngToast: Provided template could not be loaded. ' +
-                  'Please be sure that it is populated before the <ng-toast> element is represented.');
+                $log.warn('toast: Provided template could not be loaded. ' +
+                  'Please be sure that it is populated before the <toast> element is represented.');
               }
             }
 
             return function(scope) {
-              scope.hPos = ngToast.settings.horizontalPosition;
-              scope.vPos = ngToast.settings.verticalPosition;
-              scope.messages = ngToast.messages;
+              scope.hPos = toast.settings.horizontalPosition;
+              scope.vPos = toast.settings.verticalPosition;
+              scope.messages = toast.messages;
             };
           }
         };
       }
     ])
-    .directive('ngToastMessage', ['$timeout', 'ngToast',
-      function($timeout, ngToast) {
+    .directive('toastMessage', ['$timeout', 'toast',
+      function($timeout, toast) {
         return {
           replace: true,
           transclude: true,
@@ -45,13 +45,13 @@
           scope: {
             message: '='
           },
-          controller: ['$scope', 'ngToast', function($scope, ngToast) {
+          controller: ['$scope', 'toast', function($scope, toast) {
             $scope.dismiss = function() {
-              ngToast.dismiss($scope.message.id);
+              toast.dismiss($scope.message.id);
             };
           }],
           template:
-            '<li class="ng-toast__message">' +
+            '<li class="toast__message">' +
               '<div class="alert alert-{{message.class}}" ' +
                 'ng-class="{\'alert-dismissable\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
@@ -65,13 +65,13 @@
           link: function(scope, element) {
             if (scope.message.dismissOnTimeout) {
               $timeout(function() {
-                ngToast.dismiss(scope.message.id);
+                toast.dismiss(scope.message.id);
               }, scope.message.timeout);
             }
 
             if (scope.message.dismissOnClick) {
               element.bind('click', function() {
-                ngToast.dismiss(scope.message.id);
+                toast.dismiss(scope.message.id);
                 scope.$apply();
               });
             }

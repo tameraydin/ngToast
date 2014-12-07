@@ -1,10 +1,10 @@
 /*!
- * ngToast v1.2.0 (http://tameraydin.github.io/ngToast)
+ * toast v1.2.0 (http://tameraydin.github.io/toast)
  * Copyright 2014 Tamer Aydin
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
 
-.ng-toast {
+.toast {
   position: fixed;
   z-index: 1080;
   width: 100%;
@@ -12,48 +12,48 @@
   margin-top: 20px;
   text-align: center;
 }
-.ng-toast.ng-toast--top {
+.toast.toast--top {
   top: 0;
   bottom: auto;
 }
-.ng-toast.ng-toast--top .ng-toast__list {
+.toast.toast--top .toast__list {
   top: 0;
   bottom: auto;
 }
-.ng-toast.ng-toast--top.ng-toast--center .ng-toast__list {
+.toast.toast--top.toast--center .toast__list {
   position: static;
 }
-.ng-toast.ng-toast--bottom {
+.toast.toast--bottom {
   top: auto;
   bottom: 0;
 }
-.ng-toast.ng-toast--bottom .ng-toast__list {
+.toast.toast--bottom .toast__list {
   top: auto;
   bottom: 0;
 }
-.ng-toast.ng-toast--bottom.ng-toast--center .ng-toast__list {
+.toast.toast--bottom.toast--center .toast__list {
   pointer-events: none;
 }
-.ng-toast.ng-toast--bottom.ng-toast--center .ng-toast__message .alert {
+.toast.toast--bottom.toast--center .toast__message .alert {
   pointer-events: auto;
 }
-.ng-toast.ng-toast--right .ng-toast__list {
+.toast.toast--right .toast__list {
   left: auto;
   right: 0;
   margin-right: 20px;
 }
-.ng-toast.ng-toast--right .ng-toast__message {
+.toast.toast--right .toast__message {
   text-align: right;
 }
-.ng-toast.ng-toast--left .ng-toast__list {
+.toast.toast--left .toast__list {
   right: auto;
   left: 0;
   margin-left: 20px;
 }
-.ng-toast.ng-toast--left .ng-toast__message {
+.toast.toast--left .toast__message {
   text-align: left;
 }
-.ng-toast .ng-toast__list {
+.toast .toast__list {
   display: inline-block;
   position: absolute;
   right: 0;
@@ -62,38 +62,38 @@
   padding: 0;
   list-style: none;
 }
-.ng-toast .ng-toast__message {
+.toast .toast__message {
   display: block;
   width: 100%;
   text-align: center;
 }
-.ng-toast .ng-toast__message .alert {
+.toast .toast__message .alert {
   display: inline-block;
 }
-.ng-toast .ng-enter,
-.ng-toast .ng-leave,
-.ng-toast .ng-move {
+.toast .ng-enter,
+.toast .ng-leave,
+.toast .ng-move {
   transition: 0.3s ease left, 0.3s ease opacity;
 }
-.ng-toast .ng-enter {
+.toast .ng-enter {
   left: -50px;
   opacity: 0;
 }
-.ng-toast .ng-enter.ng-enter-active {
+.toast .ng-enter.ng-enter-active {
   left: 0;
   opacity: 1;
 }
-.ng-toast .ng-leave {
+.toast .ng-leave {
   left: 0;
   opacity: 1;
 }
-.ng-toast .ng-leave.ng-leave-active {
+.toast .ng-leave.ng-leave-active {
   left: -50px;
   opacity: 0;
 }
-.ng-toast .ng-move {
+.toast .ng-move {
   opacity: 0.5;
 }
-.ng-toast .ng-move.ng-move-active {
+.toast .ng-move.ng-move-active {
   opacity: 1;
 }
