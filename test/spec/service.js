@@ -1,91 +1,91 @@
 'use strict';
 
-describe('toast:', function() {
+describe('ngToast:', function() {
 
   describe('service:', function() {
-    var toast;
+    var ngToast;
 
     beforeEach(function () {
-      module('toast.provider');
+      module('ngToast.provider');
     });
 
-    beforeEach(inject(function (_toast_) {
-      toast = _toast_;
+    beforeEach(inject(function (_ngToast_) {
+      ngToast = _ngToast_;
     }));
 
     it('initial values should be set', function () {
-      expect(toast.messages).toEqual([]);
-      expect(toast.settings).not.toEqual({});
+      expect(ngToast.messages).toEqual([]);
+      expect(ngToast.settings).not.toEqual({});
     });
 
     it('create should work', function () {
-      toast.create('toast1');
-      expect(toast.messages.length).toBe(1);
-      expect(toast.messages[0].content).toBe('toast1');
+      ngToast.create('toast1');
+      expect(ngToast.messages.length).toBe(1);
+      expect(ngToast.messages[0].content).toBe('toast1');
 
-      toast.create({content: 'toast2'});
-      expect(toast.messages.length).toBe(2);
-      expect(toast.messages[1].content).toBe('toast2');
+      ngToast.create({content: 'toast2'});
+      expect(ngToast.messages.length).toBe(2);
+      expect(ngToast.messages[1].content).toBe('toast2');
     });
 
     it('create should work in reverse order when vertical position is set as bottom', function () {
-      toast.create('toast1');
+      ngToast.create('toast1');
 
-      toast.settings.verticalPosition = 'bottom';
-      toast.create('toast2');
-      expect(toast.messages.length).toBe(2);
-      expect(toast.messages[0].content).toBe('toast2');
+      ngToast.settings.verticalPosition = 'bottom';
+      ngToast.create('toast2');
+      expect(ngToast.messages.length).toBe(2);
+      expect(ngToast.messages[0].content).toBe('toast2');
     });
 
     it('create should dismiss first message when reached to max limit', function () {
-      toast.settings.maxNumber = 2;
-      toast.create('toast1');
-      toast.create('toast2');
+      ngToast.settings.maxNumber = 2;
+      ngToast.create('toast1');
+      ngToast.create('toast2');
 
-      toast.create('toast3');
-      expect(toast.messages.length).toBe(2);
-      expect(toast.messages[0].content).toBe('toast2');
+      ngToast.create('toast3');
+      expect(ngToast.messages.length).toBe(2);
+      expect(ngToast.messages[0].content).toBe('toast2');
     });
 
     it('dismiss should work', function () {
-      var toast1 = toast.create('toast1');
-      var toast2 = toast.create('toast2');
+      var toast1 = ngToast.create('toast1');
+      var toast2 = ngToast.create('toast2');
 
-      toast.dismiss(-1); // non-existent id
-      expect(toast.messages.length).toBe(2);
-      expect(toast.messages[0].content).toBe('toast1');
+      ngToast.dismiss(-1); // non-existent id
+      expect(ngToast.messages.length).toBe(2);
+      expect(ngToast.messages[0].content).toBe('toast1');
 
-      toast.dismiss(toast1);
-      expect(toast.messages.length).toBe(1);
-      expect(toast.messages[0].content).toBe('toast2');
+      ngToast.dismiss(toast1);
+      expect(ngToast.messages.length).toBe(1);
+      expect(ngToast.messages[0].content).toBe('toast2');
 
-      toast.dismiss(toast2);
-      expect(toast.messages.length).toBe(0);
+      ngToast.dismiss(toast2);
+      expect(ngToast.messages.length).toBe(0);
     });
 
     it('dismiss all should work', function () {
-      toast.create('toast1');
-      toast.create('toast2');
-      toast.create('toast3');
+      ngToast.create('toast1');
+      ngToast.create('toast2');
+      ngToast.create('toast3');
 
-      toast.dismiss();
-      expect(toast.messages.length).toBe(0);
+      ngToast.dismiss();
+      expect(ngToast.messages.length).toBe(0);
     });
   });
 
   describe('service configuration:', function() {
-    beforeEach(module('toast.provider', function(toastProvider) {
-      toastProvider.configure({
+    beforeEach(module('ngToast.provider', function(ngToastProvider) {
+      ngToastProvider.configure({
         timeout: 3000,
         dismissButton: true,
         maxNumber: 3
       });
     }));
 
-    it('should respect config values', inject(function(toast) {
-      expect(toast.settings.timeout).toBe(3000);
-      expect(toast.settings.dismissButton).toBe(true);
-      expect(toast.settings.maxNumber).toBe(3);
+    it('should respect config values', inject(function(ngToast) {
+      expect(ngToast.settings.timeout).toBe(3000);
+      expect(ngToast.settings.dismissButton).toBe(true);
+      expect(ngToast.settings.maxNumber).toBe(3);
     }));
   });
 });

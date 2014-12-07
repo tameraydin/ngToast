@@ -1,8 +1,8 @@
 (function(window, angular, undefined) {
   'use strict';
 
-  angular.module('toast.provider', [])
-    .provider('toast', [
+  angular.module('ngToast.provider', [])
+    .provider('ngToast', [
       function() {
         var messages = [],
             messageStack = [];

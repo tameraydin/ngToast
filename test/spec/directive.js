@@ -1,16 +1,16 @@
 'use strict';
 
-describe('toast:', function() {
+describe('ngToast:', function() {
 
   describe('directive:', function() {
-    var toast;
+    var ngToast;
 
     beforeEach(function () {
-      module('toast.provider');
+      module('ngToast.provider');
     });
 
-    beforeEach(inject(function (_toast_, $window) {
-      toast = _toast_;
+    beforeEach(inject(function (_ngToast_, $window) {
+      ngToast = _ngToast_;
     }));
 
     //TODO: button should work although dismissOnClick

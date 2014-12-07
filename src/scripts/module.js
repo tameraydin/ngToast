@@ -2,11 +2,11 @@
   'use strict';
 
   angular
-    .module('toast', [
+    .module('ngToast', [
       'ngAnimate',
       'ngSanitize',
-      'toast.directives',
-      'toast.provider'
+      'ngToast.directives',
+      'ngToast.provider'
     ]);
 
 })(window, window.angular);

@@ -1,47 +1,47 @@
-@ngt-module: ~'toast';
-@ngt-spacing: 20px;
+$ngt-module: 'ng-toast';
+$ngt-spacing: 20px;
 
-.@{ngt-module} {
+.#{$ngt-module} {
   position: fixed;
   z-index: 1080;
   width: 100%;
   height: 0;
-  margin-top: @ngt-spacing;
+  margin-top: $ngt-spacing;
   text-align: center;
 
-  &.@{ngt-module}--top {
+  &.#{$ngt-module}--top {
     top: 0;
     bottom: auto;
 
-    .@{ngt-module}__list {
+    .#{$ngt-module}__list {
       top: 0;
       bottom: auto;
     }
 
-    &.@{ngt-module}--center {
+    &.#{$ngt-module}--center {
 
-      .@{ngt-module}__list {
+      .#{$ngt-module}__list {
         position: static;
       }
     }
   }
 
-  &.@{ngt-module}--bottom {
+  &.#{$ngt-module}--bottom {
     top: auto;
     bottom: 0;
 
-    .@{ngt-module}__list {
+    .#{$ngt-module}__list {
       top: auto;
       bottom: 0;
     }
 
-    &.@{ngt-module}--center {
+    &.#{$ngt-module}--center {
 
-      .@{ngt-module}__list {
+      .#{$ngt-module}__list {
         pointer-events: none;
       }
 
-      .@{ngt-module}__message {
+      .#{$ngt-module}__message {
         .alert {
           pointer-events: auto;
         }
@@ -49,33 +49,33 @@
     }
   }
 
-  &.@{ngt-module}--right {
+  &.#{$ngt-module}--right {
 
-    .@{ngt-module}__list {
+    .#{$ngt-module}__list {
       left: auto;
       right: 0;
-      margin-right: @ngt-spacing;
+      margin-right: $ngt-spacing;
     }
 
-    .@{ngt-module}__message {
+    .#{$ngt-module}__message {
       text-align: right;
     }
   }
 
-  &.@{ngt-module}--left {
+  &.#{$ngt-module}--left {
 
-    .@{ngt-module}__list {
+    .#{$ngt-module}__list {
       right: auto;
       left: 0;
-      margin-left: @ngt-spacing;
+      margin-left: $ngt-spacing;
     }
 
-    .@{ngt-module}__message {
+    .#{$ngt-module}__message {
       text-align: left;
     }
   }
 
-  .@{ngt-module}__list {
+  .#{$ngt-module}__list {
     display: inline-block;
     position: absolute;
     right: 0;
@@ -85,7 +85,7 @@
     list-style: none;
   }
 
-  .@{ngt-module}__message {
+  .#{$ngt-module}__message {
     display: block;
     width: 100%;
     text-align: center;
