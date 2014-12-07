@@ -1,59 +1,63 @@
-## ngToast
+ngToast [![Code Climate](http://img.shields.io/codeclimate/github/tameraydin/ngToast.svg?style=flat)](https://codeclimate.com/github/tameraydin/ngToast/dist/ngToast.js) [![Build Status](http://img.shields.io/travis/tameraydin/ngToast/master.svg?style=flat)](https://travis-ci.org/tameraydin/ngToast)
+=======
 
-ngToast is a simple Angular provider for toast notifications. 
+ngToast is a simple Angular provider for toast notifications.
+
+**[Demo](http://tameraydin.github.io/ngToast)**
 
 ## Usage
 
-Download ngToast manually or install with bower:
+1. Download:
+  ```console
+  bower install ngtoast
+  ```
+  or manually from [dist](https://github.com/tameraydin/ngToast/tree/master/dist).
 
-```bower install ngtoast```
+2. Include ngToast source files and dependencies ([ngAnimate](http://docs.angularjs.org/api/ngAnimate), [ngSanitize](http://docs.angularjs.org/api/ngSanitize), [Bootstrap CSS](http://getbootstrap.com/)):
+  ```html
+  <link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower/ngtoast/dist/ngToast.min.css">
+  
+  <script src="bower/angular-animate/angular-animate.min.js"></script>
+  <script src="bower/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="bower/ngtoast/dist/ngToast.min.js"></script>
+  ```
+ *Note: only the [Alerts](http://getbootstrap.com/components/#alerts) component is used as style base, so you don't have to include complete CSS*
 
-Include resource files in your app:
-```
-<script src="lib/ngtoast/dist/ngToast.min.js"></script>
-<link rel="stylesheet" href="lib/ngtoast/dist/ngToast.css">
-```
+3. Include ngToast as a dependency in your application module:
+  ```javascript
+  var app = angular.module('myApp', ['ngToast']);
+  ```
 
-Include ngToast as a dependency in your app module:
+4. Place `toast` element into your HTML:
+  ```html
+  <body>
+    <toast></toast>
+    ...
+  </body>
+  ```
 
-```
-var app = angular.module('myApp', ['ngToast']);
-```
+5. Inject ngToast provider in your controller:
+  ```javascript
+  app.controller('myCtrl', function(ngToast) {
+    ngToast.create('a toast message...');
+  });
+  ```
 
-Place ```ng-toast``` element into your HTML:
-```
-<body>
-  <ng-toast></ng-toast>
-  ...
-</body>
-```
+## Settings & API
 
-Inject ngToast provider in your controller:
+Please find at the [project website](http://tameraydin.github.io/ngToast/#api).
 
-```
-var MyCtrl = function($scope, ngToast) {};
-```
+## Development
 
-## API
+* Install dependencies: `npm install`
+* Play on **/src**
+* Run `grunt`
 
-```
-// to create a toast:
-ngToast.create({
-  content: 'A toast message...'
-});
+## License
 
-// to clear specific toast:
-var msg = ngToast.create({
-  content: 'Another message as <a href="#" class="">HTML</a>',
-  horizontalPosition: 'left'
-});
+MIT [http://tameraydin.mit-license.org/](http://tameraydin.mit-license.org/)
 
-ngToast.dismiss(msg);
-
-// to clear all toasts:
-ngToast.dismiss();
-```
-
-##TODO
+## TODO
 - Add unit & e2e tests
 - Improve API documentation
