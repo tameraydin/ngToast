@@ -1,5 +1,5 @@
 /*!
- * toast v1.2.0 (http://tameraydin.github.io/toast)
+ * toast v1.2.1 (http://tameraydin.github.io/toast)
  * Copyright 2014 Tamer Aydin
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
