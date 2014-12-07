@@ -29,10 +29,10 @@ ngToast is a simple Angular provider for toast notifications.
   var app = angular.module('myApp', ['ngToast']);
   ```
 
-4. Place `ng-toast` element into your HTML:
+4. Place `toast` element into your HTML:
   ```html
   <body>
-    <ng-toast></ng-toast>
+    <toast></toast>
     ...
   </body>
   ```
