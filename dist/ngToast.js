@@ -94,7 +94,7 @@
   'use strict';
 
   angular.module('ngToast.directives', ['ngToast.provider'])
-    .directive('ngToast', ['ngToast', '$templateCache', '$log',
+    .directive('toast', ['ngToast', '$templateCache', '$log',
       function(ngToast, $templateCache, $log) {
         return {
           replace: true,
@@ -102,10 +102,10 @@
           template:
             '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
               '<ul class="ng-toast__list">' +
-                '<ng-toast-message ng-repeat="message in messages" ' +
+                '<toast-message ng-repeat="message in messages" ' +
                   'message="message">' +
                   '<span ng-bind-html="message.content"></span>' +
-                '</ng-toast-message>' +
+                '</toast-message>' +
               '</ul>' +
             '</div>',
           compile: function(tElem, tAttrs) {
@@ -115,7 +115,7 @@
                 tElem.replaceWith(template);
               } else {
                 $log.warn('ngToast: Provided template could not be loaded. ' +
-                  'Please be sure that it is populated before the <ng-toast> element is represented.');
+                  'Please be sure that it is populated before the <toast> element is represented.');
               }
             }
 
@@ -128,7 +128,7 @@
         };
       }
     ])
-    .directive('ngToastMessage', ['$timeout', 'ngToast',
+    .directive('toastMessage', ['$timeout', 'ngToast',
       function($timeout, ngToast) {
         return {
           replace: true,
