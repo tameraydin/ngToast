@@ -36,8 +36,8 @@
         };
       }
     ])
-    .directive('toastMessage', ['$timeout', 'ngToast',
-      function($timeout, ngToast) {
+    .directive('toastMessage', ['$timeout', '$compile', 'ngToast',
+      function($timeout, $compile, ngToast) {
         return {
           replace: true,
           transclude: true,
@@ -59,10 +59,26 @@
                   'ng-bind-html="message.dismissButtonHtml" ' +
                   'ng-click="!message.dismissOnClick && dismiss()">' +
                 '</button>' +
-                '<span ng-transclude></span>' +
+                '<span ng-if="!message.compileContent" ng-transclude></span>' +
               '</div>' +
             '</li>',
-          link: function(scope, element) {
+          link: function(scope, element, attrs, ctrl, transclude) {
+            if (scope.message.compileContent) {
+              var transcludedEl;
+
+              transclude(scope, function(clone) {
+                transcludedEl = clone;
+                element.children().append(transcludedEl);
+              });
+
+              $timeout(function() {
+                $compile(transcludedEl.contents())
+                  (scope.$parent, function(compiledClone) {
+                    transcludedEl.replaceWith(compiledClone);
+                  });
+              }, 0);
+            }
+
             if (scope.message.dismissOnTimeout) {
               $timeout(function() {
                 ngToast.dismiss(scope.message.id);
