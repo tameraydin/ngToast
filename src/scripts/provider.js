@@ -14,6 +14,7 @@
           dismissButton: false,
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
+          compileContent: false,
           horizontalPosition: 'right', // right, center, left
           verticalPosition: 'top', // top, bottom,
           maxNumber: 0
@@ -32,6 +33,7 @@
           this.dismissButton = defaults.dismissButton;
           this.dismissButtonHtml = defaults.dismissButtonHtml;
           this.dismissOnClick = defaults.dismissOnClick;
+          this.compileContent = defaults.compileContent;
 
           angular.extend(this, msg);
         }
