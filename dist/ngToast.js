@@ -13,7 +13,7 @@
             messageStack = [];
 
         var defaults = {
-          class: 'success',
+          'class': 'success',
           dismissOnTimeout: true,
           timeout: 4000,
           dismissButton: false,
@@ -32,7 +32,7 @@
           }
 
           this.id = id;
-          this.class = defaults.class;
+          this['class'] = defaults['class'];
           this.dismissOnTimeout = defaults.dismissOnTimeout;
           this.timeout = defaults.timeout;
           this.dismissButton = defaults.dismissButton;
