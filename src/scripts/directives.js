@@ -6,7 +6,7 @@
       function(ngToast, $templateCache, $log) {
         return {
           replace: true,
-          restrict: 'E',
+          restrict: 'EA',
           template:
             '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
               '<ul class="ng-toast__list">' +
@@ -41,7 +41,7 @@
         return {
           replace: true,
           transclude: true,
-          restrict: 'E',
+          restrict: 'EA',
           scope: {
             message: '='
           },
