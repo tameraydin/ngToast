@@ -1,6 +1,6 @@
 /*!
  * ngToast v1.3.0 (http://tameraydin.github.io/ngToast)
- * Copyright 2014 Tamer Aydin
+ * Copyright 2015 Tamer Aydin
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
 (function(window, angular, undefined) {
@@ -13,7 +13,7 @@
             messageStack = [];
 
         var defaults = {
-          'class': 'success',
+          className: 'success',
           dismissOnTimeout: true,
           timeout: 4000,
           dismissButton: false,
@@ -32,7 +32,7 @@
           }
 
           this.id = id;
-          this['class'] = defaults['class'];
+          this.className = defaults.className;
           this.dismissOnTimeout = defaults.dismissOnTimeout;
           this.timeout = defaults.timeout;
           this.dismissButton = defaults.dismissButton;
@@ -100,7 +100,7 @@
       function(ngToast, $templateCache, $log) {
         return {
           replace: true,
-          restrict: 'E',
+          restrict: 'EA',
           template:
             '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
               '<ul class="ng-toast__list">' +
@@ -135,7 +135,7 @@
         return {
           replace: true,
           transclude: true,
-          restrict: 'E',
+          restrict: 'EA',
           scope: {
             message: '='
           },
