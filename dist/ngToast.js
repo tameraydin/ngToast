@@ -146,7 +146,7 @@
           }],
           template:
             '<li class="ng-toast__message">' +
-              '<div class="alert alert-{{message.class}}" ' +
+              '<div class="alert alert-{{message.className}}" ' +
                 'ng-class="{\'alert-dismissable\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
                   'ng-if="message.dismissButton" ' +
