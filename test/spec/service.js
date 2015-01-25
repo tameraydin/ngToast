@@ -76,6 +76,7 @@ describe('ngToast:', function() {
   describe('service configuration:', function() {
     beforeEach(module('ngToast.provider', function(ngToastProvider) {
       ngToastProvider.configure({
+        className: "info",
         timeout: 3000,
         dismissButton: true,
         maxNumber: 3
@@ -83,6 +84,7 @@ describe('ngToast:', function() {
     }));
 
     it('should respect config values', inject(function(ngToast) {
+      expect(ngToast.settings.className).toBe("info");
       expect(ngToast.settings.timeout).toBe(3000);
       expect(ngToast.settings.dismissButton).toBe(true);
       expect(ngToast.settings.maxNumber).toBe(3);

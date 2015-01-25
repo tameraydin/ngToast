@@ -6,7 +6,7 @@
       function(ngToast, $templateCache, $log) {
         return {
           replace: true,
-          restrict: 'E',
+          restrict: 'EA',
           template:
             '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
               '<ul class="ng-toast__list">' +
@@ -41,7 +41,7 @@
         return {
           replace: true,
           transclude: true,
-          restrict: 'E',
+          restrict: 'EA',
           scope: {
             message: '='
           },
@@ -52,7 +52,7 @@
           }],
           template:
             '<li class="ng-toast__message">' +
-              '<div class="alert alert-{{message.class}}" ' +
+              '<div class="alert alert-{{message.className}}" ' +
                 'ng-class="{\'alert-dismissable\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
                   'ng-if="message.dismissButton" ' +
