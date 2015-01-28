@@ -1,0 +1,33 @@
+/*!
+ * ngToast v1.3.0 (http://tameraydin.github.io/ngToast)
+ * Copyright 2015 Tamer Aydin
+ * Licensed under MIT (http://tameraydin.mit-license.org/)
+ */
+
+.ng-toast .ng-enter,
+.ng-toast .ng-leave,
+.ng-toast .ng-move {
+  transition: 0.3s ease left, 0.3s ease opacity;
+}
+.ng-toast .ng-enter {
+  left: -50px;
+  opacity: 0;
+}
+.ng-toast .ng-enter.ng-enter-active {
+  left: 0;
+  opacity: 1;
+}
+.ng-toast .ng-leave {
+  left: 0;
+  opacity: 1;
+}
+.ng-toast .ng-leave.ng-leave-active {
+  left: -50px;
+  opacity: 0;
+}
+.ng-toast .ng-move {
+  opacity: 0.5;
+}
+.ng-toast .ng-move.ng-move-active {
+  opacity: 1;
+}

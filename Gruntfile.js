@@ -1,6 +1,21 @@
 require('colors');
 var jsdiff = require('diff');
 var fs = require('fs');
+var pkg = require('./package.json');
+
+var paths = {
+  dist: 'dist/',
+  sassCache: '.sass-cache/',
+  sass: 'src/styles/sass/',
+  less: 'src/styles/less/',
+  scripts: 'src/scripts/',
+  test: 'test/',
+  testCSS: 'test/css-files/',
+  testLESS: 'test/css-files/less/',
+  testSASS: 'test/css-files/sass/',
+};
+
+var moduleName = pkg.name.toLowerCase();
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -12,16 +27,16 @@ module.exports = function(grunt) {
             ' */\n',
     karma: {
       unit: {
-        configFile: 'test/karma.conf.js',
+        configFile: paths.test + 'karma.conf.js',
         singleRun: true
       }
     },
     clean: {
       dist: {
-        src: ['dist/']
+        src: [paths.dist]
       },
       sass: {
-        src: ['.sass-cache/']
+        src: [paths.sassCache]
       }
     },
     concat: {
@@ -33,38 +48,44 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       dist: {
-        src: ['src/scripts/provider.js', 'src/scripts/directives.js', 'src/scripts/module.js'],
-        dest: 'dist/ngToast.js'
+        src: [paths.scripts + 'provider.js', paths.scripts + 'directives.js', paths.scripts + 'module.js'],
+        dest: paths.dist + moduleName + '.js'
       }
     },
     compass: {
       dist: {
         options: {
           noLineComments: true,
-          sassDir: 'src/styles/sass',
-          cssDir: 'dist/',
+          sassDir: paths.sass,
+          cssDir: paths.dist,
           banner: '<%= banner %>',
-          specify: 'src/styles/sass/ngToast.scss'
+          specify: [paths.sass + 'ngtoast.scss', paths.sass + 'ngtoast-animations.scss']
         }
       },
       test: {
         options: {
           noLineComments: true,
-          sassDir: 'src/styles/sass',
-          cssDir: 'test/css-files',
-          specify: 'src/styles/sass/ngToast.scss'
+          sassDir: paths.sass,
+          cssDir: paths.testSASS,
+          specify: [paths.sass + 'ngtoast.scss', paths.sass + 'ngtoast-animations.scss']
         }
       }
     },
     less: {
       test: {
-        files: {
-          "test/css-files/ngToast.less.css": "src/styles/less/ngToast.less"
-        }
+        files: [
+          {
+            expand: true,
+            cwd: paths.less,
+            src: ['ngtoast.less', 'ngtoast-animations.less'],
+            dest: paths.testLESS,
+            ext: '.css'
+          }
+        ]
       }
     },
     cssbeautifier: {
-      files: ['test/css-files/**/*.css']
+      files: [paths.testCSS + '**/*.css']
     },
     cssmin: {
       minify: {
@@ -73,7 +94,7 @@ module.exports = function(grunt) {
           keepSpecialComments: 0
         },
         expand: true,
-        src: 'dist/*.css',
+        src: paths.dist + '*.css',
         ext: '.min.css'
       }
     },
@@ -82,15 +103,15 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       build: {
-        src: 'dist/<%= pkg.name %>.js',
-        dest: 'dist/<%= pkg.name %>.min.js'
+        src: paths.dist + moduleName + '.js',
+        dest: paths.dist + moduleName + '.min.js'
       }
     },
     jshint: {
       options: {
         jshintrc: '.jshintrc'
       },
-      all: 'src/scripts/*.js'
+      all: paths.scripts + '*.js'
     }
   });
 
@@ -110,11 +131,13 @@ module.exports = function(grunt) {
     this.requires('compass:test');
     this.requires('cssbeautifier');
 
-    var sassCSS = grunt.file.read('./test/css-files/ngToast.css');
-    var lessCSS = grunt.file.read('./test/css-files/ngToast.less.css');
+    var sassBaseCSS = grunt.file.read(paths.testSASS + 'ngtoast.css');
+    var sassAnimationsCSS = grunt.file.read(paths.testSASS + 'ngtoast-animations.css');
+    var lessBaseCSS = grunt.file.read(paths.testLESS + 'ngtoast.css');
+    var lessAnimationsCSS = grunt.file.read(paths.testLESS + 'ngtoast-animations.css');
     grunt.file.delete('test/css-files');
 
-    if (lessCSS === sassCSS) {
+    if (lessBaseCSS === sassBaseCSS && lessAnimationsCSS === sassAnimationsCSS) {
       // pass
       grunt.log.ok('LESS/SASS generated CSS matches.');
     } else {
