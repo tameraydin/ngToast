@@ -53,7 +53,7 @@
           template:
             '<li class="ng-toast__message">' +
               '<div class="alert alert-{{message.className}}" ' +
-                'ng-class="{\'alert-dismissable\': message.dismissButton}">' +
+                'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
                   'ng-if="message.dismissButton" ' +
                   'ng-bind-html="message.dismissButtonHtml" ' +
