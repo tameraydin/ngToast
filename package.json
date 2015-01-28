@@ -42,5 +42,8 @@
   },
   "scripts": {
     "test": "grunt karma"
+  },
+  "dependencies": {
+    "grunt-cssbeautifier": "^0.1.2"
   }
 }

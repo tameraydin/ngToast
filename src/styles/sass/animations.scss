@@ -1,0 +1,29 @@
+.#{$ngt-module} {
+  .ng-enter,
+  .ng-leave,
+  .ng-move {
+    transition: 0.3s ease left, 0.3s ease opacity;
+  }
+  .ng-enter {
+    left: -50px;
+    opacity: 0;
+  }
+  .ng-enter.ng-enter-active {
+    left: 0;
+    opacity: 1;
+  }
+  .ng-leave {
+    left: 0;
+    opacity: 1;
+  }
+  .ng-leave.ng-leave-active {
+    left: -50px;
+    opacity: 0;
+  }
+  .ng-move {
+    opacity: 0.5;
+  }
+  .ng-move.ng-move-active {
+    opacity: 1;
+  }
+}

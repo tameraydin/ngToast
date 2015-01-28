@@ -41,27 +41,30 @@ module.exports = function(grunt) {
       dist: {
         options: {
           noLineComments: true,
-          sassDir: 'src/styles',
+          sassDir: 'src/styles/sass',
           cssDir: 'dist/',
           banner: '<%= banner %>',
-          specify: 'src/styles/ngToast.scss'
+          specify: 'src/styles/sass/ngToast.scss'
         }
       },
       test: {
         options: {
           noLineComments: true,
-          sassDir: 'src/styles',
+          sassDir: 'src/styles/sass',
           cssDir: 'test/css-files',
-          specify: 'src/styles/ngToast.scss'
+          specify: 'src/styles/sass/ngToast.scss'
         }
       }
     },
     less: {
       test: {
         files: {
-          "test/css-files/ngToast.less.css": "src/styles/ngToast.less"
+          "test/css-files/ngToast.less.css": "src/styles/less/ngToast.less"
         }
       }
+    },
+    cssbeautifier: {
+      files: ['test/css-files/**/*.css']
     },
     cssmin: {
       minify: {
@@ -105,6 +108,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test-generated-css', function() {
     this.requires('less:test');
     this.requires('compass:test');
+    this.requires('cssbeautifier');
 
     var sassCSS = grunt.file.read('./test/css-files/ngToast.css');
     var lessCSS = grunt.file.read('./test/css-files/ngToast.less.css');
@@ -137,11 +141,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-cssbeautifier');
   grunt.loadNpmTasks('grunt-karma');
   grunt.registerTask('default', [
     'compass:test',
     'clean:sass',
     'less:test',
+    'cssbeautifier',
     'test-generated-css',
     'jshint',
     'karma',
