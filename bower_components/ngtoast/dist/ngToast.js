@@ -1,6 +1,6 @@
 /*!
- * ngToast v1.2.1 (http://tameraydin.github.io/ngToast)
- * Copyright 2014 Tamer Aydin
+ * ngToast v1.4.0 (http://tameraydin.github.io/ngToast)
+ * Copyright 2015 Tamer Aydin
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
 (function(window, angular, undefined) {
@@ -13,12 +13,13 @@
             messageStack = [];
 
         var defaults = {
-          class: 'success',
+          className: 'success',
           dismissOnTimeout: true,
           timeout: 4000,
           dismissButton: false,
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
+          compileContent: false,
           horizontalPosition: 'right', // right, center, left
           verticalPosition: 'top', // top, bottom,
           maxNumber: 0
@@ -31,12 +32,13 @@
           }
 
           this.id = id;
-          this.class = defaults.class;
+          this.className = defaults.className;
           this.dismissOnTimeout = defaults.dismissOnTimeout;
           this.timeout = defaults.timeout;
           this.dismissButton = defaults.dismissButton;
           this.dismissButtonHtml = defaults.dismissButtonHtml;
           this.dismissOnClick = defaults.dismissOnClick;
+          this.compileContent = defaults.compileContent;
 
           angular.extend(this, msg);
         }
@@ -98,7 +100,7 @@
       function(ngToast, $templateCache, $log) {
         return {
           replace: true,
-          restrict: 'E',
+          restrict: 'EA',
           template:
             '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
               '<ul class="ng-toast__list">' +
@@ -128,12 +130,12 @@
         };
       }
     ])
-    .directive('toastMessage', ['$timeout', 'ngToast',
-      function($timeout, ngToast) {
+    .directive('toastMessage', ['$timeout', '$compile', 'ngToast',
+      function($timeout, $compile, ngToast) {
         return {
           replace: true,
           transclude: true,
-          restrict: 'E',
+          restrict: 'EA',
           scope: {
             message: '='
           },
@@ -144,17 +146,33 @@
           }],
           template:
             '<li class="ng-toast__message">' +
-              '<div class="alert alert-{{message.class}}" ' +
-                'ng-class="{\'alert-dismissable\': message.dismissButton}">' +
+              '<div class="alert alert-{{message.className}}" ' +
+                'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
                   'ng-if="message.dismissButton" ' +
                   'ng-bind-html="message.dismissButtonHtml" ' +
                   'ng-click="!message.dismissOnClick && dismiss()">' +
                 '</button>' +
-                '<span ng-transclude></span>' +
+                '<span ng-if="!message.compileContent" ng-transclude></span>' +
               '</div>' +
             '</li>',
-          link: function(scope, element) {
+          link: function(scope, element, attrs, ctrl, transclude) {
+            if (scope.message.compileContent) {
+              var transcludedEl;
+
+              transclude(scope, function(clone) {
+                transcludedEl = clone;
+                element.children().append(transcludedEl);
+              });
+
+              $timeout(function() {
+                $compile(transcludedEl.contents())
+                  (scope.$parent, function(compiledClone) {
+                    transcludedEl.replaceWith(compiledClone);
+                  });
+              }, 0);
+            }
+
             if (scope.message.dismissOnTimeout) {
               $timeout(function() {
                 ngToast.dismiss(scope.message.id);
