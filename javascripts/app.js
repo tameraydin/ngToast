@@ -39,7 +39,7 @@ angular
     $scope.showSample = function() {
       ngToast.create({
         content: MESSAGE[cMessage],
-        class: TYPE[cType]
+        className: TYPE[cType]
       });
       cType++;
       if (cType > 3) cType = 0;
