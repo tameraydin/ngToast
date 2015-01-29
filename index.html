@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>ngToast Test</title>
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="dist/ngtoast.css"/>
+  <link rel="stylesheet" href="dist/ngtoast-animations.css"/>
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/Faker/build/build/faker.js"></script>
+  <script src="dist/ngtoast.js"></script>
+
+</head>
+
+<body ng-app="ToastApp" ng-controller="ToastController as ctrl">
+  <toast></toast>
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1>ngToast</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-4">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <legend>Options</legend>
+          </div>
+
+          <div class="form-group">
+            <input class="form-control" type="text" ng-model="ctrl.options.content" placeholder="Content"/>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="ctrl.dismissOnTimeout">
+              dismissOnTimeout
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="ctrl.dismissButtonHtml">
+              dismissButtonHtml
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="ctrl.dismissOnClick">
+              dismissOnClick
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="ctrl.compileContent">
+              compileContent
+            </label>
+          </div>
+
+          <hr/>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="ctrl.generateRandom">
+              Generate Random
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label">
+              Random Interval {{ ctrl.randomInerval }}s
+              <input type="range" min="1" max="10" step="1" ng-model="ctrl.randomInerval"/>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary" ng-click="ctrl.createToast()">Create Toast</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Angular App -->
+
+  <script>
+
+    function ToastConfig() {
+      /**
+       horizontalPosition:right
+       verticalPosition:   top
+       maxNumber:   '
+       */
+    }
+
+    var ToastController = ['$interval', 'ngToast',
+      function ToastControllerFn($interval, ngToast) {
+        var vm = this;
+
+        vm.init = function() {
+          vm.generateRandom = true;
+          vm.randomInerval = 3;
+
+          vm.options = {
+            content: '',
+            class: '',
+            dismissOnTimeout: true,
+            timeout: 4000,
+            dismissButton: false,
+            dismissButtonHtml: '&times',
+            dismissOnClick: true,
+            compileContent: false,
+          };
+
+          vm.startRandomInterval();
+        };
+
+
+        vm.getRandomOptions = function() {
+          return {
+            content: faker.hacker.phrase(),
+            class: faker.random.array_element(['success', 'info', 'warning', 'danger']),
+            dismissOnTimeout: true,
+            timeout: 4000,
+            dismissButton: false,
+            dismissButtonHtml: '&times',
+            dismissOnClick: true,
+            compileContent: false,
+          };
+        };
+
+        vm.createToast = function() {
+          ngToast.create(vm.options);
+        };
+
+        vm.startRandomInterval = function() {
+          vm.randomInterval = $interval(function() {
+            if (vm.generateRandom) {
+              vm.createToast(vm.getRandomOptions());
+            }
+          }, vm.randomInerval * 1000);
+        };
+
+        vm.init();
+      }
+    ];
+
+    angular.module('ToastApp', [
+      'ngToast'
+    ])
+      .controller('ToastController', ToastController)
+  </script>
+</body>
+
+</html>
