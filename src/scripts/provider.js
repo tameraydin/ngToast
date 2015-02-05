@@ -8,6 +8,7 @@
             messageStack = [];
 
         var defaults = {
+          animation: false,
           className: 'success',
           dismissOnTimeout: true,
           timeout: 4000,
@@ -27,6 +28,7 @@
           }
 
           this.id = id;
+          this.animation = defaults.animation;
           this.className = defaults.className;
           this.dismissOnTimeout = defaults.dismissOnTimeout;
           this.timeout = defaults.timeout;

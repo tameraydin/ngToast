@@ -1,7 +1,7 @@
 @import "variables";
 
 // Fade
-.#{$ngt-module} {
+.#{$ngt-module}--animate-fade {
   .ng-enter,
   .ng-leave,
   .ng-move {

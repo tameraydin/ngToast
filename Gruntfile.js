@@ -5,10 +5,12 @@ var pkg = require('./package.json');
 
 var paths = {
   dist: 'dist/',
+  src: 'src/',
   sassCache: '.sass-cache/',
   sass: 'src/styles/sass/',
   less: 'src/styles/less/',
   scripts: 'src/scripts/',
+  styles: 'src/styles/',
   test: 'test/',
   testCSS: 'test/css-files/',
   testLESS: 'test/css-files/less/',
@@ -112,7 +114,18 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       },
       all: paths.scripts + '*.js'
-    }
+    },
+    watch: {
+      src: {
+        files: [paths.src + '**/*.*'],
+        tasks: [
+          'default',
+        ],
+        options: {
+          spawn: false,
+        },
+      },
+    },
   });
 
   grunt.registerTask('version', function(file_version) {
@@ -143,11 +156,17 @@ module.exports = function(grunt) {
     } else {
       // fail
       var headerFooter = 'SASS differences\n'.magenta + 'LESS differences\n\n'.blue;
-      var diff = jsdiff.diffCss(lessCSS, sassCSS);
+      var baseDiff = jsdiff.diffCss(lessBaseCSS, sassBaseCSS);
+      var animationDiff = jsdiff.diffCss(lessAnimationsCSS, sassAnimationsCSS);
 
       grunt.log.write(headerFooter);
 
-      diff.forEach(function(line) {
+      baseDiff.forEach(function(line) {
+        var color = line.added ? 'magenta' : line.removed ? 'blue' : 'gray';
+        grunt.log.write(line.value[color]);
+      });
+
+     animationDiff.forEach(function(line) {
         var color = line.added ? 'magenta' : line.removed ? 'blue' : 'gray';
         grunt.log.write(line.value[color]);
       });
@@ -166,6 +185,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-cssbeautifier');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('default', [
     'compass:test',
     'clean:sass',

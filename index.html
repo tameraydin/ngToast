@@ -27,55 +27,78 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-xs-4">
-        <form class="form-horizontal">
+      <div class="col-sm-6">
+        <form class="form">
           <div class="form-group">
             <legend>Options</legend>
           </div>
 
           <div class="form-group">
+            <label class="control-label">
+              Content:
+            </label>
             <input class="form-control" type="text" ng-model="ctrl.options.content" placeholder="Content"/>
           </div>
-
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="ctrl.dismissOnTimeout">
-              dismissOnTimeout
+          <div class="form-group">
+            <label class="control-label">
+              Dismiss Button HTML:
             </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="ctrl.dismissButtonHtml">
-              dismissButtonHtml
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="ctrl.dismissOnClick">
-              dismissOnClick
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="ctrl.compileContent">
-              compileContent
-            </label>
+            <input type="text" class="form-control" ng-model="ctrl.options.dismissButtonHtml">
           </div>
 
-          <hr/>
 
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="ctrl.generateRandom">
-              Generate Random
-            </label>
+          <div class="form-group">
+            <div class="radio">
+              <label>
+                <input type="radio" value="info" ng-model="ctrl.options.className">
+                Info
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" value="success" ng-model="ctrl.options.className">
+                Success
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" value="warning" ng-model="ctrl.options.className">
+                Warning
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" value="danger" ng-model="ctrl.options.className">
+                Danger
+              </label>
+            </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label">
-              Random Interval {{ ctrl.randomInerval }}s
-              <input type="range" min="1" max="10" step="1" ng-model="ctrl.randomInerval"/>
-            </label>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="ctrl.options.compileContent">
+                compileContent
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="ctrl.options.dismissButton">
+                dismissButton
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="ctrl.options.dismissOnClick">
+                dismissOnClick
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="ctrl.options.dismissOnTimeout">
+                dismissOnTimeout
+              </label>
+            </div>
           </div>
 
           <div class="form-group">
@@ -83,6 +106,32 @@
           </div>
 
         </form>
+
+        <br/>
+        <br/>
+
+        <form>
+
+          <legend>Random</legend>
+
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="ctrl.generateRandom">
+                Generate Random
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label">
+              Interval {{ ctrl.randomInerval }}s
+              <input type="range" min="1" max="10" step="1" ng-model="ctrl.randomInerval"/>
+            </label>
+          </div>
+          <pre ng-show="ctrl.randomOptions">{{ ctrl.randomOptions | json }}</pre>
+        </form>
+
       </div>
     </div>
   </div>
@@ -92,13 +141,15 @@
 
   <script>
 
-    function ToastConfig() {
-      /**
-       horizontalPosition:right
-       verticalPosition:   top
-       maxNumber:   '
-       */
-    }
+    var ToastConfig = ['ngToastProvider',
+      function ToastConfigFn(ngToastProvider) {
+        ngToastProvider.configure({
+          animation: 'fade',
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          maxNumber: 0,
+        });
+      }];
 
     var ToastController = ['$interval', 'ngToast',
       function ToastControllerFn($interval, ngToast) {
@@ -106,11 +157,11 @@
 
         vm.init = function() {
           vm.generateRandom = true;
-          vm.randomInerval = 3;
+          vm.randomInerval = 5;
 
           vm.options = {
-            content: '',
-            class: '',
+            content: 'Click create toast.',
+            className: 'success',
             dismissOnTimeout: true,
             timeout: 4000,
             dismissButton: false,
@@ -122,22 +173,23 @@
           vm.startRandomInterval();
         };
 
-
         vm.getRandomOptions = function() {
           return {
             content: faker.hacker.phrase(),
-            class: faker.random.array_element(['success', 'info', 'warning', 'danger']),
+            className: faker.random.array_element(['success', 'info', 'warning', 'danger']),
             dismissOnTimeout: true,
             timeout: 4000,
-            dismissButton: false,
+            dismissButton: !!faker.random.number(),
             dismissButtonHtml: '&times',
             dismissOnClick: true,
-            compileContent: false,
+            compileContent: true,
           };
         };
 
-        vm.createToast = function() {
-          ngToast.create(vm.options);
+        vm.createToast = function(options) {
+          options = options || vm.options;
+          vm.randomOptions = angular.copy(options);
+          ngToast.create(options);
         };
 
         vm.startRandomInterval = function() {
@@ -153,9 +205,11 @@
     ];
 
     angular.module('ToastApp', [
-      'ngToast'
+      'ngAnimate',
+      'ngToast',
     ])
       .controller('ToastController', ToastController)
+      .config(ToastConfig);
   </script>
 </body>
 

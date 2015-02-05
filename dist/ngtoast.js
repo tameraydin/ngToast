@@ -13,6 +13,7 @@
             messageStack = [];
 
         var defaults = {
+          animation: false,
           className: 'success',
           dismissOnTimeout: true,
           timeout: 4000,
@@ -32,6 +33,7 @@
           }
 
           this.id = id;
+          this.animation = defaults.animation;
           this.className = defaults.className;
           this.dismissOnTimeout = defaults.dismissOnTimeout;
           this.timeout = defaults.timeout;
@@ -92,7 +94,7 @@
 
 })(window, window.angular);
 
-(function(window, angular, undefined) {
+(function(window, angular) {
   'use strict';
 
   angular.module('ngToast.directives', ['ngToast.provider'])
@@ -102,7 +104,7 @@
           replace: true,
           restrict: 'EA',
           template:
-            '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
+            '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}} {{animation ? \'ng-toast--animate-\' + animation : \'\'}}">' +
               '<ul class="ng-toast__list">' +
                 '<toast-message ng-repeat="message in messages" ' +
                   'message="message">' +
@@ -124,6 +126,8 @@
             return function(scope) {
               scope.hPos = ngToast.settings.horizontalPosition;
               scope.vPos = ngToast.settings.verticalPosition;
+              console.log(ngToast.settings.animation);
+              scope.animation = ngToast.settings.animation;
               scope.messages = ngToast.messages;
             };
           }
@@ -192,12 +196,11 @@
 
 })(window, window.angular);
 
-(function(window, angular, undefined) {
+(function(window, angular) {
   'use strict';
 
   angular
     .module('ngToast', [
-      'ngAnimate',
       'ngSanitize',
       'ngToast.directives',
       'ngToast.provider'
