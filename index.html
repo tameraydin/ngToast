@@ -102,6 +102,13 @@
           </div>
 
           <div class="form-group">
+            <label class="control-label">
+              Interval {{ ctrl.options.timeout }}ms
+              <input type="range" min="250" max="5000" step="250" ng-model="ctrl.options.timeout"/>
+            </label>
+          </div>
+
+          <div class="form-group">
             <button class="btn btn-primary" ng-click="ctrl.createToast()">Create Toast</button>
           </div>
 
@@ -125,8 +132,8 @@
 
           <div class="form-group">
             <label class="control-label">
-              Interval {{ ctrl.randomInerval }}s
-              <input type="range" min="1" max="10" step="1" ng-model="ctrl.randomInerval"/>
+              Interval {{ ctrl.randomInerval }}ms
+              <input type="range" min="250" max="5000" step="250" ng-model="ctrl.randomInerval"/>
             </label>
           </div>
           <pre ng-show="ctrl.randomOptions">{{ ctrl.randomOptions | json }}</pre>
@@ -144,20 +151,20 @@
     var ToastConfig = ['ngToastProvider',
       function ToastConfigFn(ngToastProvider) {
         ngToastProvider.configure({
-          animation: 'fade',
-          horizontalPosition: 'right',
+          animation: 'slide',
+          horizontalPosition: 'left',
           verticalPosition: 'top',
           maxNumber: 0,
         });
       }];
 
-    var ToastController = ['$interval', 'ngToast',
-      function ToastControllerFn($interval, ngToast) {
+    var ToastController = ['$interval', 'ngToast', '$timeout',
+      function ToastControllerFn($interval, ngToast, $timeout) {
         var vm = this;
 
         vm.init = function() {
           vm.generateRandom = true;
-          vm.randomInerval = 5;
+          vm.randomInerval = 2000;
 
           vm.options = {
             content: 'Click create toast.',
@@ -169,6 +176,11 @@
             dismissOnClick: true,
             compileContent: false,
           };
+
+          // put first toast on callback stack (waits for animations to load)
+          $timeout(function() {
+            vm.createToast(vm.getRandomOptions());
+          }, 0);
 
           vm.startRandomInterval();
         };
@@ -197,7 +209,7 @@
             if (vm.generateRandom) {
               vm.createToast(vm.getRandomOptions());
             }
-          }, vm.randomInerval * 1000);
+          }, vm.randomInerval);
         };
 
         vm.init();

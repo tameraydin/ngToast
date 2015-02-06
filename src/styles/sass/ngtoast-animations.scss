@@ -5,22 +5,20 @@
   .ng-enter,
   .ng-leave,
   .ng-move {
-    transition: 0.3s ease left, 0.3s ease opacity;
+    transition-property: opacity;
+    transition-duration: $ngt-transition-duration;
+    transition-timing-function: $ngt-transition-timing-function;
   }
   .ng-enter {
-    left: -50px;
     opacity: 0;
   }
   .ng-enter.ng-enter-active {
-    left: 0;
     opacity: 1;
   }
   .ng-leave {
-    left: 0;
     opacity: 1;
   }
   .ng-leave.ng-leave-active {
-    left: -50px;
     opacity: 0;
   }
   .ng-move {
@@ -29,4 +27,60 @@
   .ng-move.ng-move-active {
     opacity: 1;
   }
+}
+
+//
+// Slide
+.#{$ngt-module}--animate-slide {
+  .ng-enter,
+  .ng-leave,
+  .ng-move {
+    position: relative;
+    transition-duration: $ngt-transition-duration;
+    transition-timing-function: $ngt-transition-timing-function;
+  }
+
+  // in/out from right when right aligned
+  &.#{$ngt-module}--right {
+  transition-property: right, margin-right;
+
+  .ng-enter {
+    right: -100%;
+    margin-right: 20px;
+  }
+  .ng-enter.ng-enter-active {
+    right: 0;
+    margin-right: 0;
+  }
+  .ng-leave {
+    right: 0;
+    margin-right: 0;
+  }
+  .ng-leave.ng-leave-active {
+    right: -100%;
+    margin-right: 20px;
+  }
+}
+
+  // in/out from left when left aligned
+  &.#{$ngt-module}--left {
+  transition-property: left, margin-left;
+
+  .ng-enter {
+    left: -100%;
+    margin-left: 20px;
+  }
+  .ng-enter.ng-enter-active {
+    left: 0;
+    margin-left: 0;
+  }
+  .ng-leave {
+    left: 0;
+    margin-left: 0;
+  }
+  .ng-leave.ng-leave-active {
+    left: -100%;
+    margin-left: 20px;
+  }
+}
 }
