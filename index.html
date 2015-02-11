@@ -103,8 +103,8 @@
 
           <div class="form-group">
             <label class="control-label">
-              Interval {{ ctrl.options.timeout }}ms
-              <input type="range" min="250" max="5000" step="250" ng-model="ctrl.options.timeout"/>
+              Timeout {{ ctrl.options.timeout }}ms
+              <input type="range" min="250" max="10000" step="250" ng-model="ctrl.options.timeout"/>
             </label>
           </div>
 
@@ -133,7 +133,7 @@
           <div class="form-group">
             <label class="control-label">
               Interval {{ ctrl.randomInerval }}ms
-              <input type="range" min="250" max="5000" step="250" ng-model="ctrl.randomInerval"/>
+              <input type="range" min="250" max="10000" step="250" ng-model="ctrl.randomInerval"/>
             </label>
           </div>
           <pre ng-show="ctrl.randomOptions">{{ ctrl.randomOptions | json }}</pre>
@@ -145,14 +145,13 @@
 
 
   <!-- Angular App -->
-
   <script>
 
     var ToastConfig = ['ngToastProvider',
       function ToastConfigFn(ngToastProvider) {
         ngToastProvider.configure({
           animation: 'slide',
-          horizontalPosition: 'left',
+          horizontalPosition: 'right',
           verticalPosition: 'top',
           maxNumber: 0,
         });
@@ -164,7 +163,7 @@
 
         vm.init = function() {
           vm.generateRandom = true;
-          vm.randomInerval = 2000;
+          vm.randomInerval = 5000;
 
           vm.options = {
             content: 'Click create toast.',
