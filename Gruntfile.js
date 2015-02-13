@@ -100,6 +100,17 @@ module.exports = function(grunt) {
         ext: '.min.css'
       }
     },
+    autoprefixer: {
+      dist: {
+        options: {
+          browsers: ['last 2 versions', 'ie 8', 'ie 9']
+        },
+        expand: true,
+        flatten: true,
+        src: paths.dist + '*.css',
+        dest: paths.dist
+      }
+    },
     uglify: {
       options: {
         banner: '<%= banner %>'
@@ -166,7 +177,7 @@ module.exports = function(grunt) {
         grunt.log.write(line.value[color]);
       });
 
-     animationDiff.forEach(function(line) {
+      animationDiff.forEach(function(line) {
         var color = line.added ? 'magenta' : line.removed ? 'blue' : 'gray';
         grunt.log.write(line.value[color]);
       });
@@ -184,6 +195,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-cssbeautifier');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('default', [
@@ -198,7 +210,8 @@ module.exports = function(grunt) {
     'concat',
     'compass:dist',
     'clean:sass',
+    'autoprefixer:dist',
     'cssmin',
-    'uglify'
+    'uglify',
   ]);
 };

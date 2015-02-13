@@ -52,6 +52,7 @@ Please find at the [project website](http://tameraydin.github.io/ngToast/#api).
 
 * Install dependencies: `npm install`
 * Play on **/src**
+* Run `npm update caniuse-db` to update [grunt-autoprefixer](https://github.com/nDmitry/grunt-autoprefixer)
 * Run `grunt`
 
 ## License
