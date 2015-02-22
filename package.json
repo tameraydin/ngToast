@@ -14,7 +14,14 @@
     "toast",
     "notification"
   ],
-  "author": "Tamer Aydin",
+  "author": "Tamer Aydin (http://tamerayd.in)",
+  "contributors": [{
+    "name": "Tamer Aydin",
+    "url": "http://tamerayd.in"
+  }, {
+    "name": "Levi Thomason",
+    "url": "http://www.levithomason.com"
+  }],
   "license": {
     "type": "MIT",
     "url": "http://tameraydin.mit-license.org/"

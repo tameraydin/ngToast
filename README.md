@@ -58,6 +58,11 @@ Please find at the [project website](http://tameraydin.github.io/ngToast/#api).
 
 MIT [http://tameraydin.mit-license.org/](http://tameraydin.mit-license.org/)
 
+## Maintainers
+
+- [Tamer Aydin](http://tamerayd.in)
+- [Levi Thomason](http://www.levithomason.com)
+
 ## TODO
 - Add unit & e2e tests
 - Improve API documentation
