@@ -9,7 +9,7 @@ ngToast is a simple Angular provider for toast notifications.
 
 1. Download:
   ```console
-  bower install ngtoast
+  bower install ngtoast --production
   ```
   or manually from [dist](https://github.com/tameraydin/ngToast/tree/master/dist).
 
@@ -50,10 +50,9 @@ Please find at the [project website](http://tameraydin.github.io/ngToast/#api).
 
 ## Development
 
-* Install dependencies: `npm install`
-* Play on **/src**
-* Run `npm update caniuse-db` to update [grunt-autoprefixer](https://github.com/nDmitry/grunt-autoprefixer)
-* Run `grunt`
+* Install dependencies: ``npm install && bower install``
+* Run ``grunt watch``, play on **/src**
+* Build: ``grunt``
 
 ## License
 
