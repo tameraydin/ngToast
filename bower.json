@@ -8,7 +8,9 @@
   "dependencies": {
     "angular": ">=1.2.15 <1.4.0",
     "angular-animate": ">=1.2.17 <1.4.0",
-    "angular-sanitize": ">=1.2.15 <1.4.0",
+    "angular-sanitize": ">=1.2.15 <1.4.0"
+  },
+  "devDependencies": {
     "bootstrap": "~3.3.2",
     "Faker": "~2.1.2"
   },
@@ -17,7 +19,13 @@
     "node_modules",
     "test",
     "src",
+    ".editorconfig",
+    ".gitignore",
+    ".gitattributes",
+    ".jshintrc",
+    ".travis.yml",
     "Gruntfile.js",
-    "package.json"
+    "package.json",
+    "index.html"
   ]
 }

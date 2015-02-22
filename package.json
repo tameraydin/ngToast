@@ -25,6 +25,7 @@
     "url": "https://github.com/tameraydin/ngToast/issues"
   },
   "devDependencies": {
+    "caniuse-db": "latest",
     "colors": "^1.0.3",
     "diff": "^1.0.8",
     "grunt": "^0.4.5",
@@ -37,6 +38,7 @@
     "grunt-contrib-less": "^0.12.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-cssbeautifier": "^0.1.2",
     "grunt-karma": "~0.8.3",
     "karma": "~0.12.16",
     "karma-jasmine": "~0.1.5",
@@ -44,8 +46,5 @@
   },
   "scripts": {
     "test": "grunt karma"
-  },
-  "dependencies": {
-    "grunt-cssbeautifier": "^0.1.2"
   }
 }
