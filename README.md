@@ -50,6 +50,7 @@ Please find at the [project website](http://tameraydin.github.io/ngToast/#api).
 
 ## Development
 
+* Clone the repo or [download](https://github.com/tameraydin/ngToast/archive/master.zip)
 * Install dependencies: ``npm install && bower install``
 * Run ``grunt watch``, play on **/src**
 * Build: ``grunt``
