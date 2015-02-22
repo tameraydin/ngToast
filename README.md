@@ -59,5 +59,4 @@ Please find at the [project website](http://tameraydin.github.io/ngToast/#api).
 MIT [http://tameraydin.mit-license.org/](http://tameraydin.mit-license.org/)
 
 ## TODO
-- Add unit & e2e tests
-- Improve API documentation
+- Add more unit & e2e tests
