@@ -14,7 +14,8 @@
 
         var defaults = {
           animation: false,
-          className: 'success',
+          alertClass: 'success',
+          classes: null,
           dismissOnTimeout: true,
           timeout: 4000,
           dismissButton: false,
@@ -34,7 +35,8 @@
 
           this.id = id;
           this.animation = defaults.animation;
-          this.className = defaults.className;
+          this.alertClass = defaults.alertClass;
+          this.classes = defaults.classes;
           this.dismissOnTimeout = defaults.dismissOnTimeout;
           this.timeout = defaults.timeout;
           this.dismissButton = defaults.dismissButton;
@@ -149,8 +151,8 @@
             };
           }],
           template:
-            '<li class="ng-toast__message">' +
-              '<div class="alert alert-{{message.className}}" ' +
+            '<li class="ng-toast__message {{message.classes}}">' +
+              '<div class="alert alert-{{message.alertClass}}" ' +
                 'ng-class="{\'alert-dismissable\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
                   'ng-if="message.dismissButton" ' +

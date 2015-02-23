@@ -53,8 +53,8 @@
             };
           }],
           template:
-            '<li class="ng-toast__message">' +
-              '<div class="alert alert-{{message.className}}" ' +
+            '<li class="ng-toast__message {{message.classes}}">' +
+              '<div class="alert alert-{{message.alertClass}}" ' +
                 'ng-class="{\'alert-dismissable\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
                   'ng-if="message.dismissButton" ' +

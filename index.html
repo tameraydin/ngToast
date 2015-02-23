@@ -30,7 +30,7 @@
       <div class="col-sm-6">
         <form class="form">
           <div class="form-group">
-            <legend>Options</legend>
+            <legend>Create</legend>
           </div>
 
           <div class="form-group">
@@ -45,30 +45,36 @@
             </label>
             <input type="text" class="form-control" ng-model="ctrl.options.dismissButtonHtml">
           </div>
-
+          <div class="form-group">
+            <label class="control-label">
+              Other Classes:
+            </label>
+            <input type="text" class="form-control" ng-model="ctrl.options.classes">
+          </div>
 
           <div class="form-group">
+            <label>Alert Class:</label>
             <div class="radio">
               <label>
-                <input type="radio" value="info" ng-model="ctrl.options.className">
+                <input type="radio" value="info" ng-model="ctrl.options.alertClass">
                 Info
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" value="success" ng-model="ctrl.options.className">
+                <input type="radio" value="success" ng-model="ctrl.options.alertClass">
                 Success
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" value="warning" ng-model="ctrl.options.className">
+                <input type="radio" value="warning" ng-model="ctrl.options.alertClass">
                 Warning
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" value="danger" ng-model="ctrl.options.className">
+                <input type="radio" value="danger" ng-model="ctrl.options.alertClass">
                 Danger
               </label>
             </div>
@@ -109,16 +115,14 @@
           </div>
 
           <div class="form-group">
-            <button class="btn btn-primary" ng-click="ctrl.createToast()">Create Toast</button>
+            <button class="btn btn-lg btn-primary" ng-click="ctrl.createToast()">Create Toast</button>
           </div>
 
         </form>
+      </div>
 
-        <br/>
-        <br/>
-
+      <div class="col-sm-6">
         <form>
-
           <legend>Random</legend>
 
           <div class="form-group">
@@ -166,8 +170,9 @@
           vm.randomInerval = 5000;
 
           vm.options = {
-            content: 'Click create toast.',
-            className: 'success',
+            content: 'Just the way I like it, ngToasted to perfection.',
+            alertClass: 'success',
+            classes: 'foo',
             dismissOnTimeout: true,
             timeout: 4000,
             dismissButton: false,
@@ -187,7 +192,8 @@
         vm.getRandomOptions = function() {
           return {
             content: faker.hacker.phrase(),
-            className: faker.random.array_element(['success', 'info', 'warning', 'danger']),
+            alertClass: faker.random.array_element(['success', 'info', 'warning', 'danger']),
+            classes: faker.hacker.verb(),
             dismissOnTimeout: true,
             timeout: 4000,
             dismissButton: !!faker.random.number(),
