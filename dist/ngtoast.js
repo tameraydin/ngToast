@@ -1,6 +1,6 @@
 /*!
- * ngToast v1.3.0 (http://tameraydin.github.io/ngToast)
- * Copyright 2015 Tamer Aydin
+ * ngToast v1.4.0 (http://tameraydin.github.io/ngToast)
+ * Copyright 2015 Tamer Aydin (http://tamerayd.in)
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
 (function(window, angular, undefined) {
@@ -153,7 +153,7 @@
           template:
             '<li class="ng-toast__message {{message.classes}}">' +
               '<div class="alert alert-{{message.alertClass}}" ' +
-                'ng-class="{\'alert-dismissable\': message.dismissButton}">' +
+                'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
                   'ng-if="message.dismissButton" ' +
                   'ng-bind-html="message.dismissButtonHtml" ' +
