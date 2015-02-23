@@ -30,7 +30,6 @@
             return function(scope) {
               scope.hPos = ngToast.settings.horizontalPosition;
               scope.vPos = ngToast.settings.verticalPosition;
-              console.log(ngToast.settings.animation);
               scope.animation = ngToast.settings.animation;
               scope.messages = ngToast.messages;
             };
