@@ -65,5 +65,4 @@ MIT [http://tameraydin.mit-license.org/](http://tameraydin.mit-license.org/)
 - [Levi Thomason](http://www.levithomason.com)
 
 ## TODO
-- Add unit & e2e tests
-- Improve API documentation
+- Add more unit & e2e tests
