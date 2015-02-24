@@ -9,8 +9,8 @@
 
         var defaults = {
           animation: false,
-          alertClass: 'success',
-          classes: null,
+          className: 'success',
+          additionalClasses: null,
           dismissOnTimeout: true,
           timeout: 4000,
           dismissButton: false,
@@ -30,8 +30,8 @@
 
           this.id = id;
           this.animation = defaults.animation;
-          this.alertClass = defaults.alertClass;
-          this.classes = defaults.classes;
+          this.className = defaults.className;
+          this.additionalClasses = defaults.additionalClasses;
           this.dismissOnTimeout = defaults.dismissOnTimeout;
           this.timeout = defaults.timeout;
           this.dismissButton = defaults.dismissButton;

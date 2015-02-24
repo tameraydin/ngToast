@@ -32,6 +32,14 @@
           <div class="form-group">
             <legend>Create</legend>
           </div>
+<pre>
+ngToastProvider.configure({
+  animation: 'slide',
+  horizontalPosition: 'right',
+  verticalPosition: 'top',
+  maxNumber: 0,
+});
+</pre>
 
           <div class="form-group">
             <label class="control-label">
@@ -170,7 +178,7 @@
           vm.randomInerval = 5000;
 
           vm.options = {
-            content: 'Just the way I like it, ngToasted to perfection.',
+            content: 'Just the way we like it, ngToasted to perfection.',
             alertClass: 'success',
             classes: 'foo',
             dismissOnTimeout: true,
