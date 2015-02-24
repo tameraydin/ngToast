@@ -17,7 +17,7 @@ var paths = {
   testSASS: 'test/css-files/sass/',
 };
 
-var moduleName = pkg.name.toLowerCase();
+var moduleName = pkg.name;
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -61,7 +61,7 @@ module.exports = function(grunt) {
           sassDir: paths.sass,
           cssDir: paths.dist,
           banner: '<%= banner %>',
-          specify: [paths.sass + 'ngtoast.scss', paths.sass + 'ngtoast-animations.scss']
+          specify: [paths.sass + 'ngToast.scss', paths.sass + 'ngToast-animations.scss']
         }
       },
       test: {
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
           noLineComments: true,
           sassDir: paths.sass,
           cssDir: paths.testSASS,
-          specify: [paths.sass + 'ngtoast.scss', paths.sass + 'ngtoast-animations.scss']
+          specify: [paths.sass + 'ngToast.scss', paths.sass + 'ngToast-animations.scss']
         }
       }
     },
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: paths.less,
-            src: ['ngtoast.less', 'ngtoast-animations.less'],
+            src: ['ngToast.less', 'ngToast-animations.less'],
             dest: paths.testLESS,
             ext: '.css'
           }
@@ -155,10 +155,10 @@ module.exports = function(grunt) {
     this.requires('compass:test');
     this.requires('cssbeautifier');
 
-    var sassBaseCSS = grunt.file.read(paths.testSASS + 'ngtoast.css');
-    var sassAnimationsCSS = grunt.file.read(paths.testSASS + 'ngtoast-animations.css');
-    var lessBaseCSS = grunt.file.read(paths.testLESS + 'ngtoast.css');
-    var lessAnimationsCSS = grunt.file.read(paths.testLESS + 'ngtoast-animations.css');
+    var sassBaseCSS = grunt.file.read(paths.testSASS + 'ngToast.css');
+    var sassAnimationsCSS = grunt.file.read(paths.testSASS + 'ngToast-animations.css');
+    var lessBaseCSS = grunt.file.read(paths.testLESS + 'ngToast.css');
+    var lessAnimationsCSS = grunt.file.read(paths.testLESS + 'ngToast-animations.css');
     grunt.file.delete('test/css-files');
 
     if (lessBaseCSS === sassBaseCSS && lessAnimationsCSS === sassAnimationsCSS) {

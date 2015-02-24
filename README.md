@@ -13,12 +13,11 @@ ngToast is a simple Angular provider for toast notifications.
   ```
   or manually [download](https://github.com/tameraydin/ngToast/archive/master.zip).
 
-2. Include ngToast source files and dependencies ([ngAnimate](http://docs.angularjs.org/api/ngAnimate), [ngSanitize](http://docs.angularjs.org/api/ngSanitize), [Bootstrap CSS](http://getbootstrap.com/)):
+2. Include ngToast source files and dependencies ([ngSanitize](http://docs.angularjs.org/api/ngSanitize), [Bootstrap CSS](http://getbootstrap.com/)):
   ```html
   <link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower/ngtoast/dist/ngToast.min.css">
   
-  <script src="bower/angular-animate/angular-animate.min.js"></script>
   <script src="bower/angular-sanitize/angular-sanitize.min.js"></script>
   <script src="bower/ngtoast/dist/ngToast.min.js"></script>
   ```
@@ -42,6 +41,58 @@ ngToast is a simple Angular provider for toast notifications.
   app.controller('myCtrl', function(ngToast) {
     ngToast.create('a toast message...');
   });
+  ```
+
+## Animations
+ngToast comes with optional animations
+
+**Built-in**
+  1. Include the extra ngToast animation source files and dependencies ([ngAnimate](http://docs.angularjs.org/api/ngAnimate)):
+  
+  ```html
+  <link rel="stylesheet" href="bower/ngtoast/dist/ngToast-animations.min.css">
+  
+  <script src="bower/angular-animate/angular-animate.min.js"></script>
+  ```
+
+  2. Set the `animation` option.
+  ```javascript
+  app.config(['ngToastProvider', function(ngToastProvider) {
+    ngToastProvider.configure({
+      animation: 'slide',
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      maxNumber: 0,
+    });
+  }]);
+  ```
+  ngToast animations include:
+  - `fade`
+  - `slide`
+  
+**Custom**
+  1. Using the `additionalClasses` option and [ngAnimate](http://docs.angularjs.org/api/ngAnimate) you can easily add your own animations or wire up 3rd party css animations.
+  ```javascript
+  app.config(['ngToastProvider', function(ngToastProvider) {
+    ngToastProvider.configure({
+      additionalClasses: 'my-animation',
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      maxNumber: 0,
+    });
+  }]);
+  ```
+
+  1. Then in your css (example using animate.css):
+  ```css
+  /* Be sure to use all vendor prefixes, showing only webkit */
+  .my-animation.ng-enter {
+    -webkit-animation: flipInY 1s;
+  }
+  
+  .my-animation.ng-leave {
+    -webkit-animation: flipOutY 1s;
+  }
   ```
 
 ## Settings & API

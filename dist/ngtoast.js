@@ -14,8 +14,8 @@
 
         var defaults = {
           animation: false,
-          alertClass: 'success',
-          classes: null,
+          className: 'success',
+          additionalClasses: null,
           dismissOnTimeout: true,
           timeout: 4000,
           dismissButton: false,
@@ -35,8 +35,8 @@
 
           this.id = id;
           this.animation = defaults.animation;
-          this.alertClass = defaults.alertClass;
-          this.classes = defaults.classes;
+          this.className = defaults.className;
+          this.additionalClasses = defaults.additionalClasses;
           this.dismissOnTimeout = defaults.dismissOnTimeout;
           this.timeout = defaults.timeout;
           this.dismissButton = defaults.dismissButton;
@@ -128,7 +128,6 @@
             return function(scope) {
               scope.hPos = ngToast.settings.horizontalPosition;
               scope.vPos = ngToast.settings.verticalPosition;
-              console.log(ngToast.settings.animation);
               scope.animation = ngToast.settings.animation;
               scope.messages = ngToast.messages;
             };
@@ -151,8 +150,8 @@
             };
           }],
           template:
-            '<li class="ng-toast__message {{message.classes}}">' +
-              '<div class="alert alert-{{message.alertClass}}" ' +
+            '<li class="ng-toast__message {{message.additionalClasses}}">' +
+              '<div class="alert alert-{{message.className}}" ' +
                 'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
                   'ng-if="message.dismissButton" ' +
