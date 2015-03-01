@@ -44,15 +44,17 @@ ngToast is a simple Angular provider for toast notifications.
   ```
 
 ## Animations
-ngToast comes with optional animations
+ngToast comes with optional animations. In order to enable animations in ngToast, you need to include [ngAnimate](http://docs.angularjs.org/api/ngAnimate) module into your app:
+
+```html
+<script src="bower/angular-animate/angular-animate.min.js"></script>
+```
 
 **Built-in**
-  1. Include the extra ngToast animation source files and dependencies ([ngAnimate](http://docs.angularjs.org/api/ngAnimate)):
+  1. Include the ngToast animation stylesheet:
   
   ```html
   <link rel="stylesheet" href="bower/ngtoast/dist/ngToast-animations.min.css">
-  
-  <script src="bower/angular-animate/angular-animate.min.js"></script>
   ```
 
   2. Set the `animation` option.
@@ -66,9 +68,7 @@ ngToast comes with optional animations
     });
   }]);
   ```
-  ngToast animations include:
-  - `fade`
-  - `slide`
+  Built-in ngToast animations include `fade` & `slide`.
   
 **Custom**
   1. Using the `additionalClasses` option and [ngAnimate](http://docs.angularjs.org/api/ngAnimate) you can easily add your own animations or wire up 3rd party css animations.
@@ -83,15 +83,14 @@ ngToast comes with optional animations
   }]);
   ```
 
-  1. Then in your css (example using animate.css):
+  2. Then in your css (example using animate.css):
   ```css
-  /* Be sure to use all vendor prefixes, showing only webkit */
   .my-animation.ng-enter {
-    -webkit-animation: flipInY 1s;
+    animation: flipInY 1s;
   }
   
   .my-animation.ng-leave {
-    -webkit-animation: flipOutY 1s;
+    animation: flipOutY 1s;
   }
   ```
 
