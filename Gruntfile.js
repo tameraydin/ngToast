@@ -139,17 +139,6 @@ module.exports = function(grunt) {
     },
   });
 
-  grunt.registerTask('version', function(file_version) {
-    var bower = grunt.file.readJSON('bower.json');
-    var npm_package = grunt.file.readJSON('package.json');
-
-    bower.version = file_version;
-    npm_package.version = file_version;
-
-    fs.writeFileSync('bower.json', JSON.stringify(bower, null, 4));
-    fs.writeFileSync('package.json', JSON.stringify(npm_package, null, 4));
-  });
-
   grunt.registerTask('test-generated-css', function() {
     this.requires('less:test');
     this.requires('compass:test');
