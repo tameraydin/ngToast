@@ -1,0 +1,146 @@
+@import "variables";
+
+// Fade
+.@{ngt-module}--animate-fade {
+  .ng-enter,
+  .ng-leave,
+  .ng-move {
+    transition-property: opacity;
+    transition-duration: @ngt-transition-duration;
+    transition-timing-function: @ngt-transition-timing-function;
+  }
+  .ng-enter {
+    opacity: 0;
+  }
+  .ng-enter.ng-enter-active {
+    opacity: 1;
+  }
+  .ng-leave {
+    opacity: 1;
+  }
+  .ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+  .ng-move {
+    opacity: 0.5;
+  }
+  .ng-move.ng-move-active {
+    opacity: 1;
+  }
+}
+
+// Slide
+.@{ngt-module}--animate-slide {
+  .ng-enter,
+  .ng-leave,
+  .ng-move {
+    position: relative;
+    transition-duration: @ngt-transition-duration;
+    transition-timing-function: @ngt-transition-timing-function;
+  }
+
+  &.@{ngt-module}--center {
+
+    // in/out from top when centered and top aligned
+    &.@{ngt-module}--top {
+
+      .@{ngt-module}__message {
+        position: relative;
+        transition-property: top, margin-top, opacity;
+        &.ng-enter {
+          opacity: 0;
+          top: -100px;
+        }
+        &.ng-enter.ng-enter-active {
+          opacity: 1;
+          top: 0;
+        }
+        &.ng-leave {
+          opacity: 1;
+          top: 0;
+        }
+        &.ng-leave.ng-leave-active {
+          opacity: 0;
+          margin-top: -(52px + @ngt-spacing);
+        }
+      }
+    }
+
+    // in/out from top when centered and bottom aligned
+    &.@{ngt-module}--bottom {
+
+      .@{ngt-module}__message {
+        position: relative;
+        transition-property: bottom, margin-bottom, opacity;
+        &.ng-enter {
+          opacity: 0;
+          bottom: -100px;
+        }
+        &.ng-enter.ng-enter-active {
+          opacity: 1;
+          bottom: 0;
+        }
+        &.ng-leave {
+          opacity: 1;
+          bottom: 0;
+        }
+        &.ng-leave.ng-leave-active {
+          opacity: 0;
+          margin-bottom: -(52px + @ngt-spacing);
+        }
+      }
+    }
+  }
+
+  // in/out from right when right aligned
+  &.@{ngt-module}--right {
+    transition-property: right, margin-right, opacity;
+
+    .ng-enter {
+      opacity: 0;
+      right: -200%;
+      margin-right: 20px;
+    }
+    .ng-enter.ng-enter-active {
+      opacity: 1;
+      right: 0;
+      margin-right: 0;
+    }
+    .ng-leave {
+      opacity: 1;
+      right: 0;
+      margin-right: 0;
+    }
+    .ng-leave.ng-leave-active {
+      opacity: 0;
+      right: -200%;
+      margin-right: 20px;
+    }
+  }
+
+  // in/out from left when left aligned
+  &.@{ngt-module}--left {
+    transition-property: left, margin-left, opacity;
+
+    .ng-enter {
+      opacity: 0;
+      left: -200%;
+      margin-left: 20px;
+    }
+    .ng-enter.ng-enter-active {
+      opacity: 1;
+      left: 0;
+      margin-left: 0;
+    }
+    .ng-leave {
+      opacity: 1;
+      left: 0;
+      margin-left: 0;
+    }
+    .ng-leave.ng-leave-active {
+      opacity: 0;
+      left: -200%;
+      margin-left: 20px;
+    }
+  }
+}

@@ -1,6 +1,23 @@
 require('colors');
 var jsdiff = require('diff');
 var fs = require('fs');
+var pkg = require('./package.json');
+
+var paths = {
+  dist: 'dist/',
+  src: 'src/',
+  sassCache: '.sass-cache/',
+  sass: 'src/styles/sass/',
+  less: 'src/styles/less/',
+  scripts: 'src/scripts/',
+  styles: 'src/styles/',
+  test: 'test/',
+  testCSS: 'test/css-files/',
+  testLESS: 'test/css-files/less/',
+  testSASS: 'test/css-files/sass/',
+};
+
+var moduleName = pkg.name;
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -12,16 +29,16 @@ module.exports = function(grunt) {
             ' */\n',
     karma: {
       unit: {
-        configFile: 'test/karma.conf.js',
+        configFile: paths.test + 'karma.conf.js',
         singleRun: true
       }
     },
     clean: {
       dist: {
-        src: ['dist/']
+        src: [paths.dist]
       },
       sass: {
-        src: ['.sass-cache/']
+        src: [paths.sassCache]
       }
     },
     concat: {
@@ -33,35 +50,44 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       dist: {
-        src: ['src/scripts/provider.js', 'src/scripts/directives.js', 'src/scripts/module.js'],
-        dest: 'dist/ngToast.js'
+        src: [paths.scripts + 'provider.js', paths.scripts + 'directives.js', paths.scripts + 'module.js'],
+        dest: paths.dist + moduleName + '.js'
       }
     },
     compass: {
       dist: {
         options: {
           noLineComments: true,
-          sassDir: 'src/styles',
-          cssDir: 'dist/',
+          sassDir: paths.sass,
+          cssDir: paths.dist,
           banner: '<%= banner %>',
-          specify: 'src/styles/ngToast.scss'
+          specify: [paths.sass + 'ngToast.scss', paths.sass + 'ngToast-animations.scss']
         }
       },
       test: {
         options: {
           noLineComments: true,
-          sassDir: 'src/styles',
-          cssDir: 'test/css-files',
-          specify: 'src/styles/ngToast.scss'
+          sassDir: paths.sass,
+          cssDir: paths.testSASS,
+          specify: [paths.sass + 'ngToast.scss', paths.sass + 'ngToast-animations.scss']
         }
       }
     },
     less: {
       test: {
-        files: {
-          "test/css-files/ngToast.less.css": "src/styles/ngToast.less"
-        }
+        files: [
+          {
+            expand: true,
+            cwd: paths.less,
+            src: ['ngToast.less', 'ngToast-animations.less'],
+            dest: paths.testLESS,
+            ext: '.css'
+          }
+        ]
       }
+    },
+    cssbeautifier: {
+      files: [paths.testCSS + '**/*.css']
     },
     cssmin: {
       minify: {
@@ -70,8 +96,19 @@ module.exports = function(grunt) {
           keepSpecialComments: 0
         },
         expand: true,
-        src: 'dist/*.css',
+        src: paths.dist + '*.css',
         ext: '.min.css'
+      }
+    },
+    autoprefixer: {
+      dist: {
+        options: {
+          browsers: ['last 2 versions']
+        },
+        expand: true,
+        flatten: true,
+        src: paths.dist + '*.css',
+        dest: paths.dist
       }
     },
     uglify: {
@@ -79,48 +116,57 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       build: {
-        src: 'dist/<%= pkg.name %>.js',
-        dest: 'dist/<%= pkg.name %>.min.js'
+        src: paths.dist + moduleName + '.js',
+        dest: paths.dist + moduleName + '.min.js'
       }
     },
     jshint: {
       options: {
         jshintrc: '.jshintrc'
       },
-      all: 'src/scripts/*.js'
-    }
-  });
-
-  grunt.registerTask('version', function(file_version) {
-    var bower = grunt.file.readJSON('bower.json');
-    var npm_package = grunt.file.readJSON('package.json');
-
-    bower.version = file_version;
-    npm_package.version = file_version;
-
-    fs.writeFileSync('bower.json', JSON.stringify(bower, null, 4));
-    fs.writeFileSync('package.json', JSON.stringify(npm_package, null, 4));
+      all: paths.scripts + '*.js'
+    },
+    watch: {
+      src: {
+        files: [paths.src + '**/*.*'],
+        tasks: [
+          'default',
+        ],
+        options: {
+          spawn: false,
+        },
+      },
+    },
   });
 
   grunt.registerTask('test-generated-css', function() {
     this.requires('less:test');
     this.requires('compass:test');
+    this.requires('cssbeautifier');
 
-    var sassCSS = grunt.file.read('./test/css-files/ngToast.css');
-    var lessCSS = grunt.file.read('./test/css-files/ngToast.less.css');
+    var sassBaseCSS = grunt.file.read(paths.testSASS + 'ngToast.css');
+    var sassAnimationsCSS = grunt.file.read(paths.testSASS + 'ngToast-animations.css');
+    var lessBaseCSS = grunt.file.read(paths.testLESS + 'ngToast.css');
+    var lessAnimationsCSS = grunt.file.read(paths.testLESS + 'ngToast-animations.css');
     grunt.file.delete('test/css-files');
 
-    if (lessCSS === sassCSS) {
+    if (lessBaseCSS === sassBaseCSS && lessAnimationsCSS === sassAnimationsCSS) {
       // pass
       grunt.log.ok('LESS/SASS generated CSS matches.');
     } else {
       // fail
       var headerFooter = 'SASS differences\n'.magenta + 'LESS differences\n\n'.blue;
-      var diff = jsdiff.diffCss(lessCSS, sassCSS);
+      var baseDiff = jsdiff.diffCss(lessBaseCSS, sassBaseCSS);
+      var animationDiff = jsdiff.diffCss(lessAnimationsCSS, sassAnimationsCSS);
 
       grunt.log.write(headerFooter);
 
-      diff.forEach(function(line) {
+      baseDiff.forEach(function(line) {
+        var color = line.added ? 'magenta' : line.removed ? 'blue' : 'gray';
+        grunt.log.write(line.value[color]);
+      });
+
+      animationDiff.forEach(function(line) {
         var color = line.added ? 'magenta' : line.removed ? 'blue' : 'gray';
         grunt.log.write(line.value[color]);
       });
@@ -137,11 +183,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-cssbeautifier');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('default', [
     'compass:test',
     'clean:sass',
     'less:test',
+    'cssbeautifier',
     'test-generated-css',
     'jshint',
     'karma',
@@ -149,7 +199,8 @@ module.exports = function(grunt) {
     'concat',
     'compass:dist',
     'clean:sass',
+    'autoprefixer:dist',
     'cssmin',
-    'uglify'
+    'uglify',
   ]);
 };

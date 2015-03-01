@@ -1,9 +1,8 @@
-(function(window, angular, undefined) {
+(function(window, angular) {
   'use strict';
 
   angular
     .module('ngToast', [
-      'ngAnimate',
       'ngSanitize',
       'ngToast.directives',
       'ngToast.provider'

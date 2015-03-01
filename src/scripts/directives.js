@@ -1,4 +1,4 @@
-(function(window, angular, undefined) {
+(function(window, angular) {
   'use strict';
 
   angular.module('ngToast.directives', ['ngToast.provider'])
@@ -8,7 +8,7 @@
           replace: true,
           restrict: 'EA',
           template:
-            '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}}">' +
+            '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}} {{animation ? \'ng-toast--animate-\' + animation : \'\'}}">' +
               '<ul class="ng-toast__list">' +
                 '<toast-message ng-repeat="message in messages" ' +
                   'message="message">' +
@@ -30,6 +30,7 @@
             return function(scope) {
               scope.hPos = ngToast.settings.horizontalPosition;
               scope.vPos = ngToast.settings.verticalPosition;
+              scope.animation = ngToast.settings.animation;
               scope.messages = ngToast.messages;
             };
           }
@@ -51,7 +52,7 @@
             };
           }],
           template:
-            '<li class="ng-toast__message">' +
+            '<li class="ng-toast__message {{message.additionalClasses}}">' +
               '<div class="alert alert-{{message.className}}" ' +
                 'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
