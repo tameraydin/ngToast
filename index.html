@@ -115,38 +115,44 @@ ngToast.dismiss();
     <th>Description</th>
   </tr>
   <tr><td><strong>content</strong></td>
-  <td></td>
-  <td>Content of the toast message as string (HTML is supported).</td></tr>
+  <td>''</td>
+  <td>Content of the toast message as string (HTML is supported). ***string***</td></tr>
   <tr><td><strong>className</strong></td>
   <td>'success'</td>
-  <td>Class name to be added on toast message with 'alert-' prefix. See <a target="_blank" href="http://getbootstrap.com/components/#alerts">Bootstrap Alerts</a> for possible options.</td></tr>
+  <td>Class name to be added on toast message with 'alert-' prefix. See <a target="_blank" href="http://getbootstrap.com/components/#alerts">Bootstrap Alerts</a> for possible options. ***string***</td></tr>
   <tr><td><strong>dismissOnTimeout</strong></td>
   <td>true</td>
-  <td>Allows toast messages to be removed automatically after a specified time</td></tr>
+  <td>Allows toast messages to be removed automatically after a specified time. ***boolean***</td></tr>
   <tr><td><strong>timeout</strong></td>
   <td>4000</td>
-  <td>Wait time for removal of created toast message</td></tr>
+  <td>Wait time for removal of created toast message. ***number***</td></tr>
   <tr><td><strong>dismissButton</strong></td>
   <td>false</td>
-  <td>Appends specified close button on toast message </td></tr>
+  <td>Appends specified close button on toast message. ***boolean***</td></tr>
   <tr><td><strong>dismissButtonHtml</strong></td>
   <td>'&amp;times;'</td>
-  <td>HTML of close button to append</td></tr>
+  <td>HTML of close button to append. ***string***</td></tr>
   <tr><td><strong>dismissOnClick</strong></td>
   <td>true</td>
-  <td>Allows toasts messages to be removed on mouse click</td></tr>
+  <td>Allows toasts messages to be removed on mouse click. ***boolean***</td></tr>
   <tr><td><strong>compileContent</strong></td>
   <td>false</td>
-  <td>Re-compiles the toast message content within parent scope. Needs to be used with <a target="_blank" href="https://docs.angularjs.org/api/ng/service/$sce#trustAsHtml">trusted HTML</a> content. See <a target="_blank" href="https://github.com/tameraydin/ngToast/issues/14#issuecomment-67718318">here</a> for more information.</td></tr>
+  <td>Re-compiles the toast message content within parent scope. Needs to be used with <a target="_blank" href="https://docs.angularjs.org/api/ng/service/$sce#trustAsHtml">trusted HTML</a> content. See <a target="_blank" href="https://github.com/tameraydin/ngToast/issues/14#issuecomment-67718318">here</a> for more information. ***boolean***</td></tr>
+  <tr><td><strong>animation*</strong></td>
+  <td>''</td>
+  <td>Built-in animation type for toast messages: 'slide' or 'fade' ***string***</td></tr>
+  <tr><td><strong>additionalClasses*</strong></td>
+  <td>''</td>
+  <td>Additional class name(s) to add toast messages. ***string***</td></tr>
   <tr><td><strong>horizontalPosition*</strong></td>
-  <td>right</td>
-  <td>Horizontal position of toast messages: 'right', 'left' or 'center'</td></tr>
+  <td>'right'</td>
+  <td>Horizontal position of toast messages: 'right', 'left' or 'center' ***string***</td></tr>
   <tr><td><strong>verticalPosition*</strong></td>
-  <td>top</td>
-  <td>Vertical position of toast messages: 'top' or 'bottom'</td></tr>
+  <td>'top'</td>
+  <td>Vertical position of toast messages: 'top' or 'bottom' ***string***</td></tr>
   <tr><td><strong>maxNumber*</strong></td>
   <td>0</td>
-  <td>Maximum number of toast messages to display. (0 = no limit)</td></tr>
+  <td>Maximum number of toast messages to display. (0 = no limit) ***number***</td></tr>
 </table>
 <small class="note"><strong>*</strong> Available only at <a target="_blank" href="https://github.com/tameraydin/ngToast/issues/10#issuecomment-64061276">configuration level</a>. Rest of setting properties can be overwritten at individual toast message.</small>
 
