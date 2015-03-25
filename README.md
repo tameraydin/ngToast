@@ -64,7 +64,7 @@ ngToast comes with optional animations. In order to enable animations in ngToast
       animation: 'slide',
       horizontalPosition: 'right',
       verticalPosition: 'top',
-      maxNumber: 0,
+      maxNumber: 0
     });
   }]);
   ```
@@ -78,12 +78,12 @@ ngToast comes with optional animations. In order to enable animations in ngToast
       additionalClasses: 'my-animation',
       horizontalPosition: 'right',
       verticalPosition: 'top',
-      maxNumber: 0,
+      maxNumber: 0
     });
   }]);
   ```
 
-  2. Then in your css (example using animate.css):
+  2. Then in your CSS (example using animate.css):
   ```css
   .my-animation.ng-enter {
     animation: flipInY 1s;
