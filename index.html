@@ -93,14 +93,17 @@
 
 <h2>
 <a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
-<pre><code>// create a toast:
-ngToast.create('A toast message...');
+<pre><code>// create a simple toast:
+ngToast.create('a toast message...');
 
-// clear specific toast:
-var msg = ngToast.create({
+// create a toast with settings:
+var aToast = ngToast.create({
+  className: 'warning',
   content: 'Another message as &lt;a href="#" class=""&gt;HTML&lt;/a&gt;'
 });
-ngToast.dismiss(msg);
+
+// to clear a toast:
+ngToast.dismiss(aToast);
 
 // clear all toasts:
 ngToast.dismiss();
