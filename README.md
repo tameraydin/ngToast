@@ -61,24 +61,18 @@ ngToast comes with optional animations. In order to enable animations in ngToast
   ```javascript
   app.config(['ngToastProvider', function(ngToastProvider) {
     ngToastProvider.configure({
-      animation: 'slide',
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      maxNumber: 0
+      animation: 'slide' // or 'fade'
     });
   }]);
   ```
-  Built-in ngToast animations include `fade` & `slide`.
+  Built-in ngToast animations include `slide` & `fade`.
   
 **Custom**
   1. Using the `additionalClasses` option and [ngAnimate](http://docs.angularjs.org/api/ngAnimate) you can easily add your own animations or wire up 3rd party css animations.
   ```javascript
   app.config(['ngToastProvider', function(ngToastProvider) {
     ngToastProvider.configure({
-      additionalClasses: 'my-animation',
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      maxNumber: 0
+      additionalClasses: 'my-animation'
     });
   }]);
   ```
