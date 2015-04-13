@@ -68,6 +68,9 @@ ngToast comes with optional animations. In order to enable animations in ngToast
   Built-in ngToast animations include `slide` & `fade`.
   
 **Custom**
+  
+  See the [plunker](http://plnkr.co/edit/wglAvsCuTLLykLNqVGwU) using [animate.css](http://daneden.github.io/animate.css/).
+  
   1. Using the `additionalClasses` option and [ngAnimate](http://docs.angularjs.org/api/ngAnimate) you can easily add your own animations or wire up 3rd party css animations.
   ```javascript
   app.config(['ngToastProvider', function(ngToastProvider) {
@@ -79,6 +82,7 @@ ngToast comes with optional animations. In order to enable animations in ngToast
 
   2. Then in your CSS (example using animate.css):
   ```css
+  /* Add any vendor prefixes you need */
   .my-animation.ng-enter {
     animation: flipInY 1s;
   }
