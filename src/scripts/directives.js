@@ -46,7 +46,7 @@
           scope: {
             message: '='
           },
-          controller: ['$scope', 'ngToast', function($scope, ngToast) {
+          controller: ['$scope', function($scope) {
             $scope.dismiss = function() {
               ngToast.dismiss($scope.message.id);
             };
