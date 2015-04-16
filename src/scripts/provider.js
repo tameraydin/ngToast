@@ -16,6 +16,7 @@
           dismissButton: false,
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
+          onDismiss: angular.noop,
           compileContent: false,
           horizontalPosition: 'right', // right, center, left
           verticalPosition: 'top', // top, bottom,
@@ -37,6 +38,7 @@
           this.dismissButton = defaults.dismissButton;
           this.dismissButtonHtml = defaults.dismissButtonHtml;
           this.dismissOnClick = defaults.dismissOnClick;
+          this.onDismiss = defaults.onDismiss;
           this.compileContent = defaults.compileContent;
 
           angular.extend(this, msg);
@@ -54,6 +56,12 @@
               if (id) {
                 for (var i = messages.length - 1; i >= 0; i--) {
                   if (messages[i].id === id) {
+                    
+                    //If a dismiss callback function is provided, call it and pass in the message object
+                    if (angular.isFunction(messages[i].onDismiss)) {
+                      messages[i].onDismiss(messages[i]);
+                    }
+                    
                     messages.splice(i, 1);
                     messageStack.splice(messageStack.indexOf(id), 1);
                     return;
