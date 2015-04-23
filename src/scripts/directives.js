@@ -51,18 +51,7 @@
               ngToast.dismiss($scope.message.id);
             };
           }],
-          template:
-            '<li class="ng-toast__message {{message.additionalClasses}}">' +
-              '<div class="alert alert-{{message.className}}" ' +
-                'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
-                '<button type="button" class="close" ' +
-                  'ng-if="message.dismissButton" ' +
-                  'ng-bind-html="message.dismissButtonHtml" ' +
-                  'ng-click="!message.dismissOnClick && dismiss()">' +
-                '</button>' +
-                '<span ng-if="!message.compileContent" ng-transclude></span>' +
-              '</div>' +
-            '</li>',
+          template: _getDefaultTemplate(),
           link: function(scope, element, attrs, ctrl, transclude) {
             if (scope.message.compileContent) {
               var transcludedEl;
@@ -96,5 +85,22 @@
         };
       }
     ]);
+
+
+  function _getDefaultTemplate(customContent)
+  {
+    return ''+
+      '<li class="ng-toast__message {{message.additionalClasses}}">' +
+        '<div class="alert alert-{{message.className}}" ' +
+          'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
+          '<button type="button" class="close" ' +
+            'ng-if="message.dismissButton" ' +
+            'ng-bind-html="message.dismissButtonHtml" ' +
+            'ng-click="!message.dismissOnClick && dismiss()">' +
+          '</button>' +
+          (customContent || '<span ng-if="!message.compileContent" ng-transclude></span>') +
+        '</div>' +
+      '</li>';
+  }
 
 })(window, window.angular);
