@@ -114,7 +114,11 @@
 
             locals.$scope = scope;
             locals.$element = $element;
-            $controller(scope.message.controller, locals);
+            var controller = $controller(scope.message.controller, locals);
+
+            if (scope.message.controllerAs) {
+              scope[scope.message.controllerAs] = controller;
+            }
 
             link(scope);
           }
