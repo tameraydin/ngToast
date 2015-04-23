@@ -42,6 +42,7 @@
         return {
           replace: true,
           transclude: true,
+          priority: 400,
           restrict: 'EA',
           scope: {
             message: '='
@@ -89,6 +90,7 @@
       function($timeout, $compile, $controller, $log) {
         return {
           restrict: 'EA',
+          priority: -400,
           link: function (scope, $element) {
             if(scope.message.template && !scope.message.controller) {
               return $log.error('[ngToast] Controller is required is you want to use a custom template');
