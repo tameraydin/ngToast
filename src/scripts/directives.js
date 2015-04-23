@@ -77,6 +77,17 @@
             }
 
             if (scope.message.dismissOnClick) {
+              _bindDismissActionTo(element);
+            }
+
+            if(!scope.message.dismissOnClick && scope.message.dismissButton && scope.message.$$controller) {
+              $timeout(function() {
+                _bindDismissActionTo(element.find('button').eq(0));
+              }, 0);
+            }
+
+            ////
+            function _bindDismissActionTo(element) {
               element.bind('click', function() {
                 ngToast.dismiss(scope.message.id);
                 scope.$apply();
@@ -108,6 +119,7 @@
               return $log.error('[ngToast] `compileContent` option is incompatible with `controller`. Consider removing it.');
             }
 
+            scope.message.$$controller = true;
             $element.html(_getDefaultTemplate(scope.message.template));
             var locals = {};
             var link = $compile($element.contents());
