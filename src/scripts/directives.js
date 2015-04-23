@@ -81,6 +81,14 @@
             }
 
             if(!scope.message.dismissOnClick && scope.message.dismissButton && scope.message.$$controller) {
+              if(scope.message.$$promise) {
+                return scope.message.$$promise.then(function() {
+                  $timeout(function() {
+                    _bindDismissActionTo(element.find('button').eq(0));
+                  }, 0);
+                });
+              }
+
               $timeout(function() {
                 _bindDismissActionTo(element.find('button').eq(0));
               }, 0);
@@ -97,12 +105,16 @@
         };
       }
     ])
-    .directive('toastMessage', ['$timeout', '$compile', '$controller', '$log',
-      function($timeout, $compile, $controller, $log) {
+    .directive('toastMessage', ['$timeout', '$compile', '$controller', '$log', '$templateRequest',
+      function($timeout, $compile, $controller, $log, $templateRequest) {
         return {
           restrict: 'EA',
           priority: -400,
           link: function (scope, $element) {
+            if(!scope.message.template && scope.message.templateUrl) {
+              scope.message.template = scope.message.$$promise = $templateRequest(scope.message.templateUrl);
+            }
+
             if(scope.message.template && !scope.message.controller) {
               return $log.error('[ngToast] Controller is required is you want to use a custom template');
             }
@@ -120,19 +132,34 @@
             }
 
             scope.message.$$controller = true;
-            $element.html(_getDefaultTemplate(scope.message.template));
-            var locals = {};
-            var link = $compile($element.contents());
-
-            locals.$scope = scope;
-            locals.$element = $element;
-            var controller = $controller(scope.message.controller, locals);
-
-            if (scope.message.controllerAs) {
-              scope[scope.message.controllerAs] = controller;
+            var template = scope.message.template;
+            if(scope.message.$$promise) {
+              scope.message.$$promise.then(function(_template) {
+                template = _template;
+                _fillDirective();
+              });
+            } else {
+              _fillDirective();
             }
 
-            link(scope);
+
+            ////
+            function _fillDirective()
+            {
+              $element.html(_getDefaultTemplate(template));
+              var locals = {};
+              var link = $compile($element.contents());
+
+              locals.$scope = scope;
+              locals.$element = $element;
+              var controller = $controller(scope.message.controller, locals);
+
+              if (scope.message.controllerAs) {
+                scope[scope.message.controllerAs] = controller;
+              }
+
+              link(scope);
+            }
           }
         };
       }
