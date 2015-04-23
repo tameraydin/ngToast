@@ -105,14 +105,16 @@
         };
       }
     ])
-    .directive('toastMessage', ['$timeout', '$compile', '$controller', '$log', '$templateRequest',
-      function($timeout, $compile, $controller, $log, $templateRequest) {
+    .directive('toastMessage', ['$timeout', '$compile', '$controller', '$log', '$http', '$templateCache',
+      function($timeout, $compile, $controller, $log, $http, $templateCache) {
         return {
           restrict: 'EA',
           priority: -400,
           link: function (scope, $element) {
             if(!scope.message.template && scope.message.templateUrl) {
-              scope.message.template = scope.message.$$promise = $templateRequest(scope.message.templateUrl);
+              scope.message.template = scope.message.$$promise = $http
+                .get(scope.message.templateUrl, { cache: $templateCache, headers: { Accept: 'text/html' }})
+                .then(function(response) { return response.data; });
             }
 
             if(scope.message.template && !scope.message.controller) {
