@@ -84,8 +84,42 @@
           }
         };
       }
-    ]);
+    ])
+    .directive('toastMessage', ['$timeout', '$compile', '$controller', '$log',
+      function($timeout, $compile, $controller, $log) {
+        return {
+          restrict: 'EA',
+          link: function (scope, $element) {
+            if(scope.message.template && !scope.message.controller) {
+              return $log.error('[ngToast] Controller is required is you want to use a custom template');
+            }
 
+            if(!scope.message.template && scope.message.controller) {
+              return $log.error('[ngToast] Template is required is you want to associating a controller with a toast');
+            }
+
+            if(!scope.message.template && !scope.message.controller) {
+              return;
+            }
+
+            if(scope.message.compileContent) {
+              return $log.error('[ngToast] `compileContent` option is incompatible with `controller`. Consider removing it.');
+            }
+
+            $element.html(_getDefaultTemplate(scope.message.template));
+            var locals = {};
+            var link = $compile($element.contents());
+
+            locals.$scope = scope;
+            locals.$element = $element;
+            $controller(scope.message.controller, locals);
+
+            link(scope);
+          }
+        };
+      }
+    ])
+  ;
 
   function _getDefaultTemplate(customContent)
   {
