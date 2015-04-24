@@ -17,6 +17,7 @@
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
           compileContent: false,
+          compileToScope: null,
           horizontalPosition: 'right', // right, center, left
           verticalPosition: 'top', // top, bottom,
           maxNumber: 0
