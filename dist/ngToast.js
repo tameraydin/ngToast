@@ -1,5 +1,5 @@
 /*!
- * ngToast v1.5.0 (http://tameraydin.github.io/ngToast)
+ * ngToast v1.5.1 (http://tameraydin.github.io/ngToast)
  * Copyright 2015 Tamer Aydin (http://tamerayd.in)
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
@@ -162,7 +162,9 @@
               '</div>' +
             '</li>',
           link: function(scope, element, attrs, ctrl, transclude) {
-            if (scope.message.compileContent) {
+            var scopeToBind = scope.message.compileContent;
+
+            if (scopeToBind) {
               var transcludedEl;
 
               transclude(scope, function(clone) {
@@ -172,7 +174,8 @@
 
               $timeout(function() {
                 $compile(transcludedEl.contents())
-                  (scope.$parent, function(compiledClone) {
+                  (typeof scopeToBind === 'boolean' ?
+                    scope.$parent : scopeToBind, function(compiledClone) {
                     transcludedEl.replaceWith(compiledClone);
                   });
               }, 0);
