@@ -64,7 +64,9 @@
               '</div>' +
             '</li>',
           link: function(scope, element, attrs, ctrl, transclude) {
-            if (scope.message.compileContent) {
+            var scopeToBind = scope.message.compileContent;
+
+            if (scopeToBind) {
               var transcludedEl;
 
               transclude(scope, function(clone) {
@@ -74,7 +76,8 @@
 
               $timeout(function() {
                 $compile(transcludedEl.contents())
-                  (scope.$parent, function(compiledClone) {
+                  (typeof scopeToBind === 'boolean' ?
+                    scope.$parent : scopeToBind, function(compiledClone) {
                     transcludedEl.replaceWith(compiledClone);
                   });
               }, 0);
