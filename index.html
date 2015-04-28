@@ -140,7 +140,7 @@ ngToast.dismiss();
   <td>Allows toasts messages to be removed on mouse click. <em>(boolean)</em></td></tr>
   <tr><td><strong>compileContent</strong></td>
   <td>false</td>
-  <td>Re-compiles the toast message content within parent scope. Needs to be used with <a target="_blank" href="https://docs.angularjs.org/api/ng/service/$sce#trustAsHtml">trusted HTML</a> content. See <a target="_blank" href="https://github.com/tameraydin/ngToast/issues/14#issuecomment-67718318">here</a> for more information. <em>(boolean)</em></td></tr>
+  <td>Re-compiles the toast message content within parent (or given) scope. Needs to be used with <a target="_blank" href="https://docs.angularjs.org/api/ng/service/$sce#trustAsHtml">trusted HTML</a> content. See <a target="_blank" href="https://github.com/tameraydin/ngToast/issues/14#issuecomment-67718318">here</a> for more information. <em>(boolean|object)</em></td></tr>
   <tr><td><strong>animation*</strong></td>
   <td>''</td>
   <td>Built-in animation type for toast messages: 'slide' or 'fade' <em>(string)</em></td></tr>
