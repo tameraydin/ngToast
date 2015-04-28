@@ -66,7 +66,7 @@
           link: function(scope, element, attrs, ctrl, transclude) {
             if (scope.message.compileContent) {
               var transcludedEl;
-
+              
               transclude(scope, function(clone) {
                 transcludedEl = clone;
                 element.children().append(transcludedEl);
@@ -74,16 +74,35 @@
 
               $timeout(function() {
                 $compile(transcludedEl.contents())
-                  (scope.$parent, function(compiledClone) {
+                  (scope.message.compileToScope || scope.$parent, function(compiledClone) {
                     transcludedEl.replaceWith(compiledClone);
                   });
               }, 0);
             }
 
             if (scope.message.dismissOnTimeout) {
-              $timeout(function() {
-                ngToast.dismiss(scope.message.id);
-              }, scope.message.timeout);
+
+                //$timeout(function() {
+                //    scope.message.timedOut = true;
+                //});
+
+                var dismisstimeout = $timeout(function () {
+                    ngToast.dismiss(scope.message.id);
+                }, scope.message.timeout);
+
+                
+                //element.mouseenter(function (event) {
+                //    $timeout.cancel(dismisstimeout);
+                //});
+
+                //element.mouseleave(function (event) {
+
+                //    var timeout = scope.message.timedOut ? 500 : 2000;
+
+                //    dismisstimeout = $timeout(function () {
+                //        ngToast.dismiss(scope.message.id);
+                //    }, timeout);
+                //});
             }
 
             if (scope.message.dismissOnClick) {
