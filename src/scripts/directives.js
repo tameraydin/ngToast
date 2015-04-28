@@ -67,8 +67,6 @@
             if (scope.message.compileContent) {
               var transcludedEl;
               
-              var compileScope = scope.message.compileToScope || scope.$parent;
-              
               transclude(scope, function(clone) {
                 transcludedEl = clone;
                 element.children().append(transcludedEl);
@@ -76,7 +74,7 @@
 
               $timeout(function() {
                 $compile(transcludedEl.contents())
-                  (compileScope, function(compiledClone) {
+                  (scope.message.compileToScope || scope.$parent, function(compiledClone) {
                     transcludedEl.replaceWith(compiledClone);
                   });
               }, 0);
