@@ -55,7 +55,7 @@ ngToast is a simple Angular provider for toast notifications.
     // clear all toasts:
     ngToast.dismiss();
   
-    // Create toasts styled with bootstrap alerts (http://getbootstrap.com/components/#alerts
+    // Create toasts styled with bootstrap alerts (see http://getbootstrap.com/components/#alerts)
     ngToast.success('a toast message...');
     ngToast.info('a toast message...');
     ngToast.warning('a toast message...');
