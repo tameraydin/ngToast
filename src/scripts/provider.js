@@ -83,6 +83,23 @@
               }
               messageStack.push(newMsg.id);
               return newMsg.id;
+            },
+            createWithClassName: function(className, msg) {
+              msg = (typeof msg === 'string') ? {content: msg} : msg;
+              msg.className= className;
+              return this.create(msg);
+            },
+            success: function(msg) {
+              return this.createWithClassName('success',msg);
+            },
+            info: function(msg) {
+              return this.createWithClassName('info',msg);
+            },
+            warning: function(msg) {
+              return this.createWithClassName('warning',msg);
+            },
+            danger: function(msg) {
+              return this.createWithClassName('danger',msg);
             }
           };
         }];
