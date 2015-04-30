@@ -150,7 +150,7 @@
             };
           }],
           template:
-            '<li class="ng-toast__message {{message.additionalClasses}}">' +
+            '<li data-message-id="{{message.id}}" class="ng-toast__message {{message.additionalClasses}}">' +
               '<div class="alert alert-{{message.className}}" ' +
                 'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
