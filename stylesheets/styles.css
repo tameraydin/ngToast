@@ -199,6 +199,16 @@ small.note strong {
   color: #777;
 }
 
+code .close {
+  float: none;
+  color: #839496;
+  font-size: 14px;
+  cursor: default;
+  opacity: 1;
+  font-weight: normal;
+  text-shadow: none;
+}
+
 .fork-badge img {
   transition: opacity 0.3s ease-in;
 }

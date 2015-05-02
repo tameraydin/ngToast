@@ -12,6 +12,7 @@
     <!-- endbower -->
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/solarized-dark.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -65,7 +66,7 @@
 
 <p>Include ngToast resource files along with the built-in <a href="http://docs.angularjs.org/api/ngAnimate">ngAnimate</a> &amp; <a href="http://docs.angularjs.org/api/ngSanitize">ngSanitize</a> modules and the <a href="http://getbootstrap.com/" target="_blank">Bootstrap CSS</a> (only the Alerts component is used as style base, so you don't have to include complete CSS):</p>
 
-<pre><code>&lt;link rel="stylesheet" href="bootstrap.min.css"&gt;
+<pre><code data-language="html">&lt;link rel="stylesheet" href="bootstrap.min.css"&gt;
 &lt;link rel="stylesheet" href="ngToast.min.css"&gt;
 
 &lt;script src="angular-animate.min.js"&gt;&lt;/script&gt;
@@ -75,12 +76,12 @@
 
 <p>Include ngToast as a dependency in your app module:</p>
 
-<pre><code>var app = angular.module('myApp', ['ngToast']);
+<pre><code data-language="javascript">var app = angular.module('myApp', ['ngToast']);
 </code></pre>
 
 <p>Place <code>toast</code> (or <code>ng-toast</code>, if you are using a version lower than 1.2.1) element into your HTML:</p>
 
-<pre><code>&lt;body&gt;
+<pre><code data-language="html">&lt;body>
   &lt;toast&gt;&lt;/toast&gt;
   ...
 &lt;/body&gt;
@@ -88,23 +89,23 @@
 
 <p>Inject ngToast provider in your controller:</p>
 
-<pre><code>app.controller($scope, ngToast) {...};
+<pre><code data-language="javascript">app.controller($scope, ngToast) {...};
 </code></pre>
 
 <h2>
 <a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
-<pre><code>// create a simple toast:
+<pre><code data-language="javascript">// create a simple toast:
 ngToast.create('a toast message...');
 
 // create a toast with settings:
 ngToast.create({
   className: 'warning',
-  content: 'a message with &lt;a href="#" class=""&gt;HTML&lt;/a&gt;'
+  content: '&lt;a href="#" class=""&gt;a message&lt;/a&gt;'
 });
 
 // or just use "success", "info", "warning" or "danger" shortcut methods:
 var myToastMsg = ngToast.warning({
-  content: 'a message with &lt;a href="#" class=""&gt;HTML&lt;/a&gt;'
+  content: '&lt;a href="#" class=""&gt;a message&lt;/a&gt;'
 });
 
 // to clear a toast:
@@ -182,6 +183,11 @@ ngToast.dismiss();
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/ngtoast/dist/ngToast.min.js"></script>
     <!-- endbower -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/rainbow/1.1.8/js/language/generic.min.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/rainbow/1.1.8/js/language/html.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/rainbow/1.1.8/js/language/javascript.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/rainbow/1.1.8/js/language/css.js'></script>
         <script src="javascripts/app.js"></script>
   </body>
 </html>
