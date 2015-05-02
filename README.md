@@ -41,6 +41,7 @@ ngToast is a simple Angular provider for toast notifications.
   app.controller('myCtrl', function(ngToast) {
     ngToast.create('a toast message...');
   });
+  // for more info: http://tameraydin.github.io/ngToast/#api
   ```
 
 ## Animations

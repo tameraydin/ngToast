@@ -47,6 +47,13 @@
         };
 
         this.$get = [function() {
+          var _createWithClassName = function(className, msg) {
+              msg = (typeof msg === 'string') ? {content: msg} : msg;
+              msg.className = className;
+
+              return this.create(msg);
+          };
+
           return {
             settings: defaults,
             messages: messages,
@@ -83,6 +90,18 @@
               }
               messageStack.push(newMsg.id);
               return newMsg.id;
+            },
+            success: function(msg) {
+              return _createWithClassName.call(this, 'success', msg);
+            },
+            info: function(msg) {
+              return _createWithClassName.call(this, 'info', msg);
+            },
+            warning: function(msg) {
+              return _createWithClassName.call(this, 'warning', msg);
+            },
+            danger: function(msg) {
+              return _createWithClassName.call(this, 'danger', msg);
             }
           };
         }];
