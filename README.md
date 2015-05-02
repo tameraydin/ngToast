@@ -39,7 +39,30 @@ ngToast is a simple Angular provider for toast notifications.
 5. Inject ngToast provider in your controller:
   ```javascript
   app.controller('myCtrl', function(ngToast) {
+    
     ngToast.create('a toast message...');
+    
+    // create a toast with settings (settings doc: http://tamerayd.in/ngToast/#api)
+    
+    var aToast = ngToast.create({
+      className: 'warning',
+      content: 'Another message as <a href="#" class="">HTML</a>'
+    });
+
+    // to clear a toast:
+    ngToast.dismiss(aToast);
+
+    // clear all toasts:
+    ngToast.dismiss();
+  
+    // Create toasts styled with bootstrap alerts (see http://getbootstrap.com/components/#alerts)
+    ngToast.success('a toast message...');
+    ngToast.info('a toast message...');
+    ngToast.warning('a toast message...');
+    ngToast.danger('a toast message...');
+    
+    //styled toasts also accept settings (settings doc: http://tameraydin.github.io/ngToast/#api)
+    ngToast.info({content: 'a toast message...', timeout: 10000});
   });
   ```
 
