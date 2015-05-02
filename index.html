@@ -97,13 +97,18 @@
 ngToast.create('a toast message...');
 
 // create a toast with settings:
-var aToast = ngToast.create({
+ngToast.create({
   className: 'warning',
-  content: 'Another message as &lt;a href="#" class=""&gt;HTML&lt;/a&gt;'
+  content: 'a message with &lt;a href="#" class=""&gt;HTML&lt;/a&gt;'
+});
+
+// or just use "success", "info", "warning" or "danger" shortcut methods:
+var myToastMsg = ngToast.warning({
+  content: 'a message with &lt;a href="#" class=""&gt;HTML&lt;/a&gt;'
 });
 
 // to clear a toast:
-ngToast.dismiss(aToast);
+ngToast.dismiss(myToastMsg);
 
 // clear all toasts:
 ngToast.dismiss();
