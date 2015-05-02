@@ -27,49 +27,42 @@ describe('ngToast:', function() {
       expect(ngToast.messages.length).toBe(2);
       expect(ngToast.messages[1].content).toBe('toast2');
     });
-    
-    it('createWithClassName and a string should work', function () {
-      ngToast.createWithClassName('info', 'toast1');
-      expect(ngToast.messages.length).toBe(1);
-      expect(ngToast.messages[0].content).toBe('toast1');
-      expect(ngToast.messages[0].className).toBe('info');
-    });
-    
-    it('createWithClassName and an object should work', function () {
-      ngToast.createWithClassName('info', {content:'toast1'});
-      expect(ngToast.messages.length).toBe(1);
-      expect(ngToast.messages[0].content).toBe('toast1');
-      expect(ngToast.messages[0].className).toBe('info');
-    });
-    
+
     it('success should work', function () {
       ngToast.success('toast1');
       expect(ngToast.messages.length).toBe(1);
       expect(ngToast.messages[0].content).toBe('toast1');
       expect(ngToast.messages[0].className).toBe('success');
+
+      ngToast.success({
+        content: 'toast2'
+      });
+      expect(ngToast.messages.length).toBe(2);
+      expect(ngToast.messages[1].content).toBe('toast2');
+      expect(ngToast.messages[1].className).toBe('success');
     });
-    
+
     it('info should work', function () {
       ngToast.info('toast1');
       expect(ngToast.messages.length).toBe(1);
       expect(ngToast.messages[0].content).toBe('toast1');
       expect(ngToast.messages[0].className).toBe('info');
     });
-    
+
     it('warning should work', function () {
       ngToast.warning('toast1');
       expect(ngToast.messages.length).toBe(1);
       expect(ngToast.messages[0].content).toBe('toast1');
       expect(ngToast.messages[0].className).toBe('warning');
     });
-    
+
     it('danger should work', function () {
       ngToast.danger('toast1');
       expect(ngToast.messages.length).toBe(1);
       expect(ngToast.messages[0].content).toBe('toast1');
       expect(ngToast.messages[0].className).toBe('danger');
     });
-    
+
     it('create should work in reverse order when vertical position is set as bottom', function () {
       ngToast.create('toast1');
 
