@@ -18,6 +18,7 @@ module.exports = function(config) {
     files: [
       'test/vendor/angular.js',
       'test/vendor/angular-mocks.js',
+      'test/vendor/angular-sanitize.js',
       'src/scripts/*.js',
       'test/spec/*.js'
     ],
