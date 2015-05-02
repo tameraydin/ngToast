@@ -48,10 +48,10 @@
 
         this.$get = [function() {
           var _createWithClassName = function(className, msg) {
-              msg = (typeof msg === 'string') ? {content: msg} : msg;
-              msg.className = className;
+            msg = (typeof msg === 'string') ? {content: msg} : msg;
+            msg.className = className;
 
-              return this.create(msg);
+            return this.create(msg);
           };
 
           return {
