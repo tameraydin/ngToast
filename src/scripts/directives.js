@@ -52,7 +52,7 @@
             };
           }],
           template:
-            '<li data-message-id="{{message.id}}" class="ng-toast__message {{message.additionalClasses}}">' +
+            '<li class="ng-toast__message {{message.additionalClasses}}">' +
               '<div class="alert alert-{{message.className}}" ' +
                 'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
@@ -64,6 +64,8 @@
               '</div>' +
             '</li>',
           link: function(scope, element, attrs, ctrl, transclude) {
+            element.attr('data-message-id', scope.message.id);
+
             var scopeToBind = scope.message.compileContent;
 
             if (scopeToBind) {
