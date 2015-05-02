@@ -1,5 +1,5 @@
 /*!
- * ngToast v1.5.1 (http://tameraydin.github.io/ngToast)
+ * ngToast v1.5.2 (http://tameraydin.github.io/ngToast)
  * Copyright 2015 Tamer Aydin (http://tamerayd.in)
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
@@ -52,6 +52,13 @@
         };
 
         this.$get = [function() {
+          var _createWithClassName = function(className, msg) {
+            msg = (typeof msg === 'string') ? {content: msg} : msg;
+            msg.className = className;
+
+            return this.create(msg);
+          };
+
           return {
             settings: defaults,
             messages: messages,
@@ -89,22 +96,17 @@
               messageStack.push(newMsg.id);
               return newMsg.id;
             },
-            createWithClassName: function(className, msg) {
-              msg = (typeof msg === 'string') ? {content: msg} : msg;
-              msg.className= className;
-              return this.create(msg);
-            },
             success: function(msg) {
-              return this.createWithClassName('success',msg);
+              return _createWithClassName.call(this, 'success', msg);
             },
             info: function(msg) {
-              return this.createWithClassName('info',msg);
+              return _createWithClassName.call(this, 'info', msg);
             },
             warning: function(msg) {
-              return this.createWithClassName('warning',msg);
+              return _createWithClassName.call(this, 'warning', msg);
             },
             danger: function(msg) {
-              return this.createWithClassName('danger',msg);
+              return _createWithClassName.call(this, 'danger', msg);
             }
           };
         }];
@@ -167,7 +169,7 @@
             };
           }],
           template:
-            '<li data-message-id="{{message.id}}" class="ng-toast__message {{message.additionalClasses}}">' +
+            '<li class="ng-toast__message {{message.additionalClasses}}">' +
               '<div class="alert alert-{{message.className}}" ' +
                 'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
@@ -179,6 +181,8 @@
               '</div>' +
             '</li>',
           link: function(scope, element, attrs, ctrl, transclude) {
+            element.attr('data-message-id', scope.message.id);
+
             var scopeToBind = scope.message.compileContent;
 
             if (scopeToBind) {
