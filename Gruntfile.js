@@ -50,7 +50,11 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       dist: {
-        src: [paths.scripts + 'provider.js', paths.scripts + 'directives.js', paths.scripts + 'module.js'],
+        src: [
+          paths.scripts + 'provider.js',
+          paths.scripts + 'directives.js',
+          paths.scripts + 'module.js'
+        ],
         dest: paths.dist + moduleName + '.js'
       }
     },
@@ -61,7 +65,10 @@ module.exports = function(grunt) {
           sassDir: paths.sass,
           cssDir: paths.dist,
           banner: '<%= banner %>',
-          specify: [paths.sass + 'ngToast.scss', paths.sass + 'ngToast-animations.scss']
+          specify: [
+            paths.sass + 'ngToast.scss',
+            paths.sass + 'ngToast-animations.scss'
+          ]
         }
       },
       test: {
@@ -69,7 +76,10 @@ module.exports = function(grunt) {
           noLineComments: true,
           sassDir: paths.sass,
           cssDir: paths.testSASS,
-          specify: [paths.sass + 'ngToast.scss', paths.sass + 'ngToast-animations.scss']
+          specify: [
+            paths.sass + 'ngToast.scss',
+            paths.sass + 'ngToast-animations.scss'
+          ]
         }
       }
     },
