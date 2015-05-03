@@ -53,7 +53,7 @@
 
         this.$get = [function() {
           var _createWithClassName = function(className, msg) {
-            msg = (typeof msg === 'string') ? {content: msg} : msg;
+            msg = (typeof msg === 'object') ? msg : {content: msg};
             msg.className = className;
 
             return this.create(msg);
@@ -85,7 +85,7 @@
                 this.dismiss(messageStack[0]);
               }
 
-              msg = (typeof msg === 'string') ? {content: msg} : msg;
+              msg = (typeof msg === 'object') ? msg : {content: msg};
 
               var newMsg = new Message(msg);
               if (defaults.verticalPosition === 'bottom') {
