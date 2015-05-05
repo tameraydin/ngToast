@@ -94,4 +94,9 @@
       display: inline-block;
     }
   }
+
+  .#{$ngt-module}__message__count {
+    display: inline-block;
+    margin: 0 $ngt-spacing / 4*3 0 $ngt-spacing / 4;
+  }
 }

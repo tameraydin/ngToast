@@ -17,6 +17,7 @@
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
           compileContent: false,
+          combineDuplications: false,
           horizontalPosition: 'right', // right, center, left
           verticalPosition: 'top', // top, bottom,
           maxNumber: 0
@@ -29,6 +30,7 @@
           }
 
           this.id = id;
+          this.count = 0;
           this.animation = defaults.animation;
           this.className = defaults.className;
           this.additionalClasses = defaults.additionalClasses;
@@ -75,12 +77,25 @@
               }
             },
             create: function(msg) {
+              msg = (typeof msg === 'object') ? msg : {content: msg};
+
+              if (defaults.combineDuplications) {
+                for (var i = messageStack.length - 1; i >= 0; i--) {
+                  var _msg = messages[i];
+                  var _className = msg.className || 'success';
+
+                  if (_msg.content === msg.content &&
+                      _msg.className === _className) {
+                    messages[i].count++;
+                    return;
+                  }
+                }
+              }
+
               if (defaults.maxNumber > 0 &&
                   messageStack.length >= defaults.maxNumber) {
                 this.dismiss(messageStack[0]);
               }
-
-              msg = (typeof msg === 'object') ? msg : {content: msg};
 
               var newMsg = new Message(msg);
               if (defaults.verticalPosition === 'bottom') {
