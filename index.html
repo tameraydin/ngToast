@@ -37,7 +37,7 @@ ngToastProvider.configure({
   animation: 'slide',
   horizontalPosition: 'right',
   verticalPosition: 'top',
-  maxNumber: 0,
+  maxNumber: 0
 });
 </pre>
 
@@ -64,25 +64,25 @@ ngToastProvider.configure({
             <label>Alert Class:</label>
             <div class="radio">
               <label>
-                <input type="radio" value="info" ng-model="ctrl.options.alertClass">
+                <input type="radio" value="info" ng-model="ctrl.options.className">
                 Info
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" value="success" ng-model="ctrl.options.alertClass">
+                <input type="radio" value="success" ng-model="ctrl.options.className">
                 Success
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" value="warning" ng-model="ctrl.options.alertClass">
+                <input type="radio" value="warning" ng-model="ctrl.options.className">
                 Warning
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" value="danger" ng-model="ctrl.options.alertClass">
+                <input type="radio" value="danger" ng-model="ctrl.options.className">
                 Danger
               </label>
             </div>
@@ -166,6 +166,7 @@ ngToastProvider.configure({
           horizontalPosition: 'right',
           verticalPosition: 'top',
           maxNumber: 0,
+          combineDuplications: true
         });
       }];
 
@@ -179,14 +180,14 @@ ngToastProvider.configure({
 
           vm.options = {
             content: 'Just the way we like it, ngToasted to perfection.',
-            alertClass: 'success',
+            className: 'success',
             classes: 'foo',
             dismissOnTimeout: true,
             timeout: 4000,
             dismissButton: false,
             dismissButtonHtml: '&times',
             dismissOnClick: true,
-            compileContent: false,
+            compileContent: false
           };
 
           // put first toast on callback stack (waits for animations to load)
@@ -200,7 +201,7 @@ ngToastProvider.configure({
         vm.getRandomOptions = function() {
           return {
             content: faker.hacker.phrase(),
-            alertClass: faker.random.array_element(['success', 'info', 'warning', 'danger']),
+            className: faker.random.array_element(['success', 'info', 'warning', 'danger']),
             classes: faker.hacker.verb(),
             dismissOnTimeout: true,
             timeout: 4000,
