@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html id="app" ng-app="app">
+<head lang="en">
+  <title>Example</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="lib/bootstrap.min.css"/>
+  <link rel="stylesheet" href="lib/ngToast.min.css"/>
+  <link rel="stylesheet" href="lib/ngToast-animations.min.css"/>
+  <script src="lib/angular.min.js"></script>
+  <script src="lib/angular-animate.min.js"></script>
+  <script src="lib/angular-sanitize.min.js"></script>
+  <script src="lib/ngToast.min.js"></script>
+  <script>
+    var app = angular.module('app', ['ngSanitize', 'ngAnimate', 'ngToast']);
+    app.config(function (ngToastProvider) {
+      ngToastProvider.configure({
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        maxNumber: 4,
+        dismissOnTimeout: true,
+        timeout: 4000
+      });
+    });
+    app.controller('MainCtrl', function ($scope, ngToast) {
+      ngToast.create({className: 'info', content: 'Hello World'});
+      $scope.makeToast = function () {
+        var classNames, contentArray, booleans, pickedClass, pickedContent, pickedBool;
+        classNames = ['info', 'danger', 'success'];
+        contentArray = [
+          'Lorem ipsum dolor sit amet',
+          'consectetur <strong>adipisicing</strong> elit.',
+          'Dolorem incidunt <a href="">ipsa labore magnam</a> mollitia!',
+          'Autem <em>delectus</em> dolor dolorem ducimus eaque excepturi',
+          'modi neque, <strong>quaerat</strong>, quidem quo quod sapiente soluta vel?'
+        ];
+        booleans = [true, false];
+        pickedClass = classNames[Math.floor(Math.random() * classNames.length)];
+        pickedContent = contentArray[Math.floor(Math.random() * contentArray.length)];
+        pickedBool = booleans[Math.floor(Math.random() * booleans.length)];
+
+        ngToast.create({className: pickedClass, content: pickedContent, dismissButton: pickedBool});
+
+      }
+    });
+  </script>
+</head>
+<body>
+
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-shim.min.js"></script>
+<![endif]-->
+
+<div ng-controller="MainCtrl">
+  <div class="panel-body">
+    <button class="btn btn-primary" type="button" ng-click="makeToast()">Make me some toast</button>
+  </div>
+</div>
+
+<div toast></div>
+
+</body>
+</html>

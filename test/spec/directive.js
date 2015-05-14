@@ -32,7 +32,7 @@ describe('ngToast:', function() {
         }
       ];
 
-      element = compiler('<toast></toast>')(rootScope);
+      element = compiler('<div toast></div>')(rootScope);
       rootScope.$digest();
     });
 

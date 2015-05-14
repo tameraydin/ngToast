@@ -22,6 +22,7 @@
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
           compileContent: false,
+          combineDuplications: false,
           horizontalPosition: 'right', // right, center, left
           verticalPosition: 'top', // top, bottom,
           maxNumber: 0
@@ -34,6 +35,7 @@
           }
 
           this.id = id;
+          this.count = 0;
           this.animation = defaults.animation;
           this.className = defaults.className;
           this.additionalClasses = defaults.additionalClasses;
@@ -80,12 +82,25 @@
               }
             },
             create: function(msg) {
+              msg = (typeof msg === 'object') ? msg : {content: msg};
+
+              if (defaults.combineDuplications) {
+                for (var i = messageStack.length - 1; i >= 0; i--) {
+                  var _msg = messages[i];
+                  var _className = msg.className || 'success';
+
+                  if (_msg.content === msg.content &&
+                      _msg.className === _className) {
+                    messages[i].count++;
+                    return;
+                  }
+                }
+              }
+
               if (defaults.maxNumber > 0 &&
                   messageStack.length >= defaults.maxNumber) {
                 this.dismiss(messageStack[0]);
               }
-
-              msg = (typeof msg === 'object') ? msg : {content: msg};
 
               var newMsg = new Message(msg);
               if (defaults.verticalPosition === 'bottom') {
@@ -127,10 +142,10 @@
           template:
             '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}} {{animation ? \'ng-toast--animate-\' + animation : \'\'}}">' +
               '<ul class="ng-toast__list">' +
-                '<toast-message ng-repeat="message in messages" ' +
-                  'message="message">' +
+                '<div toast-message ng-repeat="message in messages" ' +
+                  'message="message" count="message.count">' +
                   '<span ng-bind-html="message.content"></span>' +
-                '</toast-message>' +
+                '</div>' +
               '</ul>' +
             '</div>',
           compile: function(tElem, tAttrs) {
@@ -154,14 +169,15 @@
         };
       }
     ])
-    .directive('toastMessage', ['$timeout', '$compile', 'ngToast',
-      function($timeout, $compile, ngToast) {
+    .directive('toastMessage', ['$timeout', '$compile', 'ngToast', '$sce',
+      function($timeout, $compile, ngToast, $sce) {
         return {
           replace: true,
           transclude: true,
           restrict: 'EA',
           scope: {
-            message: '='
+            message: '=',
+            count: '='
           },
           controller: ['$scope', 'ngToast', function($scope, ngToast) {
             $scope.dismiss = function() {
@@ -177,6 +193,9 @@
                   'ng-bind-html="message.dismissButtonHtml" ' +
                   'ng-click="!message.dismissOnClick && dismiss()">' +
                 '</button>' +
+                '<span ng-if="count" class="ng-toast__message__count">' +
+                  '{{count + 1}}' +
+                '</span>' +
                 '<span ng-if="!message.compileContent" ng-transclude></span>' +
               '</div>' +
             '</li>',
@@ -184,6 +203,9 @@
             element.attr('data-message-id', scope.message.id);
 
             var scopeToBind = scope.message.compileContent;
+
+            scope.message.content = $sce.trustAsHtml(scope.message.content);
+            scope.message.dismissButtonHtml = $sce.trustAsHtml(scope.message.dismissButtonHtml);
 
             if (scopeToBind) {
               var transcludedEl;

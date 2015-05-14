@@ -10,10 +10,10 @@
           template:
             '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}} {{animation ? \'ng-toast--animate-\' + animation : \'\'}}">' +
               '<ul class="ng-toast__list">' +
-                '<toast-message ng-repeat="message in messages" ' +
+                '<div toast-message ng-repeat="message in messages" ' +
                   'message="message" count="message.count">' +
                   '<span ng-bind-html="message.content"></span>' +
-                '</toast-message>' +
+                '</div>' +
               '</ul>' +
             '</div>',
           compile: function(tElem, tAttrs) {
@@ -37,8 +37,8 @@
         };
       }
     ])
-    .directive('toastMessage', ['$timeout', '$compile', 'ngToast',
-      function($timeout, $compile, ngToast) {
+    .directive('toastMessage', ['$timeout', '$compile', 'ngToast', '$sce',
+      function($timeout, $compile, ngToast, $sce) {
         return {
           replace: true,
           transclude: true,
@@ -71,6 +71,9 @@
             element.attr('data-message-id', scope.message.id);
 
             var scopeToBind = scope.message.compileContent;
+
+            scope.message.content = $sce.trustAsHtml(scope.message.content);
+            scope.message.dismissButtonHtml = $sce.trustAsHtml(scope.message.dismissButtonHtml);
 
             if (scopeToBind) {
               var transcludedEl;
