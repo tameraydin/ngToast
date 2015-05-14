@@ -113,7 +113,7 @@ module.exports = function(grunt) {
     autoprefixer: {
       dist: {
         options: {
-          browsers: ['last 2 versions']
+          browsers: ['last 2 versions', 'ie 8', 'ie 9']
         },
         expand: true,
         flatten: true,
@@ -140,13 +140,20 @@ module.exports = function(grunt) {
       src: {
         files: [paths.src + '**/*.*'],
         tasks: [
-          'default',
+          'default'
         ],
         options: {
-          spawn: false,
-        },
-      },
+          spawn: false
+        }
+      }
     },
+    copy: {
+      main: {
+        files: [
+          {src: ['dist/*.min.*'], dest: 'example/lib/', flatten: true, expand: true}
+        ]
+      }
+    }
   });
 
   grunt.registerTask('test-generated-css', function() {
@@ -197,6 +204,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.registerTask('default', [
     'compass:test',
     'clean:sass',
@@ -212,5 +220,6 @@ module.exports = function(grunt) {
     'autoprefixer:dist',
     'cssmin',
     'uglify',
+    'copy'
   ]);
 };
