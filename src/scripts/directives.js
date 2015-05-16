@@ -53,7 +53,9 @@
             };
           }],
           template:
-            '<li class="ng-toast__message {{message.additionalClasses}}">' +
+            '<li class="ng-toast__message {{message.additionalClasses}}"' +
+              'ng-mouseenter="onMouseEnter()"' +
+              'ng-mouseleave="onMouseLeave()">' +
               '<div class="alert alert-{{message.className}}" ' +
                 'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
                 '<button type="button" class="close" ' +
@@ -70,7 +72,26 @@
           link: function(scope, element, attrs, ctrl, transclude) {
             element.attr('data-message-id', scope.message.id);
 
+            var dissmissTimeout;
             var scopeToBind = scope.message.compileContent;
+
+            scope.cancelTimeout = function() {
+              $timeout.cancel(dissmissTimeout);
+            };
+
+            scope.startTimeout = function() {
+              dissmissTimeout = $timeout(function() {
+                ngToast.dismiss(scope.message.id);
+              }, scope.message.timeout);
+            };
+
+            scope.onMouseEnter = function() {
+              scope.cancelTimeout();
+            };
+
+            scope.onMouseLeave = function() {
+              scope.startTimeout();
+            };
 
             if (scopeToBind) {
               var transcludedEl;
@@ -90,9 +111,7 @@
             }
 
             if (scope.message.dismissOnTimeout) {
-              $timeout(function() {
-                ngToast.dismiss(scope.message.id);
-              }, scope.message.timeout);
+              scope.startTimeout();
             }
 
             if (scope.message.dismissOnClick) {
