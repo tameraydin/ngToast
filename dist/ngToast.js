@@ -204,15 +204,15 @@
           link: function(scope, element, attrs, ctrl, transclude) {
             element.attr('data-message-id', scope.message.id);
 
-            var dissmissTimeout;
+            var dismissTimeout;
             var scopeToBind = scope.message.compileContent;
 
             scope.cancelTimeout = function() {
-              $timeout.cancel(dissmissTimeout);
+              $timeout.cancel(dismissTimeout);
             };
 
             scope.startTimeout = function() {
-              dissmissTimeout = $timeout(function() {
+              dismissTimeout = $timeout(function() {
                 ngToast.dismiss(scope.message.id);
               }, scope.message.timeout);
             };
