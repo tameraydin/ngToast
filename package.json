@@ -1,6 +1,6 @@
 {
   "name": "ngToast",
-  "version": "1.5.3",
+  "version": "1.5.2",
   "description": "Angular provider for toast notifications",
   "main": "dist/ngToast.js",
   "repository": {
