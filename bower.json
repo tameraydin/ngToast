@@ -1,6 +1,6 @@
 {
   "name": "ngToast",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "main": [
     "dist/ngToast.js",
     "dist/ngToast.css"
