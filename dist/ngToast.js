@@ -222,7 +222,9 @@
             };
 
             scope.onMouseLeave = function() {
-              scope.startTimeout();
+              if (scope.message.dismissOnTimeout) {
+                scope.startTimeout();
+              }
             };
 
             if (scopeToBind) {
