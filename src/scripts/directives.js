@@ -80,9 +80,11 @@
             };
 
             scope.startTimeout = function() {
-              dismissTimeout = $timeout(function() {
-                ngToast.dismiss(scope.message.id);
-              }, scope.message.timeout);
+              if (scope.message.dismissOnTimeout) {
+                dismissTimeout = $timeout(function() {
+                  ngToast.dismiss(scope.message.id);
+                }, scope.message.timeout);
+              }
             };
 
             scope.onMouseEnter = function() {
@@ -90,9 +92,7 @@
             };
 
             scope.onMouseLeave = function() {
-              if (scope.message.dismissOnTimeout) {
-                scope.startTimeout();
-              }
+              scope.startTimeout();
             };
 
             if (scopeToBind) {
@@ -112,9 +112,7 @@
               }, 0);
             }
 
-            if (scope.message.dismissOnTimeout) {
-              scope.startTimeout();
-            }
+            scope.startTimeout();
 
             if (scope.message.dismissOnClick) {
               element.bind('click', function() {
