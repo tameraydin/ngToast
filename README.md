@@ -8,8 +8,10 @@ ngToast is a simple Angular provider for toast notifications.
 ## Usage
 
 1. Install via [Bower](http://bower.io/):
-  ```console
+  ```bash
   bower install ngtoast --production
+  # or
+  npm install ng-toast --production
   ```
   or manually [download](https://github.com/tameraydin/ngToast/archive/master.zip).
 
