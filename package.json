@@ -3,17 +3,17 @@
   "version": "1.5.5",
   "description": "Angular provider for toast notifications",
   "main": "dist/ngToast.js",
+  "keywords": [
+    "angular",
+    "toast",
+    "message",
+    "notification",
+    "toastr"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/tameraydin/ngToast.git"
   },
-  "keywords": [
-    "angular",
-    "ng-toast",
-    "ngToast",
-    "toast",
-    "notification"
-  ],
   "author": "Tamer Aydin (http://tamerayd.in)",
   "contributors": [{
     "name": "Tamer Aydin",
@@ -26,7 +26,6 @@
     "type": "MIT",
     "url": "http://tameraydin.mit-license.org/"
   },
-  "readmeFilename": "readme.md",
   "homepage": "http://tameraydin.github.io/ngToast",
   "bugs": {
     "url": "https://github.com/tameraydin/ngToast/issues"
