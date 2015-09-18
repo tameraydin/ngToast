@@ -1,6 +1,6 @@
 {
   "name": "ng-toast",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "Angular provider for toast notifications",
   "main": "dist/ngToast.js",
   "keywords": [
@@ -15,17 +15,17 @@
     "url": "git://github.com/tameraydin/ngToast.git"
   },
   "author": "Tamer Aydin (http://tamerayd.in)",
-  "contributors": [{
-    "name": "Tamer Aydin",
-    "url": "http://tamerayd.in"
-  }, {
-    "name": "Levi Thomason",
-    "url": "http://www.levithomason.com"
-  }],
-  "license": {
-    "type": "MIT",
-    "url": "http://tameraydin.mit-license.org/"
-  },
+  "contributors": [
+    {
+      "name": "Tamer Aydin",
+      "url": "http://tamerayd.in"
+    },
+    {
+      "name": "Levi Thomason",
+      "url": "http://www.levithomason.com"
+    }
+  ],
+  "license": "MIT",
   "homepage": "http://tameraydin.github.io/ngToast",
   "bugs": {
     "url": "https://github.com/tameraydin/ngToast/issues"
@@ -48,7 +48,8 @@
     "grunt-karma": "~0.8.3",
     "karma": "~0.12.16",
     "karma-jasmine": "~0.1.5",
-    "karma-phantomjs-launcher": "~0.1.4"
+    "karma-phantomjs-launcher": "~0.1.4",
+    "lodash": "^3.10.1"
   },
   "scripts": {
     "test": "grunt karma"

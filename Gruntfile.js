@@ -1,6 +1,7 @@
 require('colors');
 var jsdiff = require('diff');
 var fs = require('fs');
+var _ = require('lodash');
 var pkg = require('./package.json');
 
 var paths = {
@@ -17,7 +18,7 @@ var paths = {
   testSASS: 'test/css-files/sass/',
 };
 
-var moduleName = pkg.name;
+var moduleName = _.camelCase(pkg.name);
 
 module.exports = function(grunt) {
   grunt.initConfig({
