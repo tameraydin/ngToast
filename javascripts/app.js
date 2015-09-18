@@ -10,6 +10,7 @@ angular
     ngToast.configure({
       // verticalPosition: 'bottom',
       // horizontalPosition: 'center'
+      animation: 'fade'
     });
   }])
   .controller('MainController', function($scope, ngToast, $timeout) {
