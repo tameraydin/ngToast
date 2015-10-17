@@ -22,9 +22,7 @@
               '<button type="button" class="close" ' +
                 'ng-if="message.dismissButton" ' +
                 'ng-bind-html="message.dismissButtonHtml" ' +
-                'ng-click="!message.dismissOnClick && '+
-                '(!message.clickHandler || message.clickHandler()) ' +
-                '&& dismiss()">' +
+                'ng-click="!message.dismissOnClick && dismiss()">' +
               '</button>' +
               '<span ng-if="count" class="ng-toast__message__count">' +
                 '{{count + 1}}' +
@@ -125,6 +123,12 @@
             if (scope.message.dismissOnClick) {
               element.bind('click', function() {
                 ngToast.dismiss(scope.message.id);
+                scope.$apply();
+              });
+            }
+            if (scope.message.clickHandler){
+              element.bind('click', function() {
+                scope.message.clickHandler(scope.message.id);
                 scope.$apply();
               });
             }
