@@ -126,6 +126,12 @@
                 scope.$apply();
               });
             }
+            if (scope.message.clickHandler){
+              element.bind('click', function() {
+                scope.message.clickHandler(scope.message.id);
+                scope.$apply();
+              });
+            }
           }
         };
       }

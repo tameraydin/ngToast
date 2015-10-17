@@ -21,6 +21,7 @@
           dismissButton: false,
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
+          clickHandler: null,
           compileContent: false,
           combineDuplications: false,
           horizontalPosition: 'right', // right, center, left
@@ -44,6 +45,7 @@
           this.dismissButton = defaults.dismissButton;
           this.dismissButtonHtml = defaults.dismissButtonHtml;
           this.dismissOnClick = defaults.dismissOnClick;
+          this.clickHandler = defaults.clickHandler;
           this.compileContent = defaults.compileContent;
 
           angular.extend(this, msg);
@@ -255,6 +257,12 @@
             if (scope.message.dismissOnClick) {
               element.bind('click', function() {
                 ngToast.dismiss(scope.message.id);
+                scope.$apply();
+              });
+            }
+            if (scope.message.clickHandler){
+              element.bind('click', function() {
+                scope.message.clickHandler(scope.message.id);
                 scope.$apply();
               });
             }
