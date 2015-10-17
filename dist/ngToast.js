@@ -1,7 +1,7 @@
 /*!
  * ngToast v1.5.6 (http://tameraydin.github.io/ngToast)
  * Copyright 2015 Tamer Aydin (http://tamerayd.in)
- * Licensed under MIT (http://tameraydin.mit-license.org/)
+ * Licensed under  ()
  */
 (function(window, angular, undefined) {
   'use strict';
@@ -21,6 +21,7 @@
           dismissButton: false,
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
+          clickHandler: null,
           compileContent: false,
           combineDuplications: false,
           horizontalPosition: 'right', // right, center, left
@@ -44,6 +45,7 @@
           this.dismissButton = defaults.dismissButton;
           this.dismissButtonHtml = defaults.dismissButtonHtml;
           this.dismissOnClick = defaults.dismissOnClick;
+          this.clickHandler = defaults.clickHandler;
           this.compileContent = defaults.compileContent;
 
           angular.extend(this, msg);
@@ -154,7 +156,9 @@
               '<button type="button" class="close" ' +
                 'ng-if="message.dismissButton" ' +
                 'ng-bind-html="message.dismissButtonHtml" ' +
-                'ng-click="!message.dismissOnClick && dismiss()">' +
+                'ng-click="!message.dismissOnClick && '+
+                '(!message.clickHandler || message.clickHandler()) ' +
+                '&& dismiss()">' +
               '</button>' +
               '<span ng-if="count" class="ng-toast__message__count">' +
                 '{{count + 1}}' +
