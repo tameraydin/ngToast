@@ -54,13 +54,17 @@
               scope.vPos = ngToast.settings.verticalPosition;
               scope.animation = ngToast.settings.animation;
               scope.messages = ngToast.messages;
+
+              scope.$on('ngToast:update', function() {
+                scope.$applyAsync();
+              });
             };
           }
         };
       }
     ])
-    .directive('toastMessage', ['$timeout', '$compile', 'ngToast',
-      function($timeout, $compile, ngToast) {
+    .directive('toastMessage', ['$timeout', '$compile', '$templateRequest', '$controller', '$rootScope', 'ngToast',
+      function($timeout, $compile, $templateRequest, $controller, $rootScope, ngToast) {
         return {
           replace: true,
           transclude: true,
@@ -79,7 +83,13 @@
             element.attr('data-message-id', scope.message.id);
 
             var dismissTimeout;
+            var templateUrl = scope.message.templateUrl;
             var scopeToBind = scope.message.compileContent;
+
+            // Default scope for templates
+            if (templateUrl && !scopeToBind) {
+              scopeToBind = $rootScope.$new(true);
+            }
 
             scope.cancelTimeout = function() {
               $timeout.cancel(dismissTimeout);
@@ -109,13 +119,36 @@
                 element.children().append(transcludedEl);
               });
 
-              $timeout(function() {
-                $compile(transcludedEl.contents())
-                  (typeof scopeToBind === 'boolean' ?
-                    scope.$parent : scopeToBind, function(compiledClone) {
-                    transcludedEl.replaceWith(compiledClone);
-                  });
-              }, 0);
+              var doLink = function(contents) {
+                var template = angular.element(contents);
+                // element.append(template);
+                var linkFn = $compile(template);
+                var linkedScope = typeof scopeToBind === 'boolean' ?
+                    scope.$parent : scopeToBind;
+                var cloneConnectFn = function(compiledClone) {
+                  transcludedEl.replaceWith(compiledClone);
+                };
+                var controller = scope.message.controller;
+                var linkOpts = {};
+                if (controller) {
+                  linkOpts.transcludeControllers = {};
+                  var locals = angular.extend({
+                    $scope: linkedScope
+                  }, scope.message.locals);
+                  linkOpts.transcludeControllers[controller] = $controller(controller, locals);
+                }
+                linkFn(linkedScope, cloneConnectFn, linkOpts);
+              };
+
+              if (templateUrl) {
+                $templateRequest(templateUrl).then(function(templateHtml) {
+                  return doLink(templateHtml);
+                });
+              } else {
+                $timeout(function() {
+                  doLink(transcludedEl.contents());
+                }, 0);
+              }
             }
 
             scope.startTimeout();
