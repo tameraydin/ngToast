@@ -138,16 +138,28 @@ module.exports = function(grunt) {
       all: paths.scripts + '*.js'
     },
     watch: {
-      src: {
-        files: [paths.src + '**/*.*'],
+      js: {
+        files: [paths.src + 'scripts/**/*.js'],
         tasks: [
-          'default',
+          'concat',
+          'uglify'
         ],
         options: {
           spawn: false,
-        },
+        }
       },
-    },
+      styles: {
+        files: [paths.src + 'styles/**/*.*'],
+        tasks: [
+          'clean:sass',
+          'cssbeautifier',
+          'cssmin'
+        ],
+        options: {
+          spawn: false,
+        }
+      }
+    }
   });
 
   grunt.registerTask('test-generated-css', function() {
