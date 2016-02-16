@@ -54,6 +54,10 @@
               scope.vPos = ngToast.settings.verticalPosition;
               scope.animation = ngToast.settings.animation;
               scope.messages = ngToast.messages;
+
+              scope.$on('ngToast:update', function() {
+                scope.$applyAsync();
+              });
             };
           }
         };

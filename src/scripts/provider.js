@@ -48,7 +48,7 @@
         angular.extend(defaults, config);
       };
 
-      this.$get = [function() {
+      this.$get = ['$rootScope', function($rootScope) {
         var _createWithClassName = function(className, msg) {
           msg = (typeof msg === 'object') ? msg : {content: msg};
           msg.className = className;
@@ -65,6 +65,7 @@
                 if (messages[i].id === id) {
                   messages.splice(i, 1);
                   messageStack.splice(messageStack.indexOf(id), 1);
+                  $rootScope.$broadcast('ngToast:update');
                   return;
                 }
               }
@@ -74,6 +75,7 @@
                 messages.pop();
               }
               messageStack = [];
+              $rootScope.$broadcast('ngToast:update');
             }
           },
           create: function(msg) {
@@ -104,6 +106,7 @@
               messages.push(newMsg);
             }
             messageStack.push(newMsg.id);
+            $rootScope.$broadcast('ngToast:update');
             return newMsg.id;
           },
           success: function(msg) {
