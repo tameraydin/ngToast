@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     banner: '/*!\n' +
             ' * ngToast v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
             ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-            ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n' +
+            ' * Licensed under <%= pkg.license %> (http://tameraydin.mit-license.org/)\n' +
             ' */\n',
     karma: {
       unit: {
@@ -47,8 +47,7 @@ module.exports = function(grunt) {
         stripBanners: {
           'block': true,
           'line': true
-        },
-        banner: '<%= banner %>'
+        }
       },
       dist: {
         src: [
@@ -104,7 +103,6 @@ module.exports = function(grunt) {
     cssmin: {
       minify: {
         options: {
-          banner: '<%= banner %>',
           keepSpecialComments: 0
         },
         expand: true,
@@ -124,12 +122,20 @@ module.exports = function(grunt) {
       }
     },
     uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
       build: {
         src: paths.dist + moduleName + '.js',
         dest: paths.dist + moduleName + '.min.js'
+      }
+    },
+    usebanner: {
+      options: {
+        position: 'top',
+        banner: '<%= banner %>'
+      },
+      files: {
+        src: [
+          paths.dist + '*'
+        ]
       }
     },
     jshint: {
@@ -199,6 +205,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-banner');
   grunt.registerTask('default', [
     'sass:test',
     'clean:sass',
@@ -214,5 +221,6 @@ module.exports = function(grunt) {
     'autoprefixer:dist',
     'cssmin',
     'uglify',
+    'usebanner'
   ]);
 };
