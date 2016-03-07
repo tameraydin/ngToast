@@ -59,29 +59,30 @@ module.exports = function(grunt) {
         dest: paths.dist + moduleName + '.js'
       }
     },
-    compass: {
+    sass: {
       dist: {
-        options: {
-          noLineComments: true,
-          sassDir: paths.sass,
-          cssDir: paths.dist,
-          banner: '<%= banner %>',
-          specify: [
-            paths.sass + 'ngToast.scss',
-            paths.sass + 'ngToast-animations.scss'
-          ]
-        }
+        files: [
+          {
+            src: paths.sass + 'ngToast.scss',
+            dest: paths.dist + 'ngToast.css'
+          },
+          {
+            src: paths.sass + 'ngToast-animations.scss',
+            dest: paths.dist + 'ngToast-animations.css'
+          }
+        ]
       },
       test: {
-        options: {
-          noLineComments: true,
-          sassDir: paths.sass,
-          cssDir: paths.testSASS,
-          specify: [
-            paths.sass + 'ngToast.scss',
-            paths.sass + 'ngToast-animations.scss'
-          ]
-        }
+        files: [
+          {
+            src: paths.sass + 'ngToast.scss',
+            dest: paths.testSASS + 'ngToast.css'
+          },
+          {
+            src: paths.sass + 'ngToast-animations.scss',
+            dest: paths.testSASS + 'ngToast-animations.css'
+          }
+        ]
       }
     },
     less: {
@@ -152,7 +153,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test-generated-css', function() {
     this.requires('less:test');
-    this.requires('compass:test');
+    this.requires('sass:test');
     this.requires('cssbeautifier');
 
     var sassBaseCSS = grunt.file.read(paths.testSASS + 'ngToast.css');
@@ -191,7 +192,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-cssbeautifier');
@@ -199,7 +200,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('default', [
-    'compass:test',
+    'sass:test',
     'clean:sass',
     'less:test',
     'cssbeautifier',
@@ -208,7 +209,7 @@ module.exports = function(grunt) {
     'karma',
     'clean:dist',
     'concat',
-    'compass:dist',
+    'sass:dist',
     'clean:sass',
     'autoprefixer:dist',
     'cssmin',
