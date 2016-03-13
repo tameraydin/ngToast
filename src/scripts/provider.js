@@ -16,6 +16,7 @@
           dismissButton: false,
           dismissButtonHtml: '&times;',
           dismissOnClick: true,
+          onDismiss: null,
           compileContent: false,
           combineDuplications: false,
           horizontalPosition: 'right', // right, center, left
@@ -40,6 +41,7 @@
           this.dismissButton = defaults.dismissButton;
           this.dismissButtonHtml = defaults.dismissButtonHtml;
           this.dismissOnClick = defaults.dismissOnClick;
+          this.onDismiss = defaults.onDismiss;
           this.compileContent = defaults.compileContent;
 
           angular.extend(this, msg);

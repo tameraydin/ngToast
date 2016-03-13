@@ -126,6 +126,11 @@
                 scope.$apply();
               });
             }
+
+            if (scope.message.onDismiss) {
+              scope.$on('$destroy',
+                scope.message.onDismiss.bind(scope.message));
+            }
           }
         };
       }
