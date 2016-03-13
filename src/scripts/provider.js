@@ -20,7 +20,8 @@
           combineDuplications: false,
           horizontalPosition: 'right', // right, center, left
           verticalPosition: 'top', // top, bottom,
-          maxNumber: 0
+          maxNumber: 0,
+          newestOnTop: true
         };
 
         function Message(msg) {
@@ -98,12 +99,9 @@
               }
 
               var newMsg = new Message(msg);
-              if (defaults.verticalPosition === 'bottom') {
-                messages.unshift(newMsg);
-              } else {
-                messages.push(newMsg);
-              }
+              messages[defaults.newestOnTop ? 'unshift' : 'push'](newMsg);
               messageStack.push(newMsg.id);
+
               return newMsg.id;
             },
             success: function(msg) {

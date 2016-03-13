@@ -25,7 +25,7 @@ describe('ngToast:', function() {
 
       ngToast.create({content: 'toast2'});
       expect(ngToast.messages.length).toBe(2);
-      expect(ngToast.messages[1].content).toBe('toast2');
+      expect(ngToast.messages[0].content).toBe('toast2');
     });
 
     it('success should work', function () {
@@ -38,8 +38,8 @@ describe('ngToast:', function() {
         content: 'toast2'
       });
       expect(ngToast.messages.length).toBe(2);
-      expect(ngToast.messages[1].content).toBe('toast2');
-      expect(ngToast.messages[1].className).toBe('success');
+      expect(ngToast.messages[0].content).toBe('toast2');
+      expect(ngToast.messages[0].className).toBe('success');
     });
 
     it('info should work', function () {
@@ -63,13 +63,15 @@ describe('ngToast:', function() {
       expect(ngToast.messages[0].className).toBe('danger');
     });
 
-    it('create should work in reverse order when vertical position is set as bottom', function () {
+    it('should respect to newestOnTop flag', function () {
       ngToast.create('toast1');
 
-      ngToast.settings.verticalPosition = 'bottom';
       ngToast.create('toast2');
-      expect(ngToast.messages.length).toBe(2);
       expect(ngToast.messages[0].content).toBe('toast2');
+
+      ngToast.settings.newestOnTop = false;
+      ngToast.create('toast3');
+      expect(ngToast.messages[2].content).toBe('toast3');
     });
 
     it('create should dismiss first message when reached to max limit', function () {
@@ -79,7 +81,8 @@ describe('ngToast:', function() {
 
       ngToast.create('toast3');
       expect(ngToast.messages.length).toBe(2);
-      expect(ngToast.messages[0].content).toBe('toast2');
+      expect(ngToast.messages[0].content).toBe('toast3');
+      expect(ngToast.messages[1].content).toBe('toast2');
     });
 
     it('dismiss should work', function () {
@@ -88,13 +91,13 @@ describe('ngToast:', function() {
 
       ngToast.dismiss(-1); // non-existent id
       expect(ngToast.messages.length).toBe(2);
-      expect(ngToast.messages[0].content).toBe('toast1');
-
-      ngToast.dismiss(toast1);
-      expect(ngToast.messages.length).toBe(1);
       expect(ngToast.messages[0].content).toBe('toast2');
 
       ngToast.dismiss(toast2);
+      expect(ngToast.messages.length).toBe(1);
+      expect(ngToast.messages[0].content).toBe('toast1');
+
+      ngToast.dismiss(toast1);
       expect(ngToast.messages.length).toBe(0);
     });
 
