@@ -147,6 +147,9 @@ ngToast.dismiss();
   <tr><td><strong>dismissOnClick</strong></td>
   <td>true</td>
   <td>Allows toasts messages to be removed on mouse click. <em>(boolean)</em></td></tr>
+  <tr><td><strong>onDismiss</strong></td>
+  <td>null</td>
+  <td>A callback that will be triggered whenever a toast message is dismissed. Context of the function will be the message object. <em>(function)</em></td></tr>
   <tr><td><strong>compileContent</strong></td>
   <td>false</td>
   <td>Re-compiles the toast message content within parent (or given) scope. Needs to be used with <a target="_blank" href="https://docs.angularjs.org/api/ng/service/$sce#trustAsHtml">trusted HTML</a> content. See <a target="_blank" href="https://github.com/tameraydin/ngToast/issues/14#issuecomment-67718318">here</a> for more information. <em>(boolean|object)</em></td></tr>
