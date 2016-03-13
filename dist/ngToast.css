@@ -1,5 +1,5 @@
 /*!
- * ngToast v1.5.6 (http://tameraydin.github.io/ngToast)
+ * ngToast v2.0.0 (http://tameraydin.github.io/ngToast)
  * Copyright 2016 Tamer Aydin (http://tamerayd.in)
  * Licensed under MIT (http://tameraydin.mit-license.org/)
  */
