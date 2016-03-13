@@ -30,6 +30,10 @@
   "bugs": {
     "url": "https://github.com/tameraydin/ngToast/issues"
   },
+  "dependencies": {
+    "angular": ">=1.2.15 <1.6",
+    "angular-sanitize": ">=1.2.15 <1.6"
+  },
   "devDependencies": {
     "caniuse-db": "latest",
     "colors": "^1.0.3",
