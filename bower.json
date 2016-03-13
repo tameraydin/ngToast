@@ -25,10 +25,10 @@
   "license": "MIT",
   "dependencies": {
     "angular": ">=1.2.15 <1.6",
-    "angular-animate": ">=1.2.17 <1.6",
     "angular-sanitize": ">=1.2.15 <1.6"
   },
   "devDependencies": {
+    "angular-animate": ">=1.2.17 <1.6",
     "bootstrap": "~3.3.2",
     "Faker": "~2.1.2"
   },
