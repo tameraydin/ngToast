@@ -37,7 +37,9 @@ ngToastProvider.configure({
   animation: 'slide',
   horizontalPosition: 'right',
   verticalPosition: 'top',
-  maxNumber: 0
+  maxNumber: 0,
+  combineDuplications: true,
+  newestOnTop: true
 });
 </pre>
 
@@ -166,7 +168,8 @@ ngToastProvider.configure({
           horizontalPosition: 'right',
           verticalPosition: 'top',
           maxNumber: 0,
-          combineDuplications: true
+          combineDuplications: true,
+          newestOnTop: true
         });
       }];
 
@@ -181,7 +184,7 @@ ngToastProvider.configure({
 
         vm.init = function() {
           vm.generateRandom = true;
-          vm.randomIntervalValue = 5000;
+          vm.randomIntervalValue = 1500;
 
           vm.options = {
             content: 'Just the way we like it, ngToasted to perfection.',
@@ -213,7 +216,7 @@ ngToastProvider.configure({
             dismissButton: !!faker.random.number(),
             dismissButtonHtml: '&times',
             dismissOnClick: true,
-            compileContent: true,
+            compileContent: true
           };
         };
 
