@@ -144,8 +144,8 @@ ngToastProvider.configure({
 
           <div class="form-group">
             <label class="control-label">
-              Interval {{ ctrl.randomInerval }}ms
-              <input type="range" min="250" max="10000" step="250" ng-model="ctrl.randomInerval"/>
+              Interval {{ ctrl.randomIntervalValue }}ms
+              <input type="range" min="500" max="10000" step="500" ng-model="ctrl.randomIntervalValue"/>
             </label>
           </div>
           <pre ng-show="ctrl.randomOptions">{{ ctrl.randomOptions | json }}</pre>
@@ -170,13 +170,18 @@ ngToastProvider.configure({
         });
       }];
 
-    var ToastController = ['$interval', 'ngToast', '$timeout',
-      function ToastControllerFn($interval, ngToast, $timeout) {
+    var ToastController = ['$scope', '$interval', 'ngToast', '$timeout',
+      function ToastControllerFn($scope, $interval, ngToast, $timeout) {
         var vm = this;
+
+        $scope.$watch('ctrl.randomIntervalValue', function(value) {
+          vm.randomIntervalValue = parseInt(value);
+          vm.startRandomInterval();
+        });
 
         vm.init = function() {
           vm.generateRandom = true;
-          vm.randomInerval = 5000;
+          vm.randomIntervalValue = 5000;
 
           vm.options = {
             content: 'Just the way we like it, ngToasted to perfection.',
@@ -219,11 +224,12 @@ ngToastProvider.configure({
         };
 
         vm.startRandomInterval = function() {
+          $interval.cancel(vm.randomInterval);
           vm.randomInterval = $interval(function() {
             if (vm.generateRandom) {
               vm.createToast(vm.getRandomOptions());
             }
-          }, vm.randomInerval);
+          }, vm.randomIntervalValue);
         };
 
         vm.init();
