@@ -138,7 +138,7 @@
     .run(['$templateCache',
       function($templateCache) {
         $templateCache.put('ngToast/toast.html',
-          '<div class="ng-toast ng-toast--{{hPos}} ng-toast--{{vPos}} {{animation ? \'ng-toast--animate-\' + animation : \'\'}}">' +
+          '<div class="ng-toast ng-toast--{{settings.horizontalPosition}} ng-toast--{{settings.verticalPosition}} {{settings.animation ? \'ng-toast--animate-\' + settings.animation : \'\'}}">' +
             '<ul class="ng-toast__list">' +
               '<toast-message ng-repeat="message in messages" ' +
                 'message="message" count="message.count">' +
@@ -183,9 +183,7 @@
             }
 
             return function(scope) {
-              scope.hPos = ngToast.settings.horizontalPosition;
-              scope.vPos = ngToast.settings.verticalPosition;
-              scope.animation = ngToast.settings.animation;
+              scope.settings = ngToast.settings;
               scope.messages = ngToast.messages;
             };
           }
