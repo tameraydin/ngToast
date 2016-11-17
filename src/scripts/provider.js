@@ -87,7 +87,7 @@
                   var _msg = messages[i];
                   var _className = msg.className || 'success';
 
-                  if (_msg.content === msg.content &&
+                  if (_msg.content.toString() === msg.content.toString() &&
                       _msg.className === _className) {
                     messages[i].count++;
                     return;
