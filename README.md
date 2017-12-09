@@ -1,4 +1,4 @@
-ngToast [![Code Climate](http://img.shields.io/codeclimate/github/tameraydin/ngToast.svg?style=flat-square)](https://codeclimate.com/github/tameraydin/ngToast/dist/ngToast.js) [![Build Status](http://img.shields.io/travis/tameraydin/ngToast/master.svg?style=flat-square)](https://travis-ci.org/tameraydin/ngToast)
+ngToast [![Code Climate](https://img.shields.io/codeclimate/maintainability/tameraydin/ngToast.svg?style=flat-square&label=code%20climate)](https://codeclimate.com/github/tameraydin/ngToast/dist/ngToast.js) [![Build Status](https://img.shields.io/travis/tameraydin/ngToast/master.svg?style=flat-square)](https://travis-ci.org/tameraydin/ngToast)
 =======
 
 ngToast is a simple Angular provider for toast notifications.
