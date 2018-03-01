@@ -4,13 +4,15 @@ describe('ngToast:', function() {
 
   describe('service:', function() {
     var ngToast;
+    var $sce;
 
     beforeEach(function () {
       module('ngToast.provider');
     });
 
-    beforeEach(inject(function (_ngToast_) {
+    beforeEach(inject(function (_ngToast_, _$sce_) {
       ngToast = _ngToast_;
+      $sce = _$sce_;
     }));
 
     it('initial values should be set', function () {
@@ -108,6 +110,19 @@ describe('ngToast:', function() {
 
       ngToast.dismiss();
       expect(ngToast.messages.length).toBe(0);
+    });
+
+    it('combineDuplications should work with trusted html', function () {
+      ngToast.settings.combineDuplications = true;
+
+      ngToast.create({
+        content: $sce.trustAsHtml('toast1')
+      });
+      ngToast.create({
+        content: $sce.trustAsHtml('toast1')
+      });
+
+      expect(ngToast.messages.length).toBe(1);
     });
   });
 
