@@ -18,6 +18,7 @@
             'ng-mouseenter="onMouseEnter()"' +
             'ng-mouseleave="onMouseLeave()">' +
             '<div class="alert alert-{{message.className}}" ' +
+              'ng-click="message.onClick && message.onClick()"' +
               'ng-class="{\'alert-dismissible\': message.dismissButton}">' +
               '<button type="button" class="close" ' +
                 'ng-if="message.dismissButton" ' +
