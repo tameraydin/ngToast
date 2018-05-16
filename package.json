@@ -31,8 +31,8 @@
     "url": "https://github.com/tameraydin/ngToast/issues"
   },
   "dependencies": {
-    "angular": ">=1.2.15 <1.6",
-    "angular-sanitize": ">=1.2.15 <1.6"
+    "angular": ">=1.2.15 <1.8",
+    "angular-sanitize": ">=1.2.15 <1.8"
   },
   "devDependencies": {
     "caniuse-db": "latest",
